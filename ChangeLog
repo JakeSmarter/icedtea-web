@@ -1,0 +1,2398 @@
+2011-03-04  Denis Lila  <dlila@redhat.com>
+
+	* netx/net/sourceforge/jnlp/cache/ResourceTracker.java
+	(downloadResource): changed the order in which pack200+gz compression
+	and gzip compression are checked.
+	* netx/net/sourceforge/jnlp/cache/ResourceUrlCreator.java
+	(getUrl): if usePack now concatenating strings instead of replacing.
+
+
+2011-03-03  Deepak Bhole <dbhole@redhat.com>
+
+	* plugin/icedteanp/IcedTeaNPPlugin.cc
+	(plugin_send_initialization_message): New method. Sends initialization
+	information to the Java side.
+	(ITNP_SetWindow): Call the new plugin_send_initialization_message
+	function.
+	(get_scriptable_object): Same.
+
+2011-03-03  Deepak Bhole <dbhole@redhat.com>
+
+	* plugin/icedteanp/IcedTeaPluginRequestProcessor.cc
+	(eval): Proceed with _eval only if instance is valid.
+	(call): Proceed with _call only if instance is valid. Moved declaration
+	of result_variant_jniid, result_variant args_array and thread_data to 
+	the top.
+	(sendString): Proceed with _getString only if instance is valid. Remove
+	thread count incrementer.
+	(setMember): Proceed with _setMember only if instance is valid. Remove
+	thread count incrementer.
+	(sendMember): Proceed with _getMember only if instance is valid.
+
+2011-03-03  Deepak Bhole <dbhole@redhat.com>
+
+	* plugin/icedteanp/IcedTeaPluginRequestProcessor.cc
+	(PluginRequestProcessor): Remove initialization of tc_mutex
+	(~PluginRequestProcessor): Remove destruction of tc_mutex
+	(sendString): Removed thread count incrementer code.
+	(setMember): Same.
+	(sendMember): Same.
+	* plugin/icedteanp/IcedTeaPluginRequestProcessor.h: Removed tc_mutex and
+	thread_count variables. 
+
+2011-03-02  Omair Majid  <omajid@redhat.com>
+
+	Fix PR612.
+	* NEWS: Update with fix.
+	* netx/net/sourceforge/jnlp/SecurityDesc.java: Add PropertyPermissions for
+	browser and browser.* to sandboxPermissions.
+
+2011-03-02  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/controlpanel/CommandLine.java
+	(handleSetCommand): Fix warning message.
+	* netx/net/sourceforge/jnlp/resources/Messages.properties: Add
+	CLWarningUnknownProperty.
+
+2011-03-01  Omair Majid  <omajid@redhat.com>
+
+	 * netx/net/sourceforge/jnlp/runtime/JNLPPolicy.java (isSystemJar): Check
+	 for nulls.
+
+2011-03-01  Andrew Su  <asu@redhat.com>
+
+	* netx/net/sourceforge/jnlp/controlpanel/ControlPanel.java
+	(createMainSettingsPanel): Commented out unimplemented feature.
+	* netx/net/sourceforge/jnlp/controlpanel/TemporaryInternetFilesPanel.java
+	(addComponents): Commented out unimplemented feature.
+
+2011-02-28  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/controlpanel/CommandLine.java
+	(printResetHelp): Indicate that "all" is a valid argument.
+	(handleResetCommand): Deal with "all" instead of a property name by
+	reseting all properties.
+
+2011-02-28  Denis Lila  <dlila@redhat.com>
+
+	* plugin/icedteanp/java/sun/applet/PluginMain.java
+	(redirectStreams, streamHandler, securityContext) make them local.
+	(theVersion): make it private.
+	(PluginMain): make it private. Empty the body.
+	(main): Do all the work that used to be in PluginMain.
+	(connect): make it static, and now it returns a PluginStreamHandler
+	instead of setting a static variable.
+	(messageAvailable, getMessage): Remove.
+
+2011-02-28  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/resources/Messages.properties: Add Password,
+	Username and SAuthenticationPrompt.
+	* netx/net/sourceforge/jnlp/security/JNLPAuthenticator.java
+	(getPasswordAuthentication): Show password prompt using the secure thread.
+	* netx/net/sourceforge/jnlp/security/PasswordAuthenticationPane.java
+	(PasswordAuthenticationPane): Initialize variables.
+	(initialize): For consistency, rename to..
+	(addComponents): New method. Set the appropriate return value when user
+	takes an action.
+	(askUser): Remove.
+	(main): Remove.
+	* netx/net/sourceforge/jnlp/security/SecurityDialog.java
+	(initDialog): Add extra case for AUTHENTICATION dialog type.
+	(installPanel): Likewise.
+	* netx/net/sourceforge/jnlp/security/SecurityDialogs.java
+	(DialogType): Add AUTHENTICATION.
+	(showAuthenicationPrompt): New method. Shows a password authentication
+	prompt.
+
+2011-02-28  Omair Majid  <omajid@redhat.com>
+
+	Rename files
+	* netx/net/sourceforge/jnlp/security/PasswordAuthenticationDialog.java:
+	Rename to ...
+	* netx/net/sourceforge/jnlp/security/PasswordAuthenticationPane.java: New
+	file.
+	* netx/net/sourceforge/jnlp/security/SecurityWarningDialog.java: Rename
+	to...
+	* netx/net/sourceforge/jnlp/security/SecurityDialog.java: New file.
+	* netx/net/sourceforge/jnlp/security/SecurityWarning.java: Rename to...
+	* netx/net/sourceforge/jnlp/security/SecurityDialogs.java: New file.
+	* netx/net/sourceforge/jnlp/runtime/ApplicationInstance.java,
+	* netx/net/sourceforge/jnlp/runtime/JNLPClassLoader.java,
+	* netx/net/sourceforge/jnlp/runtime/JNLPSecurityManager.java,
+	* netx/net/sourceforge/jnlp/security/AccessWarningPane.java,
+	* netx/net/sourceforge/jnlp/security/AppletWarningPane.java,
+	* netx/net/sourceforge/jnlp/security/CertWarningPane.java,
+	* netx/net/sourceforge/jnlp/security/CertsInfoPane.java,
+	* netx/net/sourceforge/jnlp/security/JNLPAuthenticator.java,
+	* netx/net/sourceforge/jnlp/security/MoreInfoPane.java,
+	* netx/net/sourceforge/jnlp/security/NotAllSignedWarningPane.java,
+	* netx/net/sourceforge/jnlp/security/SecurityDialogMessage.java,
+	* netx/net/sourceforge/jnlp/security/SecurityDialogMessageHandler.java,
+	* netx/net/sourceforge/jnlp/security/SecurityDialogPanel.java,
+	* netx/net/sourceforge/jnlp/security/SingleCertInfoPane.java,
+	* netx/net/sourceforge/jnlp/security/VariableX509TrustManager.java,
+	* netx/net/sourceforge/jnlp/security/viewer/CertificatePane.java,
+	* netx/net/sourceforge/jnlp/services/ServiceUtil.java,
+	* netx/net/sourceforge/jnlp/services/XClipboardService.java,
+	* netx/net/sourceforge/jnlp/services/XExtendedService.java,
+	* netx/net/sourceforge/jnlp/services/XFileOpenService.java,
+	* netx/net/sourceforge/jnlp/services/XFileSaveService.java: Update class
+	names to the new classes.
+
+2011-02-25  Omair Majid  <omajid@redhat.com>
+
+	* Makefile.am (stamps/netx-dist.stamp): Do not add extra files to
+	classes.jar.
+
+2011-02-25  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/resources/Manifest.mf: Remove unused file.
+
+2011-02-23  Omair Majid  <omajid@redhat.com>
+
+	* Makefile.am: Add missing slash to JRE.
+
+2011-02-23  Omair Majid  <omajid@redhat.com>
+
+	RH677772: NoSuchAlgorithmException using SSL/TLS in javaws
+	* NEWS: Update with bugfix.
+	* netx/net/sourceforge/jnlp/runtime/JNLPPolicy.java: Add new field
+	jreExtDir.
+	(JNLPPolicy): Initialize jreExtDir.
+	(getPermissions): Grant AllPermissions if the CodeSourse is a system jar.
+	(isSystemJar): New method.
+	* netx/net/sourceforge/jnlp/runtime/JNLPSecurityManager.java
+	(checkPermission): Remove special casing of
+	SecurityPermission("putProviderProperty.SunJCE") and
+	SecurityPermission("accessClassInPackage.sun.security.internal.spec").
+	(inTrustedCallChain): Remove.
+
+2011-02-22  Omair Majid  <omajid@redhat.com>
+            Mark Greenwood <mark@dcs.shef.ac.uk>
+
+	Fix PR638
+	* NEWS: Update with fix.
+	* netx/net/sourceforge/jnlp/runtime/JNLPClassLoader.java (loadClass): Throw
+	ClassNotFoundException instead of returning null.
+	* AUTHORS: Update.
+
+2011-02-22  Omair Majid  <omajid@redhat.com>
+
+	* Makefile.am (uninstall-local): Fix typo in PACKAGE_NAME.
+
+2011-02-22  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/resources/Messages.properties: Add
+	RNoAboutJnlp.
+	* netx/net/sourceforge/jnlp/runtime/Boot.java: Remove NETX_ABOUT_FILE.
+	(getAboutFile): Look for about.jnlp using the classloader.
+	(getFile): Use localized error message string.
+
+2011-02-22  Omair Majid  <omajid@redhat.com>
+            DJ Lucas  <dj@lucasit.com>
+
+	* Makefile.am
+	(install-data-local): Use $(mandir) for man page dir.
+	(uninstall-local): Use $(mandir) for man page dir.
+	* AUTHORS: Update.
+
+2011-02-22  Omair Majid  <omajid@redhat.com>
+
+	Install icedtea-web into a FHS-compliant location
+	* Makefile.am: Add new vars JRE, LAUNCHER_BOOTCLASSPATH and
+	PLUGIN_BOOTCLASSPATH.
+	(install-exec-local): Install files to FHS-compliant location; do not
+	create links.
+	(install-data-local): Likewise.
+	(uninstall-local): Update file paths to delete.
+	($(PLUGIN_DIR)/%.o): Pass PLUGIN_BOOTCLASSPATH and ICEDTEA_WEB_JRE.
+	($(NETX_DIR)/launcher/%.o): Pass LAUNCHER_BOOTCLASSPATH and
+	ICEDTEA_WEB_JRE.
+	($(NETX_DIR)/launcher/controlpanel/%.o): Likewise.
+	* launcher/java_md.c
+	(GetIcedTeaWebJREPath): New method.
+	(CreateExecutionEnvironment): Call GetIcedTeaWebJREPath.
+	* plugin/icedteanp/IcedTeaNPPlugin.cc
+	(plugin_start_appletviewer): Add PLUGIN_BOOTCLASSPATH to the command.
+	(NP_Initialize): Use ICEDTEA_WEB_JRE to initialize filename.
+
+2011-02-18  Omair Majid  <omajid@redhat.com>
+
+	Remove pluginappletviewer binary
+	* Makefile.am
+	(ICEDTEAPLUGIN_TARGET): Remove dependency on pluginappletviewer.
+	(PLUGIN_LAUNCHER_OBJECTS): Remove.
+	(install-exec-local): Do not install pluginappletviewer.
+	(uninstall-local): Do not remove pluginappletviewer.
+	($(PLUGIN_DIR)/launcher/%.o): Remove.
+	($(PLUGIN_DIR)/launcher/pluginappletviewer): Remove.
+	(clean-IcedTeaPlugin): Dont clean plugin launcher files.
+
+2011-02-15  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/util/TimedHashMap.java: Do not extend HashMap
+	to provide a more type-safe and consistent interface. Use System.nanoTime
+	for a more monotonic clock.
+
+2011-02-15  Omair Majid  <omajid@redhat.com>
+
+	* plugin/icedteanp/java/sun/applet/PluginProxySelector.java
+	(TimedHashMap): Moved to...
+	* netx/net/sourceforge/jnlp/util/TimedHashMap.java: New file.
+
+2011-02-11  Omair Majid  <omajid@redhat.com>
+
+	RH677332, CVE-2011-0706: IcedTea multiple signers privilege escalation
+	* NEWS: Updated.
+	* netx/net/sourceforge/jnlp/runtime/JNLPClassLoader.java
+	(initializeResources): Assign appropriate security descriptor based on
+	code signing.
+
+2011-02-11  Deepak Bhole <dbhole@redhat.com>
+
+	Fix S6983554, CVE-2010-4450: Launcher incorrect processing of empty
+	library path entries
+	* NEWS: Updated.
+	* launcher/java_md.c: Ignore empty LD_LIBRARY_PATH.
+
+2011-02-11  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/PluginBridge.java
+	(getResourcesDescs): New method implemented to override behaviour in
+	JNLPFile class.
+
+2011-02-11  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/JNLPFile.java
+	(getResourceDescs): Renamed to...
+	(getResourcesDescs): New method.
+	(getResourceDescs): Renamed to...
+	(getResourcesDescs): New method.
+	* netx/net/sourceforge/jnlp/runtime/JNLPClassLoader.java
+	(getDownloadOptionsForJar): Call renamed method.
+
+2011-02-10  Omair Majid  <omajid@redhat.com>
+
+	Fix RH669942; Add support for packEnabled and versionEnabled.
+	* NEWS: Update with bugfix.
+	* netx/net/sourceforge/jnlp/DownloadOptions.java: New file.
+	* netx/net/sourceforge/jnlp/JNLPFile.java
+	(openURL): Use null for DownloadOptions.
+	(getResourceDescs): New method.
+	(getResourceDescs(Locale,String,String)): New method.
+	* netx/net/sourceforge/jnlp/Launcher.java
+	(launchApplication): Add image to downloader with null DownloadOptions.
+	* netx/net/sourceforge/jnlp/cache/CacheUtil.java
+	(getCachedResource):  Add resource with null DownloadOptions.
+	* netx/net/sourceforge/jnlp/cache/Resource.java: Add new field
+	downloadLocation.
+	(Resource): Initialize downloadLocation.
+	(getDownloadLocation): New method.
+	(setDownloadLocation): New method.
+	* netx/net/sourceforge/jnlp/cache/ResourceTracker.java: Add new field
+	downloadOptions.
+	(addResource(URL,Version,UpdatePolicy)): Renamed to...
+	(addResource(URL,Version,DownloadOptions,UpdatePolicy)): New method.
+	(downloadResource): Add support for explicit downloading of packed jars as
+	well as content-encoded packed jars.
+	(initializeResource): Invokde findBestUrl to find the best url. Set that
+	as the download location for the resource.
+	(getVersionedResourceURL): Remove.
+	(findBestUrl): New method. Use ResourceUrlCreator to get a list of all
+	possible urls that can be used to download this resource. Try them one by
+	one until one works and return that.
+	* netx/net/sourceforge/jnlp/cache/ResourceUrlCreator.java: New file.
+	* netx/net/sourceforge/jnlp/runtime/JNLPClassLoader.java
+	(initializeResources): Add resource with appropriate download options.
+	(activateJars): Likewise.
+	(loadClass): Likewise.
+	(getDownloadOptionsForJar): New method.
+
+2011-02-10  Deepak Bhole <dbhole@redhat.com>
+
+	* netx/net/sourceforge/jnlp/runtime/JNLPRuntime.java (initialize):
+	Restrict access to net.sourceforge.jnlp.* classes by untrusted
+	classes.
+
+2011-02-09  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/controlpanel/NetworkSettingsPanel.java
+	(addComponents): Fix the listener attached to the port field to update the
+	right config option.
+
+2011-02-08  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/browser/BrowserAwareProxySelector.java
+	(initFromBrowserConfig): Do not try to create a URL from null.
+	(getFromBrowser): Only print informational messages in debug mode.
+
+2011-02-01  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/runtime/JNLPClassLoader.java
+	(activateJars): Add the nested jar to ResourceTracker. Use
+	JarSigner.verifyJars instead of JarSigner.verifyJar.
+	* netx/net/sourceforge/jnlp/tools/JarSigner.java
+	(verifyJar): Make private to indicate nothing should be using this
+	directly.
+
+2011-01-24 Deepak Bhole <dbhole@redhat.com>
+
+	RH672262, CVE-2011-0025: IcedTea jarfile signature verification bypass
+	* rt/net/sourceforge/jnlp/runtime/JNLPClassLoader.java
+	(initializeResources): Prompt user only if there is a single certificate
+	that signs all jars in the jnlp file, otherwise treat as unsigned.
+	* rt/net/sourceforge/jnlp/security/CertVerifier.java: Rename getCerts to
+	getCertPath and make it return a CertPath.
+	* rt/net/sourceforge/jnlp/security/CertsInfoPane.java: Rename certs
+	variable to certPath and change its type to CertPath.
+	(buildTree): Use new certPath variable.
+	(populateTable): Same.
+	* rt/net/sourceforge/jnlp/security/HttpsCertVerifier.java: Rename getCerts
+	to getCertPath and make it return a CertPath.
+	* rt/net/sourceforge/jnlp/tools/JarSigner.java: Change type for certs
+	variable to be a hashmap that stores certs and the number of entries they
+	have signed.
+	(totalSignableEntries): New variable to track how many signable entries
+	have been encountered.
+	(getCerts): Updated method to return certs from new hashmap.
+	(isFullySignedByASingleCert): New method. Returns if there is a single
+	cert that signs all the entries in the jars specified in the jnlp file.
+	(verifyJars): Move verifiedJars and unverifiedJars out of the for loop so
+	that the data is not lost when the next jar is processed. After verifying
+	each jar, see if there is a single signer, and prompt the user if there is
+	such an untrusted signer.
+	(verifyJar): Increment totalSignableEntries for each signable entry
+	encountered and the count for each cert when it signs an entry. Move
+	checkTrustedCerts() out of the function into verifyJars(). 
+
+2011-01-28  Omair Majid  <omajid@redhat.com>
+
+	* Makefile.am: Move ICEDTEA_REV, ICEDTEA_PKG to acinclude.m4. Use
+	FULL_VERSION.
+	(stamps/netx-dist.stamp): Depend on netx.manifest. Use this file as the
+	jar file manifest.
+	* acinclude.m4 (IT_SET_VERSION): New macro. Defines FULL_VERSION.
+	* configure.ac: Add netx.manifest to AC_CONFIG_FILES. Invoke
+	IT_SET_VERSION.
+	* netx.manifest.in: New file.
+	* netx/net/sourceforge/jnlp/runtime/Boot.java: Set name and version using
+	information from the manifest file.
+
+2011-01-27  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/resources/Messages.properties: Add
+	RPRoxyPacNotImplemented, RProxyFirefoxNotFound, and
+	RProxyFirefoxOptionNotImplemented.
+	* netx/net/sourceforge/jnlp/runtime/JNLPProxySelector.java: Make abstract.
+	(getFromBrowser): Remove implementation; make abstract.
+	* netx/net/sourceforge/jnlp/runtime/JNLPRuntime.java
+	(initialize): Set BrowserAwareProxySelector as the proxy selector.
+	* netx/net/sourceforge/jnlp/browser/BrowserAwareProxySelector.java: New
+	file. This class extends JNLPProxySelector and searches the browser's
+	configuration to load additional proxy settings from.
+	* netx/net/sourceforge/jnlp/browser/FirefoxPreferencesFinder.java: New
+	file. This class looks into the browser configration to find the
+	preferences file for the default firefox profile.
+	* netx/net/sourceforge/jnlp/browser/FirefoxPreferencesParser.java: New
+	file. Parses the browser's preferences and makes it available through a
+	simpler interface.
+
+2011-01-27  Omair Majid  <omajid@redhat.com>
+
+	* AUTHORS: Update to include Jon A Maxwell.
+	* extra/net/sourceforge/jnlp/about/resources/notes.html: Include everyone
+	from AUTHORS.
+
+2011-01-25  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/resources/default.jnlp: Remove.
+
+2011-01-24  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/Launcher.java: Exit with error code
+	* netx/net/sourceforge/jnlp/NetxPanel.java: Likewise.
+
+2011-01-20  Andrew Su  <asu@redhat.com>
+
+	* netx/net/sourceforge/jnlp/AppletLog.java: Restrict log files to
+	owner accessible only.
+
+2011-01-20  Andrew Su  <asu@redhat.com>
+
+	Removing dead/commented/unused code.
+	* plugin/icedteanp/java/sun/applet/GetWindowPluginCallRequest.java:
+	Removed unused imports.
+	* plugin/icedteanp/java/sun/applet/MethodOverloadResolver.java:
+	(getMatchingMethod): Removed unused variable.
+	(getMatchingConstructor): Removed unused variable.
+	* plugin/icedteanp/java/sun/applet/PluginAppletSecurityContext.java:
+	Removed unused imports.
+	(Signature): Removed commented code.
+	(handleMessage): Removed commented code.
+	(getAccessControlContext): Remove commented code.
+	* plugin/icedteanp/java/sun/applet/PluginAppletViewer.java:
+	(getCachedImage): Removed commented code.
+	(makeReader): Removed unused method.
+	(parse): Removed unused variables. Removed dead code.
+	* plugin/icedteanp/java/sun/applet/PluginCallRequest.java: Removed
+	unused imports.
+	* plugin/icedteanp/java/sun/applet/PluginDebug.java: Removed unused
+	imports.
+	* plugin/icedteanp/java/sun/applet/PluginMessageConsumer.java: Removed
+	unused imports.
+	(getReference): Removed unused method.
+	(isInInit): Removed unused method.
+	(dumpWorkerStatus): Removed unused method.
+	* plugin/icedteanp/java/sun/applet/PluginMessageHandlerWorker.java:
+	Removed unused variable.
+	(PluginMessageHandlerWorker): Removed unused variable.
+	(plugin/icedteanp/java/sun/applet/PluginObjectStore.java): Removed
+	unused imports.
+	(reference): Removed commented code.
+	(unreference): Removed commented code.
+	* plugin/icedteanp/java/sun/applet/PluginProxyInfoRequest.java:
+	Removed unused import.
+	* plugin/icedteanp/java/sun/applet/PluginStreamHandler.java: Removed
+	unused imports. Removed unused variable.
+	(PluginStreamHandler): Removed unnecessary comments. Removed commented
+	code.
+	(startProcessing): Removed unused variables. Removed commented code.
+	(write): Removed commented code.
+
+2011-01-20  Deepak Bhole <dbhole@redhat.com>
+
+	PR619: Improper finalization by the plugin can crash the browser
+	* plugin/icedteanp/java/netscape/javascript/JSObject.java (finalize):
+	Proceed with finalization only if JSObject is valid.
+
+2011-01-17  Andrew Su  <asu@redhat.com>
+
+	* netx/net/sourceforge/jnlp/NetxPanel.java:
+	(showAppletException): Override, adds logging to file then proceed
+	with showAppletException in sun.applet.AppletPanel.
+	* netx/net/sourceforge/jnlp/AppletLog.java: New class.
+	* netx/net/sourceforge/jnlp/Log.java: New class.
+
+2011-01-14  Andrew Su  <asu@redhat.com>
+
+	* Makefile.am: Added net.sourceforge.jnlp.config and
+	net.sourceforge.jnlp.runtime to NETX_PKGS.
+
+2011-01-12  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/controlpanel/ControlPanel.java
+	(main): Set look and feel. Set config object to use with KeyStores.
+	* netx/net/sourceforge/jnlp/runtime/JNLPRuntime.java
+	(initialize): Set config object to use with KeyStores.
+	* netx/net/sourceforge/jnlp/security/KeyStores.java: Add new member
+	config.
+	(setConfiguration): New method. Sets the value of config after security
+	check.
+	(getKeyStoreLocation): Use config object instead of querying JNLPRuntime.
+
+2011-01-12  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/JNLPFile: Add missing generic type to info.
+	(getInformation): Remove redundant cast.
+
+2011-01-12  Omair Majid  <omajid@redhat.com>
+
+	* netx/javax/jnlp/UnavailableServiceException.java: Remove unused
+	imports.
+	* netx/net/sourceforge/jnlp/AppletDesc.java: Likewise.
+	* netx/net/sourceforge/jnlp/ApplicationDesc.java: Likewise.
+	* netx/net/sourceforge/jnlp/ComponentDesc.java: Likewise.
+	* netx/net/sourceforge/jnlp/DefaultLaunchHandler.java: Likewise.
+	* netx/net/sourceforge/jnlp/IconDesc.java: Likewise.
+	* netx/net/sourceforge/jnlp/InformationDesc.java: Likewise.
+	* netx/net/sourceforge/jnlp/InstallerDesc.java: Likewise.
+	* netx/net/sourceforge/jnlp/JARDesc.java: Likewise.
+	* netx/net/sourceforge/jnlp/JREDesc.java: Likewise.
+	* netx/net/sourceforge/jnlp/Launcher.java: Likewise.
+	* netx/net/sourceforge/jnlp/PackageDesc.java: Likewise.
+	* netx/net/sourceforge/jnlp/ParseException.java: Likewise.
+	* netx/net/sourceforge/jnlp/PluginBridge.java: Likewise.
+	* netx/net/sourceforge/jnlp/PropertyDesc.java: Likewise.
+	* netx/net/sourceforge/jnlp/ResourcesDesc.java: Likewise.
+	* netx/net/sourceforge/jnlp/Version.java: Likewise.
+	* netx/net/sourceforge/jnlp/cache/CacheEntry.java: Likewise.
+	* netx/net/sourceforge/jnlp/cache/CacheUtil.java: Likewise.
+	* netx/net/sourceforge/jnlp/cache/DefaultDownloadIndicator.java:
+	Likewise.
+	* netx/net/sourceforge/jnlp/cache/DownloadIndicator.java: Likewise.
+	* netx/net/sourceforge/jnlp/cache/UpdatePolicy.java: Likewise.
+	* netx/net/sourceforge/jnlp/controlpanel
+	/AdvancedProxySettingsDialog.java: Likewise.
+	* netx/net/sourceforge/jnlp/controlpanel
+	/AdvancedProxySettingsPane.java: Likewise.
+	* netx/net/sourceforge/jnlp/controlpanel/NetworkSettingsPanel.java:
+	Likewise.
+	* netx/net/sourceforge/jnlp/controlpanel
+	/TemporaryInternetFilesPanel.java: Likewise.
+	* netx/net/sourceforge/jnlp/event/ApplicationEvent.java: Likewise.
+	* netx/net/sourceforge/jnlp/event/DownloadEvent.java: Likewise.
+	* netx/net/sourceforge/jnlp/runtime/AppThreadGroup.java: Likewise.
+	* netx/net/sourceforge/jnlp/runtime/AppletAudioClip.java: Likewise.
+	* netx/net/sourceforge/jnlp/runtime/AppletInstance.java: Likewise.
+	* netx/net/sourceforge/jnlp/runtime/ApplicationInstance.java:
+	Likewise.
+	* netx/net/sourceforge/jnlp/runtime/Boot13.java: Likewise.
+	* netx/net/sourceforge/jnlp/runtime/JNLPRuntime.java: Likewise.
+	* netx/net/sourceforge/jnlp/runtime/JNLPSecurityManager.java:
+	Likewise.
+	* netx/net/sourceforge/jnlp/security/CertsInfoPane.java: Likewise.
+	* netx/net/sourceforge/jnlp/security/SecurityUtil.java: Likewise.
+	* netx/net/sourceforge/jnlp/services/XBasicService.java: Likewise.
+	* netx/net/sourceforge/jnlp/services/XDownloadService.java: Likewise.
+	* netx/net/sourceforge/jnlp/services/XExtensionInstallerService.java:
+	Likewise.
+	* netx/net/sourceforge/jnlp/services/XFileContents.java: Likewise.
+	* netx/net/sourceforge/jnlp/services/XFileOpenService.java: Likewise.
+	* netx/net/sourceforge/jnlp/services/XFileSaveService.java: Likewise.
+	* netx/net/sourceforge/jnlp/services/XPersistenceService.java:
+	Likewise.
+	* netx/net/sourceforge/jnlp/util/PropertiesFile.java: Likewise.
+	* netx/net/sourceforge/jnlp/util/Reflect.java: Likewise.
+	
+2011-01-04  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/security/KeyStores.java
+	(getKeyStoreLocation): Fix typo. Return the user-level certificate
+	store correctly.
+
+2011-01-04  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/runtime/JNLPPolicy.java: Add
+	systemJnlpPolicy and userJnlpPolicy.
+	(JNLPPolicy): Initialize the new policies.
+	(getPermissions): Consult the extra policies as well to determine the
+	resulting permissions to be granted.
+	(getPolicyFromConfig): New method. Create a new Policy instance to
+	delegate to for system- and user-level policies.
+
+2011-01-04  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/SecurityDesc.java: Add
+	customTrustedPolicy.
+	(SecurityDesc): Initialize customTrustedPolicy.
+	(getCustomTrustedPolicy): New method. Get custom policy file from
+	configuration and use it to initialize a custom configuration.
+	(getPermissions): If trusted application and customTrustedPolicy is
+	not null, delegate to otherwise return AllPermissions.
+	* netx/net/sourceforge/jnlp/config/Defaults.java
+	(getDefaults): Use constant for property.
+	* netx/net/sourceforge/jnlp/config/DeploymentConfiguration.java:
+	Add new constant KEY_SECURITY_TRUSTED_POLICY.
+	* netx/net/sourceforge/jnlp/runtime/ApplicationInstance.java
+	(installEnvironment): Pass cs as a parameter to
+	SecurityDesc.getPermissions.
+	* netx/net/sourceforge/jnlp/runtime/JNLPClassLoader.java
+	(getPermissions): Likewise.
+
+2011-01-04  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/controlpanel/ControlPanel.java: Remove
+	JNLPRuntime import. Remove configBrowserCommand.
+	(createMainSettingsPanel): Remove call to loadConfiguration.
+	(loadConfiguration): Remove method. Setting the browser command
+	should be handled by the appropriate panel.
+	(main): Remove call to JNLPRuntime.initialize and just create a new
+	DeploymentConfiguration object. Clarify TODO comment.
+
+2011-01-04  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/runtime/JNLPClassLoader.java
+	(installShutdownHooks): Only print when not null.
+
+2011-01-04  Andrew Su  <asu@redhat.com>
+
+	* netx/net/sourceforge/jnlp/controlpanel/SecuritySettingsPanel.java:
+	(addComponents): Hide unsupported options.
+
+2010-12-23  Andrew Su  <asu@redhat.com>
+
+	* netx/net/sourceforge/jnlp/controlpanel/AdvancedProxySettingsDialog.java:
+	(showAdvancedProxySettingsDialog): Removed call to setSystemLookAndFeel().
+	(setSystemLookAndFeel): Method removed.
+
+2010-12-23  Andrew Su  <asu@redhat.com>
+
+	* netx/net/sourceforge/jnlp/controlpanel/AdvancedProxySettingsDialog.java:
+	(showAdvancedProxySettingsDialog): Removed creation of swing thread.
+	* netx/net/sourceforge/jnlp/controlpanel/CacheViewer.java:
+	(showCacheDialog): Removed throwing of exception.
+	* netx/net/sourceforge/jnlp/controlpanel/NetworkSettingsPanel.java:
+	(addComponents): Removed try catch block.
+	* /netx/net/sourceforge/jnlp/controlpanel/TemporaryInternetFilesPanel.java:
+	(addComponents): Removed creation of swing thread and try catch block.
+
+2010-12-22  Deepak Bhole <dbhole@redhat.com>
+
+	RH665104: OpenJDK Firefox Java plugin loses a cookie
+	* plugin/icedteanp/java/sun/applet/PluginCookieInfoRequest.java
+	(parseReturn): Skip one less space so that the first cookie is not
+	skipped.
+	* NEWS: Updated.
+
+2010-12-21  Andrew Su  <asu@redhat.com>
+
+	* netx/net/sourceforge/jnlp/controlpanel/AdvancedProxySettingsPane.java,
+	netx/net/sourceforge/jnlp/controlpanel/NetworkSettingsPanel.java:
+	(addComponents): Replaced key listeners and mouse listeners for text
+	fields with document adapter.
+	* netx/net/sourceforge/jnlp/controlpanel/DocumentAdapter.java: New class.
+	* netx/net/sourceforge/jnlp/controlpanel/MiddleClickListener.java:
+	Removed.
+
+2010-12-20  Andrew Su  <asu@redhat.com>
+
+	Added a cache viewer for the control panel.
+	* netx/net/sourceforge/jnlp/controlpanel/TemporaryInternetFilesPanel.java:
+	(addComponents): Changed buttons to open cache viewer.
+	* netx/net/sourceforge/jnlp/resources/Messages.properties: Added text
+	used by the cache viewer.
+	* netx/net/sourceforge/jnlp/cache/CacheDirectory.java,
+	netx/net/sourceforge/jnlp/cache/DirectoryNode.java,
+	netx/net/sourceforge/jnlp/controlpanel/CachePane.java,
+	netx/net/sourceforge/jnlp/controlpanel/CacheViewer.java: New classes.
+
+2010-12-20  Omair Majid  <omajid@redhat.com>
+
+	* Makefile.am
+	($(NETX_DIR)/launcher/controlpanel/%.o): Set program name, and launch
+	net.sourceforge.jnlp.controlpanel.CommandLine.
+	* netx/net/sourceforge/jnlp/config/Defaults.java
+	(getDefaults): Set descriptions to Unknown rather than the name.
+	Set source to localized form of internal.
+	* netx/net/sourceforge/jnlp/config/DeploymentConfiguration.java
+	(getProperty): Check for nulls.
+	(setProperty): Add unknown as description and source for new
+	properties.
+	(checkAndFixConfiguration): Fix translation constants.
+	(parsePropertiesFile): Use unknown as description.
+	* netx/net/sourceforge/jnlp/controlpanel/CommandLine.java: New file
+	(CommandLine): New method.
+	(handleHelpCommand): Likewise.
+	(printListHelp): Likewise.
+	(handleListCommand): Likewise.
+	(printGetHelp): Likewise.
+	(handleGetCommand): Likewise.
+	(printSetHelp): Likewise.
+	(handleSetCommand): Likewise.
+	(printResetHelp): Likewise.
+	(handleResetCommand): Likewise.
+	(printInfoHelp): Likewise.
+	(handleInfoCommand): Likewise.
+	(printCheckHelp): Likewise.
+	(handleCheckCommand): Likewise.
+	(handle): Likewise.
+	(main): Likewise.
+	* netx/net/sourceforge/jnlp/resources/Messages.properties: Add
+	Usage, Unknown, RConfigurationFatal, DCIncorrectValue,
+	DCSourceInternal, DCUnknownSettingWithName, VVPossibleValues,
+	CLNoInfo, CLValue, CLValueSource, CLDescription, CLUnknownCommand
+	CLUnknownProperty, CLNoIssuesFound, CLIncorrectValue,
+	CLListDescription, CLGetDescription, CLSetDescription,
+	CLResetDescription, CLInfoDescription, CLCheckDescription and
+	CLHelpDescription. Remove DCErrorInSetting and
+	DCUnknownSettingWithVal.
+
+2010-12-17  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/controlpanel/ControlPanel.java
+	(ControlPanel): Create and add the topPanel.
+	(createTopPanel): New method. Creates a JPanel to display the
+	description on top of the Control Panel.
+	(createNotImplementedPanel): Use the same way to load resource
+	as createTopPanel to avoid null pointer exceptions.
+	* netx/net/sourceforge/jnlp/resources/Messages.properties: Add
+	CPMainDescriptionShort and CPMainDescriptionLong.
+
+2010-12-17  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/security/SecurityWarning.java
+	(shouldPromptUser): Use full privileges when checking configuration. This
+	value is not security-sensitive and the method is private.
+	* netx/net/sourceforge/jnlp/services/ServiceUtil.java
+	(shouldPromptUser): Likewise.
+
+2010-12-16 Omair Majid <omajid@redhat.com>
+
+	RH663680, CVE-2010-4351:
+	* NEWS: List issue.
+	* netx/net/sourceforge/jnlp/runtime/JNLPSecurityManager.java:
+	Make sure SecurityException is thrown if necessary. 
+
+2010-12-15  Omair Majid  <omajid@redhat.com>
+
+	* Makefile.am
+	(install-exec-local): Install plugin.jar as data. If $(prefix)/jre/bin
+	exists, then install symlinks to real javaws and itweb-settings binaries
+	under it.
+	($(NETX_DIR)/launcher/%.o): Set system property java.icedtea-web.bin to
+	point to the installed location of the javaws binary.
+	* netx/net/sourceforge/jnlp/Launcher.java (launchExternal): Use the system
+	property java.icedtea-web.bin to locate javaws binary.
+
+2010-12-15  Andrew Su  <asu@redhat.com>
+
+	* /netx/net/sourceforge/jnlp/resources/Messages.properties: Changed
+	messages for about and JRE.
+
+2010-12-14  Andrew John Hughes  <ahughes@redhat.com>
+
+	* Makefile.am:
+	(LAUNCHER_OBJECTS): Add jli_util.o, parse_manifest.o,
+	version_comp.o, wildcard.o.
+	(LAUNCEHR_FLAGS): Add -DEXPAND_CLASSPATH_WILDCARDS
+	as used in build of libjli in OpenJDK.
+	(LAUNCHER_LINK): Don't link to libjli.
+	* launcher/jli_util.c,
+	* launcher/parse_manifest.c,
+	* launcher/version_comp.c,
+	* launcher/wildcard.c:
+	Add source files from OpenJDK6 to match header files
+	already used.
+
+2010-12-13  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/config/ValueValidator.java: New file.
+	* netx/net/sourceforge/jnlp/config/BasicValueValidators.java: New
+	file. Provides methods to get some common validators.
+	* netx/net/sourceforge/jnlp/config/ConfiguratonValidator.java: New
+	file. Provides methods to validate a configuration.
+	* netx/net/sourceforge/jnlp/runtime/DeploymentConfiguration.java:
+	Moved to config subpackage instead and split off into Setting.java,
+	DeploymentConfiguration.java and Defaults.java.
+	* netx/net/sourceforge/jnlp/config/DeploymentConfiguration.java:
+	Renamed version of original DeploymentConfiguration.
+	(load): Delegate to load.
+	(load(boolean)): Load configuration and optionally fix any issues
+	found.
+	(checkAndFixConfiguration): New method. Validate all settings and
+	set them to default values if problems found.
+	* netx/net/sourceforge/jnlp/config/Setting.java: New file. Based on
+	ConfigValue which was originally a part of DeploymentConfiguration.
+	* netx/net/sourceforge/jnlp/config/Defaults.java: New file.
+	Contains the default configuration settings. Originally from
+	DeploymentConfiguration.java's loadDefaultProperties.
+	* netx/net/sourceforge/jnlp/resources/Messages.properties: Add new
+	messages.
+	* netx/net/sourceforge/jnlp/Launcher.java: Fix imports.
+	* netx/net/sourceforge/jnlp/SecurityDesc.java: Likewise.
+	* netx/net/sourceforge/jnlp/cache/CacheUtil.java: Likewise.
+	* netx/net/sourceforge/jnlp/controlpanel
+	/AdvancedProxySettingsDialog.java: Likewise
+	* netx/net/sourceforge/jnlp/controlpanel
+	/AdvancedProxySettingsPane.java: Likewise.
+	* netx/net/sourceforge/jnlp/controlpanel/ControlPanel.java: Likewise
+	* netx/net/sourceforge/jnlp/controlpanel/DebuggingPanel.java:
+	Likewise.
+	* netx/net/sourceforge/jnlp/controlpanel/DesktopShortcutPanel.java:
+	Likewise.
+	* netx/net/sourceforge/jnlp/controlpanel/MiddleClickListener.java:
+	Likewise
+	* netx/net/sourceforge/jnlp/controlpanel/NetworkSettingsPanel.java:
+	Likewise.
+	* netx/net/sourceforge/jnlp/controlpanel/SecuritySettingsPanel.java:
+	Likewise.
+	* netx/net/sourceforge/jnlp/controlpanel
+	/TemporaryInternetFilesPanel.java:Likewise.
+	* netx/net/sourceforge/jnlp/runtime/ApplicationInstance.java:
+	Likewise.
+	* netx/net/sourceforge/jnlp/runtime/JNLPProxySelector.java:
+	Likewise.
+	* netx/net/sourceforge/jnlp/runtime/JNLPRuntime.java: Likewise.
+	* netx/net/sourceforge/jnlp/security/KeyStores.java: Likewise.
+	* netx/net/sourceforge/jnlp/security/SecurityWarning.java: Likewise.
+	* netx/net/sourceforge/jnlp/services/ServiceUtil.java: Likewise.
+	* netx/net/sourceforge/jnlp/services/SingleInstanceLock.java:
+	Likewise.
+	* netx/net/sourceforge/jnlp/services/XBasicService.java: Likewise
+	* netx/net/sourceforge/jnlp/services/XPersistenceService.java:
+	Likewise.
+	* netx/net/sourceforge/jnlp/util/XDesktopEntry.java: Likewise.
+	* plugin/icedteanp/java/sun/applet/JavaConsole.java: Likewise.
+	* plugin/icedteanp/java/sun/applet/PluginMain.java: Likewise. 
+
+2010-12-13  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/Parser.java
+	(getInformationDesc): Fix whitespace in title, vendor and description
+	elements.
+	(getRelatedContent): Fix whitespace in title and description elements.
+	(getSpanText(Node)): Delegate to ...
+	(getSpanText(Node,boolean)): New method.  Return the text in an element,
+	optionally fixing whitespace.
+
+2010-12-10  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/tools/JarSigner.java: Remove unused variables
+	collator, VERSION, IN_KEYSTORE, IN_SCOPE, privateKey, store, keystore,
+	nullStream, token, jarfile, alias, storepass, protectedPath, storetype,
+	providerName, providers, providerArgs, keypass, sigfile, sigalg,
+	digestalg, signedjar, tsaUrl, tsaAlias, verify, debug, signManifest and
+	externalSF.
+	(getPublisher): Remove unnecessary cast.
+	(getRoot): Likewise.
+
+2010-12-08  Deepak Bhole <dbhole@redhat.com>
+
+	PR597: Entities are parsed incorrectly in PARAM tag in applet plugin
+	* plugin/icedteanp/IcedTeaNPPlugin.cc
+	(encode_string): New function. Takes a string and replaces certain special
+	characters with html escapes.
+	(plugin_create_applet_tag): Use the new encode_string function to encode
+	argn and argv right away, rather than encoding the whole tag.
+	* plugin/icedteanp/java/sun/applet/PluginAppletViewer.java
+	(handleMessage): Move decoding out so that it is done after parsing.
+	(decodeString): New function. Decodes the given string such that html
+	escapes are replaced by the original special characters.
+	(scanTag): Decode parameter name and value before adding it to attribute
+	array.
+	* NEWS: Updated.
+
+2010-12-08  Omair Majid  <omajid@redhat.com>
+
+	* configure.ac: Add check for sun.misc.HexDumpEncoder
+	* netx/net/sourceforge/jnlp/security/CertsInfoPane.java: Import
+	sun.misc.HexDumpEncoder. Remove import of net.sourceforge.jnlp.tools.*
+	* netx/net/sourceforge/jnlp/tools/CharacterEncoder.java: Remove file.
+	* netx/net/sourceforge/jnlp/tools/HexDumpEncoder.java: Remove file.
+
+2010-12-08  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/JNLPFile.java
+	(getSupportedVersions): Remove method.
+	* netx/net/sourceforge/jnlp/Parser.java: Remove supportedVersions.
+	(Parser(JNLPFile,URL,Node,boolean,boolean)): Remove check for supported
+	version.
+	(getSupportedVersions): Remove method.
+	* netx/net/sourceforge/jnlp/resources/Messages.properties:
+	Remove PSpecUnsupported.
+
+2010-12-08  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/tools/JarRunner.java: Remove unused class.
+	* netx/net/sourceforge/jnlp/tools/JarSignerResources.java: Remove unused
+	class.
+
+2010-12-07  Andrew John Hughes  <ahughes@redhat.com>
+
+	* netx/net/sourceforge/jnlp/InformationDesc.java,
+	(InformationDesc(JNLPFile,Locale)): Correct @param tag.
+	* netx/net/sourceforge/jnlp/JARDesc.java:
+	(JARDesc(URL,Version,String,boolean,boolean,boolean,boolean)):
+	Correct typo and add missing @param tag for cacheable.
+	* netx/net/sourceforge/jnlp/JREDesc.java:
+	(JREDesc(Version,URL,String,String,String,List)): Correct typo
+	in @param tag.
+	* netx/net/sourceforge/jnlp/Launcher.java:
+	(Launcher(boolean)): Correct broken @param tag.
+	* netx/net/sourceforge/jnlp/cache/ResourceTracker.java:
+	(addDownloadListener(DownloadListener)): Remove broken @param tags.
+	Add correct one.
+	(removeDownloadListener(DownloadListener)): Add missing @param tag.
+	* netx/net/sourceforge/jnlp/security/KeyStores.java:
+	(getKeyStoreLocation(Level,Type)): Add content to @param and @return tags.
+	(toTranslatableString(Level,Type)): Likewise.
+	* netx/net/sourceforge/jnlp/security/PasswordAuthenticationDialog.java:
+	(askUser(String,int,String,String)): Correct typo in @param tag.
+	* netx/net/sourceforge/jnlp/security/SecurityDialogPanel.java:
+	(createSetValueListener(SecurityWarningDialog,int)): Add content to @return tag.
+	* netx/net/sourceforge/jnlp/security/SecurityWarningDialog.java:
+	(showCertInfoDialog(CertVerifier,SecurityWarningDialog)): Remove broken
+	@param tag and add correct ones.
+	(showSingleCertInfoDialog(X509Certificate,JDialog)): Add content to @param tags.
+	* netx/net/sourceforge/jnlp/tools/CharacterEncoder.java:
+	Remove broken @see tags from import from OpenJDK.
+	* netx/net/sourceforge/jnlp/util/FileUtils.java:
+	Fix bad whitespace.
+	(sanitizeFileName(String)): Fix @param tag.
+	* netx/net/sourceforge/nanoxml/XMLElement.java:
+	Fix example in class documentation.
+	* plugin/icedteanp/java/sun/applet/PluginAppletViewer.java,
+	(waitForAppletInit(NetxPanel)): Fix @param tag.
+
+2010-12-08  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/tools/KeyTool.java: Remove unused class.
+
+2010-12-07  Andrew Su  <asu@redhat.com>
+
+	* MiddleClickListener.java: Added copyright header. Corrected typo in
+	javadoc.
+
+2010-12-07  Omair Majid  <omajid@redhat.com>
+
+	* Makefile.am
+	(PLUGIN_VERSION): Change to IcedTea-Web
+	($(PLUGIN_DIR)/%.o): Define PLUGIN_NAME and PACKAGE_URL.
+	* configure.ac
+	(AC_INTIT): Add url.
+	* plugin/icedteanp/IcedTeaNPPlugin.cc
+	(PLUGIN_NAME): Removed.
+	(PLUGIN_FULL_NAME): New definition.
+	(PLUGIN_DESC): Add link to IcedTea-Web wiki page.
+	(NP_GetValue): Return PLUGIN_FULL_NAME instead of PLUGIN_NAME.
+
+2010-12-06  Deepak Bhole <dbhole@redhat.com>
+
+	Fixed indentation and spacing for all .java files
+	* .settings/org.eclipse.jdt.core.prefs: New file. Contains code style
+	preference settings for Eclipse.
+	* .settings/org.eclipse.jdt.ui.prefs: Same.
+
+2010-12-03  Andrew John Hughes  <ahughes@redhat.com>
+
+	* netx/net/sourceforge/jnlp/cache/CacheUtil.java,
+	(getCachedResource(URL,Version,UpdatePolicy)):
+	Revert change to use toURI() for now.
+	See http://mail.openjdk.java.net/pipermail/distro-pkg-dev/2010-December/011270.html
+	* netx/net/sourceforge/jnlp/cache/ResourceTracker.java,
+	(getCacheURL(URL)): Likewise.
+	* netx/net/sourceforge/jnlp/runtime/Boot.java,
+	(getFile()): Use toURI.toURL() to avoid broken escaping.
+	* netx/net/sourceforge/jnlp/runtime/JNLPClassLoader.java:
+	(initializeResources()): Likewise.
+
+2010-12-01  Andrew John Hughes  <ahughes@redhat.com>
+
+	* netx/net/sourceforge/jnlp/cache/CacheUtil.java:
+	(getCachedResource(URL,Version,UpdatePolicy)): Use
+	toURI().toURL() to avoid broken escaping.
+	* netx/net/sourceforge/jnlp/cache/ResourceTracker.java:
+	(getCacheURL(URL)): Likewise.
+	* netx/net/sourceforge/jnlp/runtime/ApplicationInstance.java:
+	(destroy()): Suppress deprecated warning from use of thread.stop().
+	Only use when interrupt() has already been tried.
+	* netx/net/sourceforge/jnlp/runtime/Boot.java:
+	(getFile()): Use toURI.toURL() to avoid broken escaping.
+	* netx/net/sourceforge/jnlp/runtime/JNLPClassLoader.java:
+	(initializeResources()): Likewise.
+	* netx/net/sourceforge/jnlp/security/PasswordAuthenticationDialog.java:
+	(askUser(String,int,String,String)): Use getPassword() to retrieve
+	a character array directly.  Fix overrunning line.
+	* netx/net/sourceforge/jnlp/tools/JarSigner.java:
+	Remove unused IdentityScope variable, scope.
+	* netx/net/sourceforge/nanoxml/XMLElement.java:
+	(scanWhitespace(StringBuffer)): Don't fallthrough.
+	* plugin/icedteanp/IcedTeaPluginRequestProcessor.cc:
+	Fix warnings where std::string is used in printf
+	rather than char* by invoking c_str on these strings.
+	* plugin/icedteanp/java/netscape/javascript/JSException.java:
+	(JSException()): Mark with @Deprecated annotation.
+	(JSException(String)): Likewise.
+	(JSException(String,String,int,String,int)): Likewise.
+	* plugin/icedteanp/java/netscape/javascript/JSObject.java:
+	(JSObject(String)): Remove redundant cast.
+	(getWindow(Applet)): Likewise.
+	* plugin/icedteanp/java/sun/applet/AppletSecurityContextManager.java:
+	(contexts): Initialise properly with generic typing.
+	* plugin/icedteanp/java/sun/applet/MethodOverloadResolver.java:
+	(getMatchingMethod(Object[]): Add missing generic type to Class
+	instances.
+	(getMatchingConstructor(Object[])): Likewise.
+	(getCostAndCastedObject(Object,Class<?>)): Likewise.
+	(getMatchingMethods(Class<?>,String,int)): Likewise.
+	(getMatchingConstructors(Class<?>,int)): Likewise.
+	(getNum(String,Class<?>)): Likewise.
+	* plugin/icedteanp/java/sun/applet/PluginAppletSecurityContext.java:
+	(parseCall(String,ClassLoader,Class<V>)): Use c.cast rather than (V).
+	(handleMessage(int,String,AccessControlContext,String)): Add
+	missing generic type to Class instances.  Remove redundant casts.
+	(prepopulateField(int,String)): Add missing generic type to Class instance.
+	* plugin/icedteanp/java/sun/applet/PluginAppletViewer.java:
+	(createPanel(PluginStreamHandler,int,long,URL,Hashtable<String,String>)):
+	Add missing generic types on Hashtable and PrivilegedAction.
+	(initEventQueue(AppletPanel)): Add missing generic type to PrivilegedAction.
+	(splitSeparator(String,String)): Use an ArrayList rather than Vector
+	to avoid locking and use generic types.
+	(requests): Initialise properly with generic typing.
+	(applets): Likewise.
+	(appletStateChanged(AppletEvent)): Use setSize and getPreferredSize.
+	(handleMessage(int,String)): Remove redundant casts.
+	(audioClips): Add generic types.
+	(getAudioClip): Remove redundant cast.
+	(imageRefs): Add generic types.
+	(getCachedImageRef(URL)): Remove redundant cast.
+	(appletPanels): Add generic types.
+	(getApplets()): Likewise.
+	(getStream(String)): Mark with @Override.
+	(getStreamKeys()): Likewise.
+	(systemParam): Add generic types.
+	(printTag(PrintStream,Hashtable<String,String>)): Likewise.
+	Remove redundant casts.
+	(updateAtts()): Use getSize() and getInsets().  Use Integer.valueOf().
+	(appletReload()): Add generic types to PrivilegedAction.
+	(scanIdentifier(int[],Reader)): Use StringBuilder to avoid unnecessary
+	locking.
+	(skipComment(int[],Reader)): Likewise.
+	(scanTag(int[],Reader)): Likewise. Add generic types.
+	(parse(int,long,String,String,Reader,URL)): Use PrivilegedExceptionAction
+	to avoid catching and rethrowing the exception manually.  Add generic types.
+	(parse(int,long,String,String,Reader,URL,PrintStream,PluginAppletPanelFactory)):
+	Add generic types.  Remove unnecessary casts.  Fix overlong lines.
+	* plugin/icedteanp/java/sun/applet/PluginMain.java:
+	(init()): Add generic types.  Remove unnecessary cast.
+	* plugin/icedteanp/java/sun/applet/PluginObjectStore.java:
+	(objects): Initialise properly with generic typing.
+	(counts): Likewise.
+	(identifiers): Likewise.
+	* plugin/icedteanp/java/sun/applet/PluginProxySelector.java:
+	(get(Object)): Suppress unchecked warning arising from cast to K.
+
+2010-12-02  Omair Majid  <omajid@redhat.com>
+
+	* Makefile.am (EXTRA_DIST): Add itweb-settings.desktop.in.
+	(all-local): Add itweb-settings.desktop.
+	(clean-desktop-files): Remove itweb-settings.desktop.
+	(itweb-settings.desktop): New target.
+	* itweb-settings.desktop.in: New file.
+
+2010-12-01  Andrew John Hughes  <ahughes@redhat.com>
+
+	* acinclude.m4:
+	(IT_CHECK_FOR_APPLETVIEWERPANEL_HOLE):
+	New check to ensure sun.applet.AppletViewerPanel
+	is public (via the patch in IcedTea, applet_hole.patch).
+	* configure.ac: Invoke the above macro.  Don't call
+	IT_CHECK_FOR_CLASS for the same class (the above macro
+	handles this too).
+	* README: Mention this limitation.
+
+2010-12-01  Andrew Su  <asu@redhat.com>
+
+	* NEWS: Added controlpanel for modifying deployments.properties
+	* Makefile.am:
+	(CONTROLPANEL_LAUNCHER_OBJECTS): Objects used to compile binary
+	control panel.
+	(all-local): Add $(NETX_DIR)/launcher/controlpanel/itw-settings.
+	(install-exec-local): Install the control panel binary.
+	(uninstall-local): Removes the compiled control panel binary.
+	($(NETX_DIR)/launcher/controlpanel/%.o): Create the launcher objects.
+	($(NETX_DIR)/launcher/controlpanel/itw-settings): Link the objects to
+	make the launcher.
+	* netx/net/sourceforge/jnlp/controlpanel/AboutPanel.java,
+	* netx/net/sourceforge/jnlp/controlpanel/ComboItem.java,
+	* netx/net/sourceforge/jnlp/controlpanel/ControlPanel.java,
+	* netx/net/sourceforge/jnlp/controlpanel/DebuggingPanel.java,
+	* netx/net/sourceforge/jnlp/controlpanel/DesktopShortcutPanel.java,
+	* netx/net/sourceforge/jnlp/controlpanel/JREPanel.java,
+	* netx/net/sourceforge/jnlp/controlpanel/NamedBorderPanel.java,
+	* netx/net/sourceforge/jnlp/controlpanel/MiddleClickListener.java,
+	* netx/net/sourceforge/jnlp/controlpanel/SecuritySettingsPanel.java,
+	* netx/net/sourceforge/jnlp/controlpanel/TemporaryInternetFilesPanel.java,
+	* netx/net/sourceforge/jnlp/controlpanel/AdvancedProxySettingsDialog.java,
+	* netx/net/sourceforge/jnlp/controlpanel/AdvancedProxySettingsPane.java,
+	* netx/net/sourceforge/jnlp/controlpanel/NetworkSettingsPanel.java,:
+	New classes. All methods are new as well.
+	* netx/net/sourceforge/jnlp/resources/Messages.properties: Added
+	messages used by control panel.
+	* netx/net/sourceforge/jnlp/security/viewer/CertificatePane.java:
+	Changed to not display a close button if null parent frame.
+
+2010-11-30  Andrew John Hughes  <ahughes@redhat.com>
+
+	* Makefile.am:
+	(liveconnect): Add NETX_DIR first on the bootclasspath
+	so the plugin can be built against 1.7 and 1.8
+	branch releases of IcedTea6.
+
+2010-11-26  Andrew John Hughes  <ahughes@redhat.com>
+
+	Make distcheck work.
+	* Makefile.am:
+	(EXTRA_DIST): Use relative paths for netx
+	and the plugin.
+	(clean-local): Remove empty stamps directory.
+	(install-exec-local): Use install to install
+	programs and data with the correct permissions.
+	(install-data-local): Likewise.
+	(uninstall-local): Remove documentation.
+	(netx): Use ${INSTALL_DATA} to add resources so
+	that read-only files aren't copied.
+	(extra-files): Likewise.
+	($(NETX_DIR)/launcher/javaws): Don't create empty launcher
+	directory.
+	(clean-docs): Remove empty docs directory.
+	(clean-bootstrap-directory): Remove empty bootstrap
+	directory.
+
+2010-11-29  Deepak Bhole <dbhole@redhat.com>
+
+	* plugin/icedteanp/java/sun/applet/PluginAppletViewer.java
+	(createPanel): Call the new framePanel() method with the proper handle.
+	(framePanel): New method, renamed from reFrame. Changed to now do one-time
+	framing of panel into the plugin.
+	(handleMessage): Don't re-frame the panel. Panel is now framed only once.
+	(destroyApplet): Dispose the frame right away, and try to remove the panel
+	if possible. If not, handleMessage() will do it when the panel is
+	ready/removable.
+
+2010-11-25  Andrew John Hughes  <ahughes@redhat.com>
+
+	* Makefile.am:
+	(JDK_UPDATE_VERSION): Document.
+	(NETX_PKGS): NetX packages for documentation.
+	(PLUGIN_PKGS): Same for the plugin.
+	(JAVADOC_OPTS): Common options passed to javadoc.
+	(JAVADOC_MEM_OPTS): Memory options passed to JVM
+	if possible (taken from the previous OpenJDK build).
+	(all-local): Depend on docs.stamp.
+	(clean-local): Add clean-docs.
+	(.PHONY): Add clean-docs, clean-plugin-docs, clean-netx-docs.
+	(install-exec-local): Install the documentation if enabled.
+	(docs): Meta-dependency for netx-docs and plugin-docs.
+	(clean-docs): Likewise but for clean targets.
+	(netx-docs): Build documentation for the NetX API.
+	(clean-netx-docs): Remove the NetX docs.
+	(plugin-docs): Build documentation for the plugin API.
+	(clean-plugin-docs): Likewise.
+	(bootstrap-directory): Link to javadoc binary.
+	* acinclude.m4:
+	(IT_FIND_JAVADOC): Find a javadoc binary, first checking
+	user input, then the JDK and the path for 'javadoc' and
+	'gjdoc'.  Also sets JAVADOC_SUPPORTS_J_OPTIONS if it does.
+	* configure.ac:
+	Call IT_FIND_JAVADOC.
+
+2010-11-25  Omair Majid  <omajid@redhat.com>
+
+	* Makefile.am (stamps/liveconnect.stamp): Set a bootclasspath to
+	avoid using an older netx.jar during compilation.
+
+2010-11-24  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/util/FileUtils.java
+	(createRestrictedDirectory): New method. Creates a directory with reduced
+	permissions.
+	(createRestrictedFile(File,boolean)): New method. Creates a file with reduced
+	permissions.
+	(createRestrictedFile(File,boolean,boolean): New method. Creates a file or
+	a directory with reduced permissions.
+	* netx/net/sourceforge/jnlp/Launcher.java
+	(markNetxRunning): Do not grant unnecessary file permissions.
+	* netx/net/sourceforge/jnlp/runtime/Boot.java: Remove umask from
+	help message.
+	* netx/net/sourceforge/jnlp/runtime/JNLPClassLoader.java
+	(activateNative): Create file with proper permissions.
+	(getNativeDir): Create directory with proper permissions.
+	* netx/net/sourceforge/jnlp/runtime/JNLPRuntime.java
+	(initializeStreams): Create files with proper permissions.
+	* netx/net/sourceforge/jnlp/security/CertWarningPane.java
+	(CheckBoxListener.actionPerformed): Likewise.
+	* netx/net/sourceforge/jnlp/security/KeyStores.java
+	(createKeyStoreFromFile): Likewise.
+	* netx/net/sourceforge/jnlp/security/viewer/CertificatePane.java
+	(ImportButtonListener.actionPerformed): Likewise.
+	(RemoveButtonListener.actionPerformed): Likewise.
+	* netx/net/sourceforge/jnlp/services/SingleInstanceLock.java
+	(createWithPort): Likewise.
+	(getLockFile): Likewise.
+	* netx/net/sourceforge/jnlp/services/XExtendedService.java
+	(openFile): Likewise.
+	* netx/net/sourceforge/jnlp/services/XPersistenceService.java
+	(create): Likewise.
+	* netx/net/sourceforge/jnlp/util/XDesktopEntry.java
+	(installDesktopLauncher): Likewise.
+	* netx/net/sourceforge/jnlp/resources/Messages.properties: Add
+	CantCreateFile, RCantCreateDir and RCantRename. Remove BNoBase and
+	BOUmask.
+
+2010-11-24  Deepak Bhole <dbhole@redhat.com>
+
+	Fix PR593: Increment of invalidated iterator in IcedTeaPluginUtils (patch
+	from barbara.xxx1975@libero.it)
+	* plugin/icedteanp/IcedTeaPluginUtils.cc
+	(invalidateInstance): Act on the pointer directly, rather than via
+	members.
+	* NEWS: Updated.
+
+2010-11-24  Deepak Bhole <dbhole@redhat.com>
+
+	Fix PR552: Support for FreeBSD's pthread implementation (patch from
+	jkim@freebsd.org)
+	* plugin/icedteanp/IcedTeaNPPlugin.cc
+	(NP_Shutdown): Do pthread_join after cancel to	avoid destroying mutexes
+	or condition variables in use.
+	* plugin/icedteanp/IcedTeaPluginRequestProcessor.cc
+	(PluginRequestProcessor): Initialize mutexes dynamically.
+	(queue_cleanup): New method. Destroy dynamically created mytexes.
+	(queue_processor): Initialize wait_mutex and push cleanup on exit. Clean
+	up after processing stops.
+
+2010-11-24  Andrew John Hughes  <ahughes@redhat.com>
+
+	* NEWS: Bring in changes from IcedTea6 1.10
+	NEWS (now redundant there) and apply same structure
+	as in IcedTea6.
+
+2010-11-24  Omair Majid  <omajid@redhat.com>
+
+	CVE-2010-3860 IcedTea System property information leak via public static
+	* netx/net/sourceforge/jnlp/runtime/Boot.java: Remove basedir
+	 option. Add NETX_ABOUT_FILE.
+	 (run): Remove call to JNLPRuntime.setBaseDir.
+	 (getAboutFile): Use the constant in this file, not JNLPRuntime.
+	 (getBaseDir): Remove obsolete method.
+	 * netx/net/sourceforge/jnlp/runtime/JNLPRuntime.java: Remove
+	 baseDir, USER, HOME_DIR, NETXRC_FILE, NETX_DIR, SECURITY_DIR,
+	 CERTFICIATES_FILE, JAVA_HOME_DIR, NETX_ABOUT_FILE.
+	 (initialize): Do not set baseDir.
+	 (getBaseDir): Remove method.
+	 (setBaseDir): Likewise.
+	 (getDefaultBaseDir): Likewise.
+	 (getProperties): Likewise.
+	 * netx/net/sourceforge/jnlp/security/SecurityUtil.java
+	 (getTrustedCertsFilename): Delegate to
+	 KeyStores.getKeyStoreLocation.
+	 * plugin/icedteanp/java/sun/applet/PluginAppletSecurityContext.java
+	 (PluginAppletSecurityContext): Remove call to obsolete method.
+
+2010-11-24  Omair Majid  <omajid@redhat.com>
+
+	Fix PR592.
+	* netx/net/sourceforge/jnlp/util/XDesktopEntry.java
+	(getContentsAsReader): Sanitize information before adding to desktop file.
+	(sanitize): New method. Ensure that there are no newlines in input.
+
+2010-11-24  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/resources/Messages.properties: Add
+	CVCertificateType.
+	* netx/net/sourceforge/jnlp/security/viewer/CertificatePane.java: Use
+	CVCertificateType instead of hardcoded string.
+
+2010-11-24  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/SecurityDesc.java: Add grantAwtPermissions.
+	(SecurityDesc): Set grantAwtPermissions.
+	(getSandboxPermissions): Use grantAwtPermissions to determine whether to
+	grant permissions.
+
+2010-11-24  Matthias Klose  <doko@ubuntu.com>
+
+	* Makefile.am (javaws.desktop): Search javaws.desktop.in in $(srcdir).
+
+2010-11-24  Matthias Klose  <doko@ubuntu.com>
+
+	* Makefile.am (LAUNCHER_LINK): Don't explicitely link with -lc,
+	link with -pthread instead of -lpthread.
+	(LAUNCHER_FLAGS): Add -pthread.
+
+2010-11-24  Chris Coulson  <chris.coulson@canonical.com>
+
+	* Makefile.am (pluginappletviewer, javaws):
+	Fix linking with --as-needed.
+
+2010-11-23  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/runtime/DeploymentConfiguration.java:
+	Add KEY_PROXY_TYPE, KEY_PROXY_SAME, KEY_PROXY_AUTO_CONFIG_URL,
+	KEY_PROXY_BYPASS_LIST, KEY_PROXY_BYPASS_LOCAL, KEY_PROXY_HTTP_HOST,
+	KEY_PROXY_HTTP_PORT, KEY_PROXY_HTTPS_HOST, KEY_PROXY_HTTPS_PORT,
+	KEY_PROXY_FTP_HOST, KEY_PROXY_FTP_PORT, KEY_PROXY_SOCKS4_HOST,
+	KEY_PROXY_SOCKS4_PORT, and KEY_PROXY_OVERRIDE_HOSTS.
+	(loadDefaultProperties): Use the new constants.
+	* netx/net/sourceforge/jnlp/runtime/JNLPProxySelector.java: New
+	class.
+	(JNLPProxySelector): New method.
+	(parseConfiguration): New method. Initializes this object by
+	querying the configuration.
+	(getHost): New method.
+	(getPort): New method.
+	(connectFailed): New method.
+	(select): New method. Returns a list of appropriate proxies to use
+	for a given uri.
+	(inBypassList): New method. Return true if the host in the URI
+	should be bypassed for proxy purposes.
+	(isLocalHost): New method.
+	(getFromConfiguration): New method. Finds a proxy based on
+	configuration.
+	(getFromPAC): New method.
+	(getFromBrowser): New method.
+	* netx/net/sourceforge/jnlp/runtime/JNLPRuntime.java
+	(initialize): Install proxy selector and authenticator.
+	* plugin/icedteanp/java/sun/applet/PluginMain.java
+	(init): Do not install authenticator.
+	(CustomAuthenticator): Moved to...
+	* netx/net/sourceforge/jnlp/security/JNLPAuthenticator.java: Here.
+	* plugin/icedteanp/java/sun/applet/PasswordAuthenticationDialog.java
+	Moved to...
+	* netx/net/sourceforge/jnlp/security
+	/PasswordAuthenticationDialog.java: Here.
+	* plugin/icedteanp/java/sun/applet/PluginProxySelector.java: Extend
+	JNLPProxySelector.
+	(select): Renamed to...
+	(getFromBrowser): New method.
+
+2010-11-19  Omair Majid  <omajid@redhat.com>
+
+	* Makefile.am (EXTRA_DIST): Replace javaws.desktop with
+	javaws.desktop.in. (all-local): Add javaws.desktop. (clean-local):
+	Add dependency on clean-desktop-files. (.PHONY): Add clean-desktop-
+	files. (clean-desktop-files): New target. (javaws.desktop): New
+	target. Use the absolute path to javaws binary in the Exec= line to
+	create the javaws.desktop file.
+	* javaws.desktop: Renamed to...
+	* javaws.desktop.in: New file. Does not contain Encoding key. Value
+	for Icon does not contain extension.
+	* netx/net/sourceforge/jnlp/util/XDesktopEntry.java
+	(JAVA_ICON_NAME): Set to icon name without the extension.
+
+2010-11-18  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/SecurityDesc.java: Remove window banner
+	permissions from sandboxPermissions and j2eePermissions.
+	(getSandBoxPermissions): Dynamically add window banner permissions
+	if allowed by configuration.
+	* netx/net/sourceforge/jnlp/runtime/DeploymentConfiguration.java:
+	Add KEY_SECURITY_PROMPT_USER,
+	KEY_SECURITY_ALLOW_HIDE_WINDOW_WARNING,
+	KEY_SECURITY_PROMPT_USER_FOR_JNLP, and
+	KEY_SECURITY_INSTALL_AUTHENTICATOR.
+	(loadDefaultProperties): Use the new constants.
+	* netx/net/sourceforge/jnlp/security/SecurityWarning.java
+	(showAccessWarningDialog): Check if the user should be prompted
+	before prompting the user.
+	(showNotAllSignedWarningDialog): Likewise.
+	(showCertWarningDialog): Likewise.
+	(showAppletWarning): Likewise.
+	(shouldPromptUser): New method. Check if configuration allows
+	showing user prompts.
+	* netx/net/sourceforge/jnlp/services/ServiceUtil.java
+	(checkAccess(AccessType,Object...)): Clarify javadocs.
+	(checkAccess(ApplicationInstance,AccessType,Object...)): Clarify
+	javadocs. Only prompt the user if showing JNLP prompts is ok.
+	(shouldPromptUser): New method. Returns true if configuration allows
+	for showing JNLP api prompts.
+	* plugin/icedteanp/java/sun/applet/PluginMain.java
+	(init): Only install custom authenticator if allowed by
+	configuration.
+
+2010-11-18  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/runtime/DeploymentConfiguration.java:
+	Add KEY_ENABLE_LOGGING.
+	(loadDefaultProperties): Use KEY_ENABLE_LOGGING.
+	* netx/net/sourceforge/jnlp/runtime/JNLPRuntime.java: Add
+	redirectStreams, STDERR_FILE and STDOUT_FILE.
+	(initialize): Call initializeStreams.
+	(initializeStreams): New method. Redirects or duplicates stdout and
+	stderr to the logging files as required.
+	(setRedirectStreams): New method. Sets whether stdout/stderr streams
+	should be redirected.
+	* plugin/icedteanp/java/sun/applet/PluginMain.java:
+	(PluginMain): Move code for creating logging files into JNLPRuntime.
+	Call JNLPRuntime.setRedirectStreams to redirect streams.
+	(TeeOutputStream): Move to its own class.
+	* netx/net/sourceforge/jnlp/util/TeeOutputStream.java: Moved from
+	PluginMain into this new class.
+
+2010-11-18  Omair Majid  <omajid@redhat.com>
+
+	* NEWS: Update with new interfaces
+	* netx/javax/jnlp/DownloadService2.java: New interface.
+	(ResourceSpec): New class.
+	(ResourceSpec.ResourceSpec): New method.
+	(ResourceSpec.getExpirationDate): New method.
+	(ResourceSpec.getLastModified): New method.
+	(ResourceSpec.getSize): New method.
+	(ResourceSpec.getType): New method.
+	(ResourceSpec.getUrl): New method.
+	(ResourceSpec.getVersion): New method.
+	(getCachedResources): New method.
+	(getUpdateAvaiableReosurces): New method.
+	* netx/javax/jnlp/IntegrationService.java: New interface.
+	(hasAssociation): New method.
+	(hasDesktopShortcut): New method.
+	(hasMenuShortcut): New method.
+	(removeAssociation): New method.
+	(removeShortcuts): New method.
+	(requestAssociation): New method.
+	(requestShortcut): New method.
+
+2010-11-16  Andrew Su  <asu@redhat.com>
+
+	* netx/net/sourceforge/jnlp/runtime/DeploymentConfiguration.java:
+	Corrected typo in one of the default values.
+
+2010-11-11  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/runtime/Boot.java (main): Move trust
+	manager initialization code into JNLPRuntime.initialize.
+	* plugin/icedteanp/java/sun/applet/PluginMain.java
+	(init): Likewise.
+	* netx/net/sourceforge/jnlp/runtime/JNLPRuntime.java (initialize):
+	Set the default SSL TrustManager here.
+	* netx/net/sourceforge/jnlp/security/CertWarningPane.java
+	(CheckBoxListener.actionPerformed): Add this certificate into
+	user's trusted certificate store.
+	* netx/net/sourceforge/jnlp/tools/KeyTool.java
+	(addToKeyStore(File,KeyStore)): Move to CertificateUtils.
+	(addToKeyStore(X509Certificate,KeyStore)): Likewise.
+	(dumpCert): Likewise.
+	* netx/net/sourceforge/jnlp/security/CertificateUtils.java: New
+	class.
+	(addToKeyStore(File,KeyStore)): Moved from KeyTool.
+	(addToKeyStore(X509Certificate,KeyStore)): Likewise.
+	(dumpCert): Likewise.
+	(inKeyStores): New method.
+	* netx/net/sourceforge/jnlp/security/HttpsCertVerifier.java
+	(getRootInCacerts): Check all available CA store to check if
+	root is in CA certificates.
+	* netx/net/sourceforge/jnlp/security/KeyStores.java
+	(getKeyStore(Level,Type,boolean)): Add security check.
+	(getClientKeyStores): New method.
+	* netx/net/sourceforge/jnlp/security/VariableX509TrustManager.java
+	(VariableX509TrustManager): Initialize multiple CA, certificate and
+	client trust managers.
+	(checkClientTrusted): Check all the client TrustManagers if
+	certificate is trusted.
+	(checkAllManagers): Check multiple CA certificates and trusted
+	certificates to determine if the certificate chain can be trusted.
+	(isExplicitlyTrusted): Check with multiple TrustManagers.
+	(getAcceptedIssuers): Gather results from multiple TrustManagers.
+	* netx/net/sourceforge/jnlp/security/viewer/CertificatePane.java
+	(ImportButtonListener): Use CertificateUtils instead of KeyTool.
+	* netx/net/sourceforge/jnlp/tools/JarSigner.java
+	(checkTrustedCerts): Use multiple key stores to check if certificate
+	is directly trusted and if the root is trusted.
+
+2010-11-09  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/resources/Messages.properties: Add
+	ButAllow, ButClose, ButCopy, ButMoreInformation, ButProceed,
+	ButRun, AlwaysAllowAction, Continue, Field, From, Name, Publisher,
+	Value, Version, SNoAssociatedCertificate, SAlwaysTrustPublisher,
+	SHttpsUnverified, SNotAllSignedSummary, SNotAllSignedDetail,
+	SNotAllSignedQuestion, SCertificateDetails, SIssuer, SSerial,
+	SMD5Fingerprint, SSHA1Fingerprint, SSignature, SSignatureAlgorithm,
+	SSubject, SValidity, CVCertificateViewer, CVDetails, CVIssuedTo,
+	CVExport, CVImport, CVIssuedBy, IssuedTo, CVRemove,
+	CVRemoveConfirmMessage,CVRemoveConfirmTitle, CVUser, CVSystem,
+	KS, KSCerts, KSJsseCerts, KSCaCerts, KSJsseCaCerts, and
+	KSClientCerts.
+	* netx/net/sourceforge/jnlp/security/AccessWarningPane.java
+	(addComponents): Use localized strings.
+	* netx/net/sourceforge/jnlp/security/CertWarningPane.java
+	(addComponents): Likewise.
+	* netx/net/sourceforge/jnlp/security/CertsInfoPane.java
+	(parseCert): Likewise.
+	(addComponents): Likewise.
+	* netx/net/sourceforge/jnlp/security/MoreInfoPane.java
+	(addComponents): Likewise.
+	* netx/net/sourceforge/jnlp/security/NotAllSignedWarningPane.java
+	(addComponents): Likewise.
+	* netx/net/sourceforge/jnlp/security/viewer/CertificatePane.java:
+	Likewise.
+	(addComponents): Likewise.
+	(CertificateType.toString): Likewise.
+	(RemoveButtonListener.actionPerformed): Likewise. 
+
+2010-11-05  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/runtime/DeploymentConfiguration.java:
+	Add KEY_BROWSER_PATH.
+	(loadDefaultProperties): Use KEY_BROWSER_PATH.
+	* netx/net/sourceforge/jnlp/services/XBasicService.java
+	(initialize): Use the browser command from the configuration.
+	Save updates to configuration as well. 
+
+2010-11-05  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/ShortcutDesc.java: Change prefixes from
+	SHORTCUT_ to CREATE_.
+	* netx/net/sourceforge/jnlp/runtime/ApplicationInstance.java
+	(addMenuAndDesktopEntries): Call shouldCreateShortcut to find out
+	if shortcut should be created. Remove call to checkAccess which
+	does nothing as the entire stack contains trusted classes.
+	(shouldCreateShortcut): New method. Use the configuration to find
+	out if a shorcut should be created, and possibly prompt the user.
+	* netx/net/sourceforge/jnlp/runtime/DeploymentConfiguration.java:
+	Add KEY_CREATE_DESKTOP_SHORTCUT.
+	(loadDefaultProperties): Use KEY_CREATE_DESKTOP_SHORTCUT.
+
+2010-11-08  Omair Majid  <omajid@redhat.com>
+
+	* Makefile.am (JDK_UPDATE_VERSION): Define variable.
+
+2010-11-04  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/runtime/DeploymentConfiguration.java:
+	Add KEY_USER_TRUSTED_CA_CERTS, KEY_USER_TRUSTED_JSSE_CA_CERTS,
+	KEY_USER_TRUSTED_CERTS, KEY_USER_TRUSTED_JSSE_CERTS,
+	KEY_USER_TRUSTED_CLIENT_CERTS, KEY_SYSTEM_TRUSTED_CA_CERTS,
+	KEY_SYSTEM_TRUSTED_JSSE_CA_CERTS, KEY_SYSTEM_TRUSTED_CERTS,
+	KEY_SYSTEM_TRUSTED_JSSE_CERTS, KEY_SYSTEM_TRUSTED_CLIENT_CERTS
+	(loadDefaultProperties): Use the defined constants.
+	* netx/net/sourceforge/jnlp/security/KeyStores.java: New class.
+	(getPassword): New method. Return the default password used for
+	KeyStores.
+	(getKeyStore(Level,Type)): New method. Returns the appropriate
+	KeyStore.
+	(getKeyStore(Level,Type,String)): Likewise.
+	(getCertKeyStores): New method. Return all the trusted certificate
+	KeyStores.
+	(getCAKeyStores): New method. Return all the trusted CA certificate
+	KeyStores.
+	(getKeyStoreLocation): New method. Return the location of the
+	appropriate KeyStore.
+	(toTranslatableString): New method. Return a string that can be
+	used to create a human-readable name for the KeyStore.
+	(toDisplayableString): New method. Return a human-readable name
+	for the KeyStore.
+	(createKeyStoreFromFile): New method. Creates a new KeyStore object,
+	initializing it from the given file if possible.
+	* netx/net/sourceforge/jnlp/security/viewer/CertificatePane.java
+	(CertificatePane): Create two JTables. Populate the tables when
+	done creating the user interface.
+	(initializeKeyStore): Use the correct keystore.
+	(addComponents): Do not read KeyStore. Create more interface
+	elements to show the new possible KeyStores. Mark some buttons to
+	be disabled when needed.
+	(repopulateTable): Renamed to...
+	(repopulateTables): New method. Read KeyStore and use the contents
+	to create the user and system tables.
+	(CertificateType): New class.
+	(CertificateTypeListener): New class. Listens to JComboBox change
+	events.
+	(TabChangeListener): New class. Listens to new tab selections.
+	(ImportButtonListener): Import certificates to the appropriate
+	KeyStore.
+	(ExportButtonListener): Find the certificate from the right table.
+	(RemoveButtonListener): Find the certificate from the right table
+	and right the KeyStore.
+	(DetailsButtonListener): Find the certificate from the right table.
+	* netx/net/sourceforge/jnlp/security/viewer/CertificateViewer.java
+	(showCertficaiteViewer): Initialize the JNLPRuntime so the
+	configuration gets loaded.
+	* netx/net/sourceforge/jnlp/tools/KeyTool.java
+	(addToKeyStore(File,KeyStore)): New method. Adds certificate from
+	the file to the KeyStore.
+	(addToKeyStore(X509Certificate,KeyStore)): New method. Adds a
+	certificate to a KeyStore.
+
+2010-11-04  Deepak Bhole <dbhole@redhat.com>
+
+	* plugin/icedteanp/java/sun/applet/PluginAppletViewer.java (update):
+	Override method and implement double-buffering.
+
+2010-10-28  Andrew John Hughes  <ahughes@redhat.com>
+
+	* Makefile.am:
+	(NETX_BOOTSTRAP_CLASSES): Removed.
+	(PLUGIN_BOOTSTRAP_CLASSES): Likewise.
+	(NETX_SUN_CLASSES): Likewise.
+	(PLUGIN_SUN_CLASSES): Likewise.
+	* acinclude.m4:
+	(IT_CHECK_FOR_CLASS): Require detection
+	of javac and java.  Put test class in
+	sun.applet to get access to some internal
+	classes.  Change test to use forName for
+	the same reason.  I expect to be able to
+	revert this when usage of sun.applet is fixed.
+	(IT_FIND_JAVA): Ported from IcedTea6.  Change
+	to prioritise 'java' over 'gij'.
+	* configure.ac:
+	Add IT_CHECK_FOR_CLASS checks for classes which
+	are required but not found in JDKs other than
+	Oracle-based ones.  Also check for java.* classes
+	missing from current versions of gcj but which
+	may appear there in future.
+
+2010-11-03  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/Launcher.java
+	(markNetxRunning): Get file name from configuration.
+	(markNetxStopped): Likewise.
+	* netx/net/sourceforge/jnlp/cache/CacheUtil.java
+	(clearCache): Get cache directory from configuration.
+	(okToClearCache): Get netx_running file from configuration.
+	(getCacheFile): Get cache directory from configuration.
+	(urlToPath): Change semantics to take in the full path of the
+	directory instead of a directory under runtime.
+	* netx/net/sourceforge/jnlp/runtime/DeploymentConfiguration.java:
+	Change DEPLOYMENT_DIR to ".icedtea". Add constants
+	KEY_USER_CACHE_DIR, KEY_USER_PERSISTENCE_CACHE_DIR,
+	KEY_SYSTEM_CACHE_DIR, KEY_USER_LOG_DIR, KEY_USER_TMP_DIR,
+	KEY_USER_LOCKS_DIR, and KEY_USER_NETX_RUNNING_FILE.
+	(load): Use DEPLOYMENT_DIR instead of hardcoded string.
+	(loadDefaultProperties): Add LOCKS_DIR. Replace strings with
+	constants. Add new default values for persistence cache directory,
+	single instance locks directory and the netx_running file.
+	* netx/net/sourceforge/jnlp/runtime/JNLPRuntime.java: Remove
+	unneeded TMP_DIR, LOCKS_DIR and NETX_RUNNING_FILE
+	* netx/net/sourceforge/jnlp/services/SingleInstanceLock.java
+	(getLockFile): Get locks directory from configuration.
+	* netx/net/sourceforge/jnlp/services/XPersistenceService.java
+	(toCacheFile): Get persistence cache directory from configuration.
+	* netx/net/sourceforge/jnlp/util/XDesktopEntry.java
+	(getContentsAsReader): Get cache directory from configuration.
+	(installDesktopLauncher): Get temporary directory from
+	configuration. Make parent directories if required.
+	* plugin/icedteanp/java/sun/applet/JavaConsole.java
+	(initialize): Get log directory from configuration and create the
+	error and output files under it.
+	* plugin/icedteanp/java/sun/applet/PluginMain.java:
+	PLUGIN_STDERR_FILE and PLUGIN_STDOUT_FILE are now just filesnames.
+	(PluginMain): Use configuration for finding the log directory.
+	Initialize JNLPRuntime before creating the stderr and stdout logs.
+
+2010-11-01  Omair Majid  <omajid@redhat.com>
+
+	* Makefile.am (clean-IcedTeaPlugin): Only delete launcher directory if it
+	exists.
+
+2010-11-01  Deepak Bhole <dbhole@redhat.com>
+
+	PR542: Plugin fails with NPE on
+	http://www.openprocessing.org/visuals/iframe.php?visualID=2615
+	* netx/net/sourceforge/jnlp/runtime/JNLPClassLoader.java
+	(initializeResources): If cacheFile is null (JAR couldn't be downloaded),
+	try to continue, rather than allowing the exception to cause an abort.
+	* NEWS: Updated.
+
+2010-11-01  Deepak Bhole <dbhole@redhat.com>
+
+	* plugin/docs: Added new docs folder that contains plugin documentation.
+	* plugin/docs/MessageBusArchitecture.png: Diagram of the JS <-> Java 
+	message handling architectrure.
+	* plugin/docs/OverallArchitecture.png: Diagram of the overall plugin
+	architecture.
+	* plugin/docs/java-js-wf.png: Sequence diagram showing an example
+	LiveConnect call from an applet to JavaScript/Browser.
+	* plugin/docs/js-java-wf.png: Sequence diagram showing an example
+	LiveConnect call from JavaScript/Browser to an applet.
+	* plugin/docs/npplugin_liveconnect_design.pdf: Slides with notes on the
+	above diagrams.
+
+2010-10-29  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/JNLPFile.java: Add component.
+	(getLaunchInfo): Modify javadoc to indicate that it does not return
+	the ComponentDesc.
+	(getComponent): Return component instead of launchType.
+	(isComponent): Check if component is not null.
+	(parse): Find and set component descriptor.
+	* netx/net/sourceforge/jnlp/Parser.java
+	(getLauncher): Remove all checks for component-desc. Allow having
+	none of application-desc, applet-desc and installer-desc.
+	(getComponent): Check for more than one component-desc element.
+	Read and parse the component-desc.
+
+2010-10-28  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/security/SecurityWarningDialog.java
+	(showMoreInfoDialog): Make dialog modal.
+	(showCertInfoDialog): Likewise.
+	(showSingleCertInfoDialog): Likewise.
+	(initDialog): Use setModality instead of setModal.
+
+2010-10-27  Deepak Bhole <dbhole@redhat.com>
+
+	* plugin/icedteanp/IcedTeaNPPlugin.cc (plugin_create_applet_tag): Escape
+	the entire applet tag, not just the params.
+
+2010-10-27  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/runtime/DeploymentConfiguration.java
+	(load): Do a security check at start. A security exception later on may
+	accidentally reveal a filename or a system property.
+	(save): Likewise.
+
+2010-10-26  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/Launcher.java
+	(doPerApplicationAppContextHacks): New method. Create a new ParserDelegate
+	to intialize the per AppContext dtd used by Swing HTML controls.
+	(TgThread.run): Call doPerApplicationAppContextHacks.
+	* netx/net/sourceforge/jnlp/runtime/JNLPRuntime.java
+	(initialize): Call doMainAppContextHacks.
+	(doMainAppContextHacks): New method. Create a new ParserDelegate to
+	initialize the per AppContext dtd used by Swing HTML controls.
+
+2010-10-26  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/Launcher.java
+	(launchApplication): Mark main method as accessible before
+	invoking it.
+
+2010-10-26  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/Parser.java: Add 1.1, 1.2, 1.3 and
+	1.4 to supportedVersions.
+
+2010-10-26  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/runtime/Translator.java
+	(R(String)): New method.
+
+2010-10-26  Deepak Bhole <dbhole@redhat.com>
+
+	* netx/net/sourceforge/jnlp/PluginBridge.java: Trim whitespace from jar
+	names in the constructor.
+
+2010-10-26  Deepak Bhole <dbhole@redhat.com>
+
+	* plugin/icedteanp/java/sun/applet/PluginAppletViewer.java:
+	Replace all status.put calls with calls to updateStatus().
+	(createPanel): Create a frame with a 0 handle. Use the new
+	waitForAppletInit function to wait until applet is ready.
+	(reFrame): Re-order code so that the panel is never parentless.
+	(handleMessage): Re-wrote message processing to handle destroy calls
+	correctly, checking for them more often to prevent a frame from popping up
+	if the tab/page is closed before loading finishes. Decode special
+	characters in the message.
+	(updateStatus): New function. Updates the status for the given instance if
+	applicable.
+	(destroyApplet): New function. Destroys a given applet and frees related
+	resources.
+	(waitForAppletInit): New function. Blocks until applet is initialized.
+	(parse): Remove part that decoded the params. Decoding is now done earlier
+	in handleMessage().
+	* plugin/icedteanp/java/sun/applet/PluginMessageConsumer.java:
+	(getPriorityStrIfPriority): Mark destroy messages as priority.
+	(bringPriorityMessagesToFront): Scans the queue for priority messages and
+	brings them to the front.
+	(run): If the queue is not empty and there are no workers left, run
+	bringPriorityMessagesToFront() and retry.
+
+2010-10-26  Andrew Su  <asu@redhat.com>
+
+	* Makefile.am: Split rm -rf into rm -f and rmdir for launcher
+	directory.
+
+2010-10-25  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/ShortcutDesc.java:
+	Add SHORTCUT_NEVER, SHORTCUT_ALWAYS, SHORTCUT_ASK_USER,
+	SHORTCUT_ASK_USER_IF_HINTED, SHORTCUT_ALWAYS_IF_HINTED,
+	SHORTCUT_DEFAULT.
+	* netx/net/sourceforge/jnlp/resources/Messages.properties:
+	Add RConfigurationError.
+	* netx/net/sourceforge/jnlp/runtime/DeploymentConfiguration.java:
+	New file.
+	(ConfigValue): New class. Holds a configuration value.
+	(DeploymentConfiguration): New method.
+	(load): New method.
+	(getProperty): Likewise.
+	(getAllPropertyNames): Likewise.
+	(setProperty): Likewise.
+	(loadDefaultProperties): Likewise.
+	(findSystemConfigFile): Likewise.
+	(loadSystemConfiguration): Likewise.
+	(loadProperties): Likewise.
+	(save): Likewise.
+	(parsePropertiesFile): Likewise.
+	(mergeMaps): Likewise.
+	(dumpConfiguration): Likewise.
+	* netx/net/sourceforge/jnlp/runtime/JNLPRuntime.java:
+	(initialize): Load configuration.
+	(getConfiguration): Return the configuration.
+
+2010-10-25  Omair Majid  <omajid@redhat.com>
+
+	* net/sourceforge/jnlp/ExtensionDesc.java: Import Translator.R and use
+	that.
+	* net/sourceforge/jnlp/JNLPFile.java: Import Translator.R.
+	(R): Remove.
+	* net/sourceforge/jnlp/JREDesc.java: Import Translator.R.
+	(checkHeapSize): Use R instead of JNLPRuntime.getMessage.
+	* net/sourceforge/jnlp/Launcher.java: Import Translator.R.
+	(R): Remove.
+	* net/sourceforge/jnlp/Parser.java: Import Translator.R
+	(R(String)): Remove.
+	(R(String,Object)): Remove.
+	(R(String,Object,Object)): Remove.
+	(R(String,Object,Object,Object)): Remove.
+	* net/sourceforge/jnlp/cache/CacheEntry.java: Import Translator.R
+	(CacheEntry): Use R instead of JNLPRuntime.getMessage.
+	* net/sourceforge/jnlp/cache/CacheUtil.java: Import Translator.R
+	(R(String)): Remove.
+	(R(String,Object)): Remove.
+	* net/sourceforge/jnlp/cache/DefaultDownloadIndicator.java: Import
+	Translator.R and use that instead of JNLPRuntime.getMessage.
+	* net/sourceforge/jnlp/runtime/Boot.java: Import Translator.R.
+	(R(String)): Remove.
+	(R(String, Object)): Remove.
+	(run): Use R instead of JNLPRuntime.getMessage.
+	* net/sourceforge/jnlp/runtime/JNLPClassLoader.java: Import Translator.R.
+	(R): Remove.
+	* net/sourceforge/jnlp/runtime/JNLPSecurityManager.java: Import
+	Translator.R.  Use it instead of JNLPRuntime.getMeesage.
+	(R): Remove.
+	* net/sourceforge/jnlp/security/AccessWarningPane.java: Import
+	Translator.R.
+	* net/sourceforge/jnlp/security/CertWarningPane.java: Likewise.
+	* net/sourceforge/jnlp/security/HttpsCertVerifier.java: Import
+	Translator.R.
+	(R(String)): Remove.
+	(R(String,String,String)): Remove.
+	* net/sourceforge/jnlp/security/MoreInfoPane.java: Import Translator.R.
+	* net/sourceforge/jnlp/security/SecurityDialogPanel.java
+	(R(String)): Remove.
+	(R(String,Object)): Remove.
+	* net/sourceforge/jnlp/services/ServiceUtil.java
+	(R): Remove.
+	* net/sourceforge/jnlp/services/SingleInstanceLock.java: Import
+	Translator.R
+	(R(String)): Remove.
+	(R(String,Object)): Remove.
+	* net/sourceforge/jnlp/tools/JarSigner.java: Import Translator.R.
+	(R): Remove.
+	* net/sourceforge/jnlp/runtime/Translator.java: New file
+	(R(String,Object...)): New method.
+
+2010-10-25  Andrew Su <asu@redhat.com>
+
+	* Makefile.am:
+	(clean-IcedTeaPlugin): Remove launcher folder first.
+	(clean-plugin): Removed called to remove launcher folder
+
+2010-10-22  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/NetxPanel.java
+	(runLoader): Do not initialize JNLPRuntime here.
+	(createAppletThreads): Initialize JNLPRuntim here.
+	* netx/net/sourceforge/jnlp/runtime/ApplicationInstance.java:
+	Switch from SecurityWarningDialog.AccessType to
+	SecurityWarning.AccessType.
+	* netx/net/sourceforge/jnlp/runtime/JNLPClassLoader.java
+	(getInstance(JNLPFile,UpdatePolicy)): Switch to SecurityWarning.
+	(initializeResources): Likewise.
+	(checkTrustWithUser): Likewise.
+	* netx/net/sourceforge/jnlp/runtime/JNLPRuntime.java:
+	Add securityDialogMesasgeHandler.
+	(initialize): Set System look and feel. Start security thread.
+	(startSecurityThread): New method. Starts a thread to show security
+	dialogs.
+	(getSecurityDialogHandler): Returns the securityDialogMessageHandler.
+	* netx/net/sourceforge/jnlp/runtime/JNLPSecurityManager.java:
+	Switch from SecurityWarningDialog.AccessType to
+	SecurityWarning.AccessType.
+	(checkAwtEventQueueAccess): New method. Skeleton code for allowing
+	EventQueue acccess to applets.
+	* netx/net/sourceforge/jnlp/security/AccessWarningPane.java:
+	Switch from SecurityWarningDialog.AccessType to
+	SecurityWarning.AccessType.
+	* netx/net/sourceforge/jnlp/security/CertWarningPane.java:
+	Likewise.
+	* netx/net/sourceforge/jnlp/security/SecurityWarningDialog.java:
+	Move DialogType and AccessType to SecurityWarning.
+	(SecurityWarningDialog(DialogType,AccessType,JNLPFile,CertVerifier,
+	X509Certificate,Object[])): New method. The catch-all construction.
+	(SecurityWarningDialog(DialogType,AccessType,JNLPFile): Delegate to
+	the new constructor.
+	(SecurityWarningDialog(DialogType,AccessType,JNLPFile,CertVerifier)):
+	Likewise.
+	(SecurityWarningDialog(DialogType,AccessType,CertVerifier)): Likewise.
+	(SecurityWarningDialog(DialogType,AccessType,JNLPFile,Object[])):
+	Likewise.
+	(SecurityWarningDialog(DialogType,X509Certificate)): Likewise.
+	(showAccessWarningDialog(AccessType,JNLPFile)): Move to SecurityWarning
+	class.
+	(showAccessWarningDialog(AccessType,JNLPFile,Object[])): Likewise.
+	(showNotAllSignedWarningDialog(JNLPFile)): Likewise.
+	(showCertWarningDialog(AccessType,JNLPFile,CertVerifier)): Likewise.
+	(showAppletWarning): Likewise.
+	(initDialog): Make dialog non modal and remove window closing listener.
+	(getValue): Make public.
+	(dispose): New method. Notify listeners.
+	(notifySelectionMade): New method. Notify listeners that user has made
+	a decision.
+	(addActionListener): New method. Add a listener to be notified when
+	user makes a decision about this security warning.
+	* netx/net/sourceforge/jnlp/security/VariableX509TrustManager.java:
+	Switch from SecurityWarningDialog.AccessType to
+	SecurityWarning.AccessType.
+	* netx/net/sourceforge/jnlp/services/ServiceUtil.java: Likewise.
+	* netx/net/sourceforge/jnlp/services/XClipboardService.java: Likewise.
+	* netx/net/sourceforge/jnlp/services/XExtendedService.java: Likewise.
+	* netx/net/sourceforge/jnlp/services/XFileOpenService.java: Likewise.
+	* netx/net/sourceforge/jnlp/services/XFileSaveService.java: Likewise.
+	* netx/net/sourceforge/jnlp/security/SecurityDialogMessage.java:
+	New class.
+	* netx/net/sourceforge/jnlp/security/SecurityDialogMessageHandler.java:
+	New class.
+	(run): New method. Runs the security message loop.
+	(handleMessage): New method. Handles a SecurityDialogMessage to show a
+	security warning.
+	(postMessage): New method. Posts a message to sthe security message
+	queue.
+	* netx/net/sourceforge/jnlp/security/SecurityWarning.java: New class.
+	Move AccessType and DialogType from SecurityWarningDialog to here.
+	(showAccessWarningDialog): Moved from SecurityWarningDialog to here.
+	(showAccessWarningDialog): Moved from SecurityWarningDialog to here.
+	Modified to post messages to the security queue instead of showing a
+	SecurityWarningDialog directly.
+	(showNotAllSignedWarningDialog): Likewise.
+	(showCertWarningDialog): Likewise.
+	(showAppletWarning): Likewise.
+	(getUserReponse): New method. Posts a message to the security thread and
+	blocks until it gets a response from the user.
+
+2010-10-20  Andrew John Hughes  <ahughes@redhat.com>
+
+	* netx/javax/jnlp/ServiceManager.java:
+	(lookupTable): Add generic types.
+	* netx/net/sourceforge/jnlp/AppletDesc.java:
+	(parameters): Likewise.
+	(AppletDesc(String,String,URL,int,int,Map)): Likewise.
+	(getParameters()): Likewise.
+	* netx/net/sourceforge/jnlp/ApplicationDesc.java:
+	(getArguments()): Remove redundant cast.
+	(addArgument(String)): Add generic typing.
+	* netx/net/sourceforge/jnlp/ExtensionDesc.java:
+	(extToPart): Add generic types.
+	(eagerExtParts): Likewise.
+	* netx/net/sourceforge/jnlp/InformationDesc.java:
+	(info): Likewise.
+	(getIcons(Object)): Add generic typing.
+	(getAssociations()): Likewise.
+	(getRelatedContents()): Likewise.
+	(getItem(Object)): Likewise.
+	(getItems(Object)): Likewise.
+	(addItem(String,Object)): Likewise.
+	* netx/net/sourceforge/jnlp/JNLPFile.java:
+	(resources): Likewise.
+	(InformationDesc.getItems(Object)): Likewise.
+	(getResources(Class)): Likewise.
+	* netx/net/sourceforge/jnlp/LaunchException.java:
+	(getCauses()): Likewise.
+	* netx/net/sourceforge/jnlp/Launcher.java:
+	(launchApplication(JNLPFile)): Likewise.
+	* netx/net/sourceforge/jnlp/NetxPanel.java:
+	(NetxPanel(URL,Hashtable)): Likewise.
+	(NetxPanel(URL,Hashtable,boolean)): Likewise.
+	* netx/net/sourceforge/jnlp/Node.java:
+	(getChildNodes()): Likewise.
+	* netx/net/sourceforge/jnlp/Parser.java:
+	(getResources(Node,boolean)): Likewise.
+	(getInfo(Node)): Likewise.
+	(getInformationDesc(Node)): Likewise.
+	(getApplet(Node)): Likewise.
+	(getApplication(Node)): Likewise.
+	(splitString(String)): Likewise.
+	(getLocales(Node)): Likewise.
+	(getChildNodes(Node,String)): Likewise.
+	* netx/net/sourceforge/jnlp/PluginBridge.java:
+	Fix variable naming and add generic types.
+	(cacheJars): Changed from cache_jars.
+	(cacheExJars): Changed from cache_ex-jars.
+	(atts): Add generic typing.
+	(PluginBridge(URL,URL,String,String,int,int,Hashtable)): Likewise.
+	(getInformation(Locale)): Likewise.
+	(getResources(Locale,String,String)): Likewise.
+	(getJARs()): Avoid excessive copying; filtering already performed
+	by getResources in JNLPFile.
+	* netx/net/sourceforge/jnlp/ResourcesDesc.java:
+	(resources): Add generic typing.
+	(getJREs()): Likewise.
+	(getJARs()): Likewise.
+	(getJARs(String)): Likewise.
+	(getExtensions()): Likewise.
+	(getPackages()): Likewise.
+	(getPackages(String)): Likewise.
+	(getProperties()): Likewise.
+	(getPropertiesMap()): Likewise.
+	(getResources(Class)): Make generic.
+	* netx/net/sourceforge/jnlp/Version.java:
+	(matches(Version)): Add generic types.
+	(matchesAny(Version)): Likewise.
+	(matchesSingle(String)): Likewise.
+	(matches(String,String)): Likewise.
+	(equal(List,List)): Likewise.
+	(greater(List,List)): Likewise.
+	(compare(String,String)): Use Integer.valueOf.
+	(normalize(List,int)): Add generic types, using
+	a List of lists rather than an array of lists.
+	(getVersionStrings()): Add generic types.
+	(getParts()): Likewise.
+	* netx/net/sourceforge/jnlp/cache/CacheUtil.java:
+	(waitForResources(ApplicationInstance,ResourceTracker,
+	URL,String)): Likewise.
+	* netx/net/sourceforge/jnlp/cache/DefaultDownloadIndicator.java:
+	(getListener(ApplicatonInstance,String,URL)): Use setVisible instead
+	of show().
+	(disposeListener(DownloadServiceListener)): Use setVisible instead
+	of hide().
+	(DownloadPanel.urls): Add generic typing.
+	(DownloadPanel.panels): Likewise.
+	(DownloadPanel.update(URL,String,long,long,int)): Fix formatting.
+	Add generic types.
+	* netx/net/sourceforge/jnlp/cache/Resource.java:
+	(resources): Add generic typing.
+	(trackers): Likewise.
+	(getResource(URL,Version,UpdatePolicy)): Use generic types.
+	(getTracker()): Likewise.
+	(addTracker(ResourceTracker)): Likewise.
+	(fireDownloadEvent()): Likewise.
+	* netx/net/sourceforge/jnlp/cache/ResourceTracker.java:
+	(prefetchTrackers): Add generic typing.
+	(queue): Likewise.
+	(active): Likewise.
+	(resources): Likewise.
+	(listeners): Likewise.
+	(fireDownloadEvent(Resource)): Remove unneeded cast.
+	(getPrefetch()): Use generic typing.
+	(selectByFlag(List,int,int)): Likewise.
+	(getResource(URL)): Likewise.
+	* netx/net/sourceforge/jnlp/runtime/AppletEnvironment.java:
+	(weakClips): Add generic types.
+	(destroy()): Use generic typing.
+	(getApplets()): Likewise.
+	(getStreamKeys()): Likewise.
+	* netx/net/sourceforge/jnlp/runtime/ApplicationInstance.java:
+	(weakWindows): Add generic types.
+	(installEnvironment()): Likewise.
+	(destroy()): Remove redundant cast.
+	* netx/net/sourceforge/jnlp/runtime/Boot.java:
+	Extend PrivilegedAction<Void>.
+	(run()): Add generic typing.
+	(getOptions(String)): Likewise.
+	* netx/net/sourceforge/jnlp/runtime/Boot13.java:
+	(main(String[]): Likewise.
+	* netx/net/sourceforge/jnlp/runtime/JNLPClassLoader.java:
+	Fix formatting.
+	(urlToLoader): Add generic types.
+	(resourcePermissions): Likewise.
+	(available): Likewise.
+	(jarEntries): Likewise.
+	(getInstance(JNLPFile,UpdatePolicy)): Remove redundant cast.
+	(getInstance(URL,String,Version,UpdatePolicy)): Likewise.
+	(initializeExtensions()): Add generic types.
+	(initializePermissions()): Likewise.
+	(initializeResources()): Likewise.
+	(getPermissions(CodeSource)): Likewise.
+	(fillInPartJars(List)): Likewise.
+	(activateJars(List)): Likewise.
+	(loadClass(String)): Likewise.  Suppress warnings due to
+	sun.misc.JarIndex usage.
+	(findResources(String)): Mark as overriding.  Add generic
+	types.
+	(getExtensionName()): Add @Deprecated annotation.
+	(getExtensionHREF()): Likewise.
+	* netx/net/sourceforge/jnlp/runtime/JNLPSecurityManager.java:
+	(weakWindows): Add generic typing.
+	(weakApplications): Likewise.
+	(getApplication(Window)): Remove redundant casts.  Add w,
+	which is window cast to Window.
+	* netx/net/sourceforge/jnlp/services/ServiceUtil.java:
+	(invoke(Object,Method,Object[])): Use generic types.
+	* netx/net/sourceforge/jnlp/services/XPersistenceService.java:
+	(getNames(URL)): Likewise.
+	* netx/net/sourceforge/jnlp/tools/JarSigner.java:
+	(verifyJars(List,ResourceTracker)): Remove redundant cast.
+	* netx/net/sourceforge/jnlp/util/WeakList.java:
+	Redesign as a generic type.
+	(refs): Add generic types.
+	(deref(WeakReference)): Likewise.
+	(get(int)): Likewise.
+	(set(int,Object)): Likewise.
+	(add(int,E)): Likewise.
+	(remove()): Likewise.
+	(hardList()): Likewise.
+	* netx/net/sourceforge/nanoxml/XMLElement.java:
+	(attributes): Add generic typing.
+	(children): Likewise.
+	(entities): Likewise.
+	(XMLElement()): Use generic types.
+	(XMLElement(Hashtable): Likewise.
+	(resolveEntity(StringBuffer)): Remove redundant cast.
+
+2010-10-20  Omair Majid  <omajid@redhat.com>
+
+	* AUTHORS: Add Francis Kung, Andrew Su, Joshua Sumali, Mark Wielaard and
+	Man Lung Wong. Add link to forked Netx project.
+
+2010-10-20  Matthias Klose  <doko@ubuntu.com>
+
+	* AUTHORS: Add myself.
+
+2010-10-20  Andrew Su  <asu@redhat.com>
+
+	* PluginBridge.java:
+	(PluginBridge): Added parsing for jnlp_href, and reading the jnlp file
+	for applet parameters.
+
+2010-10-20  Matthias Klose  <doko@ubuntu.com>
+
+	* Makefile.am (stamps/extra-class-files.stamp): Fix -sourcepath.
+
+2010-10-20  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/runtime/JNLPClassLoader.java
+	(initializeResources): Do not perform url encoding on the file url. Stay
+	consistent with the unencoded urls used in getPermissions.
+
+2010-10-20  Omair Majid  <omajid@redhat.com>
+
+	* netx/net/sourceforge/jnlp/runtime/JNLPClassLoader.java
+	(JNLPClassLoader): Call installShutdownHooks.
+	(installShutdownHooks): New method. Installs a shutdown hook to
+	recursively delete the contents of nativeDir.
+	(activateNative): Only create a nativeDir if there are native
+	libraries.
+
+2010-10-19  Deepak Bhole  <dbhole@redhat.com>
+
+	* Makefile.am:
+	($(NETX_DIR)/launcher/javaws): Use $(NETX_DIR).
+
+2010-10-19  Deepak Bhole  <dbhole@redhat.com>
+
+	* Makefile.am:
+	(NETX_DIR): New variable representing the NetX build dir.
+	(NETX_LAUNCHER_OBJECTS): Prefix with $(NETX_DIR).
+	(LAUNCHER_LINK): Fixed escaping of ORIGIN to the rpath argument.
+	(all-local): Fix javaws launcher path.
+	(install-exec-local): Likewise, and use $(NETX_DIR) for NetX classes.jar.
+	(clean-plugin): Remove launcher.
+	(liveconnect): Use NETX_DIR in classpath.
+	(netx): Use NETX_DIR throughout.
+	(netx-dist): Likewise.
+	(clean-netx): Likewise.
+	($(NETX_DIR)/launcher/%.o)): Likewise.
+	* launcher/jni_md.h: Imported from OpenJDK.
+
+2010-10-20  Matthias Klose  <doko@ubuntu.com>
+
+	* Makefile.am: Fix build with builddir != srcdir.
+
+2010-10-19  Andrew John Hughes  <ahughes@redhat.com>
+
+	* Makefile.am:
+	(PLUGIN_LAUNCHER_OBJECTS): Do prefixing once.
+	(NETX_LAUNCHER_OBJECTS): Likewise for NetX.
+	(pluginappletviewer): Use PLUGIN_LAUNCHER_OBJECTS.
+	(javaws): Use NETX_LAUNCHER_OBJECTS.
+	* configure.ac: Re-enable foreign (I want to use
+	GNU make!)
+	* README: Use gmake not make.
+
+2010-10-19  Andrew John Hughes  <ahughes@redhat.com>
+
+	* .hgignore,
+	* Makefile.am,
+	* acinclude.m4,
+	* autogen.sh,
+	* configure.ac,
+	* extra/net/sourceforge/jnlp/about/HTMLPanel.java,
+	* extra/net/sourceforge/jnlp/about/Main.java,
+	* extra/net/sourceforge/jnlp/about/resources/about.html,
+	* extra/net/sourceforge/jnlp/about/resources/applications.html,
+	* extra/net/sourceforge/jnlp/about/resources/notes.html,
+	* javac.in,
+	* javaws.desktop: Imported from IcedTea6.
+	* launcher/java.c,
+	* launcher/java.h,
+	* launcher/java_md.c,
+	* launcher/java_md.h,
+	* launcher/jli_util.h,
+	* launcher/jni.h,
+	* launcher/jvm.h,
+	* launcher/jvm_md.h,
+	* launcher/manifest_info.h,
+	* launcher/splashscreen.h,
+	* launcher/splashscreen_stubs.c,
+	* launcher/version_comp.h,
+	* launcher/wildcard.h: Imported from OpenJDK.
+	* netx/javaws.1,
+	* netx/javax/jnlp/BasicService.java,
+	* netx/javax/jnlp/ClipboardService.java,
+	* netx/javax/jnlp/DownloadService.java,
+	* netx/javax/jnlp/DownloadServiceListener.java,
+	* netx/javax/jnlp/ExtendedService.java,
+	* netx/javax/jnlp/ExtensionInstallerService.java,
+	* netx/javax/jnlp/FileContents.java,
+	* netx/javax/jnlp/FileOpenService.java,
+	* netx/javax/jnlp/FileSaveService.java,
+	* netx/javax/jnlp/JNLPRandomAccessFile.java,
+	* netx/javax/jnlp/PersistenceService.java,
+	* netx/javax/jnlp/PrintService.java,
+	* netx/javax/jnlp/ServiceManager.java,
+	* netx/javax/jnlp/ServiceManagerStub.java,
+	* netx/javax/jnlp/SingleInstanceListener.java,
+	* netx/javax/jnlp/SingleInstanceService.java,
+	* netx/javax/jnlp/UnavailableServiceException.java,
+	* netx/net/sourceforge/jnlp/AppletDesc.java,
+	* netx/net/sourceforge/jnlp/ApplicationDesc.java,
+	* netx/net/sourceforge/jnlp/AssociationDesc.java,
+	* netx/net/sourceforge/jnlp/ComponentDesc.java,
+	* netx/net/sourceforge/jnlp/DefaultLaunchHandler.java,
+	* netx/net/sourceforge/jnlp/ExtensionDesc.java,
+	* netx/net/sourceforge/jnlp/IconDesc.java,
+	* netx/net/sourceforge/jnlp/InformationDesc.java,
+	* netx/net/sourceforge/jnlp/InstallerDesc.java,
+	* netx/net/sourceforge/jnlp/JARDesc.java,
+	* netx/net/sourceforge/jnlp/JNLPFile.java,
+	* netx/net/sourceforge/jnlp/JNLPSplashScreen.java,
+	* netx/net/sourceforge/jnlp/JREDesc.java,
+	* netx/net/sourceforge/jnlp/LaunchException.java,
+	* netx/net/sourceforge/jnlp/LaunchHandler.java,
+	* netx/net/sourceforge/jnlp/Launcher.java,
+	* netx/net/sourceforge/jnlp/MenuDesc.java,
+	* netx/net/sourceforge/jnlp/NetxPanel.java,
+	* netx/net/sourceforge/jnlp/Node.java,
+	* netx/net/sourceforge/jnlp/PackageDesc.java,
+	* netx/net/sourceforge/jnlp/ParseException.java,
+	* netx/net/sourceforge/jnlp/Parser.java,
+	* netx/net/sourceforge/jnlp/PluginBridge.java,
+	* netx/net/sourceforge/jnlp/PropertyDesc.java,
+	* netx/net/sourceforge/jnlp/RelatedContentDesc.java,
+	* netx/net/sourceforge/jnlp/ResourcesDesc.java,
+	* netx/net/sourceforge/jnlp/SecurityDesc.java,
+	* netx/net/sourceforge/jnlp/ShortcutDesc.java,
+	* netx/net/sourceforge/jnlp/StreamEater.java,
+	* netx/net/sourceforge/jnlp/UpdateDesc.java,
+	* netx/net/sourceforge/jnlp/Version.java,
+	* netx/net/sourceforge/jnlp/cache/CacheEntry.java,
+	* netx/net/sourceforge/jnlp/cache/CacheUtil.java,
+	* netx/net/sourceforge/jnlp/cache/DefaultDownloadIndicator.java,
+	* netx/net/sourceforge/jnlp/cache/DownloadIndicator.java,
+	* netx/net/sourceforge/jnlp/cache/Resource.java,
+	* netx/net/sourceforge/jnlp/cache/ResourceTracker.java,
+	* netx/net/sourceforge/jnlp/cache/UpdatePolicy.java,
+	* netx/net/sourceforge/jnlp/cache/package.html,
+	* netx/net/sourceforge/jnlp/event/ApplicationEvent.java,
+	* netx/net/sourceforge/jnlp/event/ApplicationListener.java,
+	* netx/net/sourceforge/jnlp/event/DownloadEvent.java,
+	* netx/net/sourceforge/jnlp/event/DownloadListener.java,
+	* netx/net/sourceforge/jnlp/event/package.html,
+	* netx/net/sourceforge/jnlp/package.html,
+	* netx/net/sourceforge/jnlp/resources/Manifest.mf,
+	* netx/net/sourceforge/jnlp/resources/Messages.properties,
+	* netx/net/sourceforge/jnlp/resources/about.jnlp,
+	* netx/net/sourceforge/jnlp/resources/default.jnlp,
+	* netx/net/sourceforge/jnlp/runtime/AppThreadGroup.java,
+	* netx/net/sourceforge/jnlp/runtime/AppletAudioClip.java,
+	* netx/net/sourceforge/jnlp/runtime/AppletEnvironment.java,
+	* netx/net/sourceforge/jnlp/runtime/AppletInstance.java,
+	* netx/net/sourceforge/jnlp/runtime/ApplicationInstance.java,
+	* netx/net/sourceforge/jnlp/runtime/Boot.java,
+	* netx/net/sourceforge/jnlp/runtime/Boot13.java,
+	* netx/net/sourceforge/jnlp/runtime/JNLPClassLoader.java,
+	* netx/net/sourceforge/jnlp/runtime/JNLPPolicy.java,
+	* netx/net/sourceforge/jnlp/runtime/JNLPRuntime.java,
+	* netx/net/sourceforge/jnlp/runtime/JNLPSecurityManager.java,
+	* netx/net/sourceforge/jnlp/runtime/package.html,
+	* netx/net/sourceforge/jnlp/security/AccessWarningPane.java,
+	* netx/net/sourceforge/jnlp/security/AppletWarningPane.java,
+	* netx/net/sourceforge/jnlp/security/CertVerifier.java,
+	* netx/net/sourceforge/jnlp/security/CertWarningPane.java,
+	* netx/net/sourceforge/jnlp/security/CertsInfoPane.java,
+	* netx/net/sourceforge/jnlp/security/HttpsCertVerifier.java,
+	* netx/net/sourceforge/jnlp/security/MoreInfoPane.java,
+	* netx/net/sourceforge/jnlp/security/NotAllSignedWarningPane.java,
+	* netx/net/sourceforge/jnlp/security/SecurityDialogPanel.java,
+	* netx/net/sourceforge/jnlp/security/SecurityUtil.java,
+	* netx/net/sourceforge/jnlp/security/SecurityWarningDialog.java,
+	* netx/net/sourceforge/jnlp/security/SingleCertInfoPane.java,
+	* netx/net/sourceforge/jnlp/security/VariableX509TrustManager.java,
+	* netx/net/sourceforge/jnlp/security/viewer/CertificatePane.java,
+	* netx/net/sourceforge/jnlp/security/viewer/CertificateViewer.java,
+	* netx/net/sourceforge/jnlp/services/ExtendedSingleInstanceService.java,
+	* netx/net/sourceforge/jnlp/services/InstanceExistsException.java,
+	* netx/net/sourceforge/jnlp/services/ServiceUtil.java,
+	* netx/net/sourceforge/jnlp/services/SingleInstanceLock.java,
+	* netx/net/sourceforge/jnlp/services/XBasicService.java,
+	* netx/net/sourceforge/jnlp/services/XClipboardService.java,
+	* netx/net/sourceforge/jnlp/services/XDownloadService.java,
+	* netx/net/sourceforge/jnlp/services/XExtendedService.java,
+	* netx/net/sourceforge/jnlp/services/XExtensionInstallerService.java,
+	* netx/net/sourceforge/jnlp/services/XFileContents.java,
+	* netx/net/sourceforge/jnlp/services/XFileOpenService.java,
+	* netx/net/sourceforge/jnlp/services/XFileSaveService.java,
+	* netx/net/sourceforge/jnlp/services/XJNLPRandomAccessFile.java,
+	* netx/net/sourceforge/jnlp/services/XPersistenceService.java,
+	* netx/net/sourceforge/jnlp/services/XPrintService.java,
+	* netx/net/sourceforge/jnlp/services/XServiceManagerStub.java,
+	* netx/net/sourceforge/jnlp/services/XSingleInstanceService.java,
+	* netx/net/sourceforge/jnlp/services/package.html,
+	* netx/net/sourceforge/jnlp/tools/CharacterEncoder.java,
+	* netx/net/sourceforge/jnlp/tools/HexDumpEncoder.java,
+	* netx/net/sourceforge/jnlp/tools/JarRunner.java,
+	* netx/net/sourceforge/jnlp/tools/JarSigner.java,
+	* netx/net/sourceforge/jnlp/tools/JarSignerResources.java,
+	* netx/net/sourceforge/jnlp/tools/KeyStoreUtil.java,
+	* netx/net/sourceforge/jnlp/tools/KeyTool.java,
+	* netx/net/sourceforge/jnlp/util/FileUtils.java,
+	* netx/net/sourceforge/jnlp/util/PropertiesFile.java,
+	* netx/net/sourceforge/jnlp/util/Reflect.java,
+	* netx/net/sourceforge/jnlp/util/WeakList.java,
+	* netx/net/sourceforge/jnlp/util/XDesktopEntry.java,
+	* netx/net/sourceforge/nanoxml/XMLElement.java,
+	* netx/net/sourceforge/nanoxml/XMLParseException.java,
+	* plugin/icedteanp/IcedTeaJavaRequestProcessor.cc,
+	* plugin/icedteanp/IcedTeaJavaRequestProcessor.h,
+	* plugin/icedteanp/IcedTeaNPPlugin.cc,
+	* plugin/icedteanp/IcedTeaNPPlugin.h,
+	* plugin/icedteanp/IcedTeaPluginRequestProcessor.cc,
+	* plugin/icedteanp/IcedTeaPluginRequestProcessor.h,
+	* plugin/icedteanp/IcedTeaPluginUtils.cc,
+	* plugin/icedteanp/IcedTeaPluginUtils.h,
+	* plugin/icedteanp/IcedTeaRunnable.cc,
+	* plugin/icedteanp/IcedTeaRunnable.h,
+	* plugin/icedteanp/IcedTeaScriptablePluginObject.cc,
+	* plugin/icedteanp/IcedTeaScriptablePluginObject.h,
+	* plugin/icedteanp/java/netscape/javascript/JSException.java,
+	* plugin/icedteanp/java/netscape/javascript/JSObject.java,
+	* plugin/icedteanp/java/netscape/javascript/JSObjectCreatePermission.java,
+	* plugin/icedteanp/java/netscape/javascript/JSProxy.java,
+	* plugin/icedteanp/java/netscape/javascript/JSRunnable.java,
+	* plugin/icedteanp/java/netscape/javascript/JSUtil.java,
+	* plugin/icedteanp/java/netscape/security/ForbiddenTargetException.java,
+	* plugin/icedteanp/java/sun/applet/AppletSecurityContextManager.java,
+	* plugin/icedteanp/java/sun/applet/GetMemberPluginCallRequest.java,
+	* plugin/icedteanp/java/sun/applet/GetWindowPluginCallRequest.java,
+	* plugin/icedteanp/java/sun/applet/JavaConsole.java,
+	* plugin/icedteanp/java/sun/applet/MethodOverloadResolver.java,
+	* plugin/icedteanp/java/sun/applet/PasswordAuthenticationDialog.java,
+	* plugin/icedteanp/java/sun/applet/PluginAppletSecurityContext.java,
+	* plugin/icedteanp/java/sun/applet/PluginAppletViewer.java,
+	* plugin/icedteanp/java/sun/applet/PluginCallRequest.java,
+	* plugin/icedteanp/java/sun/applet/PluginCallRequestFactory.java,
+	* plugin/icedteanp/java/sun/applet/PluginClassLoader.java,
+	* plugin/icedteanp/java/sun/applet/PluginCookieInfoRequest.java,
+	* plugin/icedteanp/java/sun/applet/PluginCookieManager.java,
+	* plugin/icedteanp/java/sun/applet/PluginDebug.java,
+	* plugin/icedteanp/java/sun/applet/PluginException.java,
+	* plugin/icedteanp/java/sun/applet/PluginMain.java,
+	* plugin/icedteanp/java/sun/applet/PluginMessageConsumer.java,
+	* plugin/icedteanp/java/sun/applet/PluginMessageHandlerWorker.java,
+	* plugin/icedteanp/java/sun/applet/PluginObjectStore.java,
+	* plugin/icedteanp/java/sun/applet/PluginProxyInfoRequest.java,
+	* plugin/icedteanp/java/sun/applet/PluginProxySelector.java,
+	* plugin/icedteanp/java/sun/applet/PluginStreamHandler.java,
+	* plugin/icedteanp/java/sun/applet/RequestQueue.java,
+	* plugin/icedteanp/java/sun/applet/TestEnv.java,
+	* plugin/icedteanp/java/sun/applet/VoidPluginCallRequest.java,
+	* plugin/tests/LiveConnect/DummyObject.java,
+	* plugin/tests/LiveConnect/OverloadTestHelper1.java,
+	* plugin/tests/LiveConnect/OverloadTestHelper2.java,
+	* plugin/tests/LiveConnect/OverloadTestHelper3.java,
+	* plugin/tests/LiveConnect/PluginTest.java,
+	* plugin/tests/LiveConnect/build,
+	* plugin/tests/LiveConnect/common.js,
+	* plugin/tests/LiveConnect/index.html,
+	* plugin/tests/LiveConnect/jjs_eval_test.js,
+	* plugin/tests/LiveConnect/jjs_func_parameters_tests.js,
+	* plugin/tests/LiveConnect/jjs_func_rettype_tests.js,
+	* plugin/tests/LiveConnect/jjs_get_tests.js,
+	* plugin/tests/LiveConnect/jjs_set_tests.js,
+	* plugin/tests/LiveConnect/jsj_func_overload_tests.js,
+	* plugin/tests/LiveConnect/jsj_func_parameters_tests.js,
+	* plugin/tests/LiveConnect/jsj_func_rettype_tests.js,
+	* plugin/tests/LiveConnect/jsj_get_tests.js,
+	* plugin/tests/LiveConnect/jsj_set_tests.js,
+	* plugin/tests/LiveConnect/jsj_type_casting_tests.js,
+	* plugin/tests/LiveConnect/jsj_type_conversion_tests.js:
+	Initial import from IcedTea6.
+	* AUTHORS,
+	* COPYING
+	* INSTALL,
+	* NEWS,
+	* README: New documentation.
