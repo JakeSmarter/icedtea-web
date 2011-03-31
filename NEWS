@@ -1,0 +1,58 @@
+Key:
+
+SX  - http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=X
+PRX - http://icedtea.classpath.org/bugzilla/show_bug.cgi?id=X
+RHX - https://bugzilla.redhat.com/show_bug.cgi?id=X
+DX  - http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=X
+GX  - http://bugs.gentoo.org/show_bug.cgi?id=X
+
+CVE-XXXX-YYYY: http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=XXXX-YYYY
+
+New in release 1.1 (2011-XX-XX):
+* Security updates
+  - S6983554, CVE-2010-4450: Launcher incorrect processing of empty library path entries 
+  - RH677332, CVE-2011-0706: IcedTea multiple signers privilege escalation
+* New Features
+  - IcedTea-Web now installs to a FHS-compliant location
+  - IcedTea-Web can now handle Proxy Auto Config files
+  - Binary launchers replaced with simple shell scripts
+  - Can now use codebase_lookup=false with applets.
+* Common Fixes and Improvements
+  - PR497: Mercurial revision detection not very reliable
+  - PR638: JNLPClassLoader.loadClass(String name) can return null
+  - RH677772: NoSuchAlgorithmException using SSL/TLS in javaws
+* NetX
+  - Use Firefox's proxy settings if possible
+  - The user's default browser (determined from xdg-open or $BROWSER) is used
+  - RH669942: javaws fails to download version/packed files (missing support for jnlp.packEnabled and jnlp.versionEnabled)
+  - PR658: now jnlp.packEnabled works with applets.
+* Plugin
+  - PR475, RH604061: Allow applets from the same page to use the same classloader
+  - PR612: NetDania application ends on java.security.AccessControlException: access denied (java.util.PropertyPermission browser read)
+  - PR664: Sound doesn't play on runescape.com.
+
+New in release 1.0 (2010-XX-XX):
+
+* Initial release of IcedTea-Web
+* Security updates
+  - RH645843, CVE-2010-3860: IcedTea System property information leak via public static
+  - RH672262, CVE-2011-0025: IcedTea jarfile signature verification bypass
+* Plugin
+  - PR542: Plugin fails with NPE on http://www.openprocessing.org/visuals/iframe.php?visualID=2615
+  - PR552: Support for FreeBSD's pthread implementation
+  - PR554: System.err writes content two times
+  - PR556: Applet initialization code is prone to race conditions
+  - PR557: Applet opens in a separate window if tab is closed when the applet loads
+  - PR565: UIDefaults.getUI fails with jgoodies:looks 2.3.1
+  - PR593: Increment of invalidated iterator in IcedTeaPluginUtils (patch from barbara.xxx1975@libero.it)
+  - PR597: Entities are parsed incorrectly in PARAM tag in applet plugin
+  - PR619: Improper finalization by the plugin can crash the browser
+  - Applets are now double-buffered to eliminate flicker in ones that do heavy drawing
+  - RH665104: OpenJDK Firefox Java plugin loses a cookie
+* NetX
+  - Add a new option -Xclearcache
+  - Interfaces javax.jnlp.IntegrationService and javax.jnlp.DownloadService2 are now available
+  - PR592: NetX can create invalid desktop entry files
+  - RH663680, CVE-2010-4351: IcedTea JNLP SecurityManager bypass
+* Control Panel
+  - Modifications to deployments.properties file can now be done through a GUI
