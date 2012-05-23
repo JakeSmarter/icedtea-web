@@ -1,0 +1,104 @@
+Key:
+
+SX  - http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=X
+PRX - http://icedtea.classpath.org/bugzilla/show_bug.cgi?id=X
+RHX - https://bugzilla.redhat.com/show_bug.cgi?id=X
+DX  - http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=X
+GX  - http://bugs.gentoo.org/show_bug.cgi?id=X
+
+CVE-XXXX-YYYY: http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=XXXX-YYYY
+
+New in release 1.3 (2012-XX-XX):
+* NetX
+  - PR898: signed applications with big jnlp-file doesn't start (webstart affect like "frozen")
+  - PR811: javaws is not handling urls with spaces (and other characters needing encoding) correctly
+* Plugin
+  - PR820: IcedTea-Web 1.1.3 crashing Firefox when loading Citrix XenApp
+  - PR895: IcedTea-Web searches for missing classes on each loadClass or findClass
+* Common
+  - PR918: java applet windows uses a low resulution black/white icon
+
+New in release 1.2 (2011-XX-XX):
+* Security updates:
+	- RH718164, CVE-2011-2513: Home directory path disclosure to untrusted applications
+	- RH718170, CVE-2011-2514: Java Web Start security warning dialog manipulation
+	- RH742515, CVE-2011-3377: IcedTea-Web: second-level domain subdomains and suffix domain SOP bypass
+* NetX
+  - PR618: Can't install OpenDJ, JavaWebStart fails with Input stream is null error
+  - PR765: JNLP file with all resource jars marked as 'lazy' fails to validate signature and stops the launch of application
+  - PR788: Elluminate Live! is not working
+  - PR804: javaws launcher incorrectly handles file names with spaces
+* Plugin
+  - PR749: sun.applet.PluginStreamHandler#handleMessage(String) really slow
+  - PR782: Support building against npapi-sdk as well
+  - PR838: IcedTea plugin crashes with chrome browser when javascript is executed
+  - PR852: Classloader not being flushed after last applet from a site is closed
+  - RH586194: Unable to connect to connect with Juniper VPN client
+  - RH718693: MindTerm SSH Applet doesn't work
+Common
+  - PR768: Signed applets/Web Start apps don't work with OpenJDK7 and up
+  - PR771: IcedTea-Web certificate verification code does not use the right API
+  - PR742: IcedTea-Web checks certs only upto 1 level deep before declaring them untrusted.
+  - PR769: IcedTea-Web does not work with some ssl sites with OpenJDK7
+  - PR778: Jar download and server certificate verification deadlock
+  - PR789: typo in jrunscript.sh
+  - PR794: IcedTea-Web does not work if a Web Start app jar has a Class-Path element in the manifest
+  - PR808: javaws is unable to start, when missing jars are enumerated before main jar
+  - RH734081: Javaws cannot use proxy settings from Firefox
+  - RH738814: Access denied at ssl handshake
+  - Support for authenticating using client certificates
+
+New in release 1.1 (2011-XX-XX):
+* Security updates
+  - S6983554, CVE-2010-4450: Launcher incorrect processing of empty library path entries 
+  - RH677332, CVE-2011-0706: IcedTea multiple signers privilege escalation
+* New Features
+  - IcedTea-Web now installs to a FHS-compliant location
+  - IcedTea-Web can now handle Proxy Auto Config files
+  - Binary launchers replaced with simple shell scripts
+  - Can now use codebase_lookup=false with applets.
+* Common Fixes and Improvements
+  - PR497: Mercurial revision detection not very reliable
+  - PR638: JNLPClassLoader.loadClass(String name) can return null
+  - RH677772: NoSuchAlgorithmException using SSL/TLS in javaws
+  - PR724: Possible NullPointerException in JNLPClassLoader.getClassPathsFromManifest
+* NetX
+  - Use Firefox's proxy settings if possible
+  - The user's default browser (determined from xdg-open or $BROWSER) is used
+  - RH669942: javaws fails to download version/packed files (missing support for jnlp.packEnabled and jnlp.versionEnabled)
+  - PR464: plugin can now load parameters from jnlp files.
+  - PR658: now jnlp.packEnabled works with applets.
+  - PR726: closing javaws -about no longer throws exceptions.
+  - PR727: cache now properly removes files.
+* Plugin
+  - PR475, RH604061: Allow applets from the same page to use the same classloader
+  - PR612: NetDania application ends on java.security.AccessControlException: access denied (java.util.PropertyPermission browser read)
+  - PR664: Sound doesn't play on runescape.com.
+  - PR721: IcedTeaPlugin.so cannot run g_main_context_iteration on a different thread unless a different GMainContext *context is used
+  - PR735: Firefox 4 sometimes freezes if the applet calls showDocument()
+
+New in release 1.0 (2010-XX-XX):
+
+* Initial release of IcedTea-Web
+* Security updates
+  - RH645843, CVE-2010-3860: IcedTea System property information leak via public static
+  - RH672262, CVE-2011-0025: IcedTea jarfile signature verification bypass
+* Plugin
+  - PR542: Plugin fails with NPE on http://www.openprocessing.org/visuals/iframe.php?visualID=2615
+  - PR552: Support for FreeBSD's pthread implementation
+  - PR554: System.err writes content two times
+  - PR556: Applet initialization code is prone to race conditions
+  - PR557: Applet opens in a separate window if tab is closed when the applet loads
+  - PR565: UIDefaults.getUI fails with jgoodies:looks 2.3.1
+  - PR593: Increment of invalidated iterator in IcedTeaPluginUtils (patch from barbara.xxx1975@libero.it)
+  - PR597: Entities are parsed incorrectly in PARAM tag in applet plugin
+  - PR619: Improper finalization by the plugin can crash the browser
+  - Applets are now double-buffered to eliminate flicker in ones that do heavy drawing
+  - RH665104: OpenJDK Firefox Java plugin loses a cookie
+* NetX
+  - Add a new option -Xclearcache
+  - Interfaces javax.jnlp.IntegrationService and javax.jnlp.DownloadService2 are now available
+  - PR592: NetX can create invalid desktop entry files
+  - RH663680, CVE-2010-4351: IcedTea JNLP SecurityManager bypass
+* Control Panel
+  - Modifications to deployments.properties file can now be done through a GUI
