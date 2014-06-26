@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=IcedTea Web Start
+Comment=IcedTea Application Launcher
+Exec=PATH_TO_JAVAWS %f
+Icon=javaws
+Terminal=false
+Type=Application
+NoDisplay=true
+Categories=Network;WebBrowser;
+MimeType=application/x-java-jnlp-file;

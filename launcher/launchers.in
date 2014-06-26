@@ -1,0 +1,100 @@
+#!/bin/bash
+
+JAVA=@JAVA@
+LAUNCHER_BOOTCLASSPATH=@LAUNCHER_BOOTCLASSPATH@
+LAUNCHER_FLAGS=-Xms8m
+CLASSNAME=@MAIN_CLASS@
+BINARY_LOCATION=@BIN_LOCATION@
+SPLASH_LOCATION=@JAVAWS_SPLASH_LOCATION@
+PROGRAM_NAME=@PROGRAM_NAME@
+CP=@JRE@/lib/rt.jar
+
+CONFIG_HOME=$XDG_CONFIG_HOME
+if [ "x$CONFIG_HOME" = "x" ] ; then
+  CONFIG_HOME=~/.config
+fi;
+PROPERTY_NAME=deployment.jre.dir
+CUSTOM_JRE_REGEX="^$PROPERTY_NAME *= *"
+CUSTOM_JRE=`grep "$CUSTOM_JRE_REGEX" $CONFIG_HOME/icedtea-web/deployment.properties 2>/dev/null |  sed "s/$CUSTOM_JRE_REGEX//g"`
+#now check in legacy one
+if [ "x$CUSTOM_JRE" = "x" ] ; then
+  CUSTOM_JRE=`grep "$CUSTOM_JRE_REGEX" ~/.icedtea/deployment.properties 2>/dev/null |  sed "s/$CUSTOM_JRE_REGEX//g"`
+fi;
+#now check in global one
+if [ "x$CUSTOM_JRE" = "x" ] ; then
+  CUSTOM_JRE=`grep "$CUSTOM_JRE_REGEX" /etc/.java/.deploy/deployment.properties 2>/dev/null |  sed "s/$CUSTOM_JRE_REGEX//g"`
+fi;
+if [ "x$CUSTOM_JRE" != "x" ] ; then
+  if [ -e  "$CUSTOM_JRE" -a -e "$CUSTOM_JRE/bin/java" -a -e "$CUSTOM_JRE/lib/rt.jar" ] ; then
+    JAVA=$CUSTOM_JRE/bin/java
+    CP=$CUSTOM_JRE/lib/rt.jar
+  else
+    echo "Your custom JRE $CUSTOM_JRE read from deployment.properties under key $PROPERTY_NAME as $CUSTOM_JRE is not valid. Using default ($JAVA, $CP) in attempt to start. Please fix this."
+  fi
+fi;
+
+JAVA_ARGS=( )
+ARGS=( )
+COMMAND=()
+
+i=0
+j=0
+
+SPLASH="false"
+if [ "x$ICEDTEA_WEB_SPLASH" = "x" ] ; then
+SPLASH="true"
+fi;
+while [ "$#" -gt "0" ]; do
+  case "$1" in
+    -J*)
+      JAVA_ARGS[$i]="${1##-J}"
+      i=$((i+1))
+      ;;
+    *)
+      ARGS[$j]="$1"
+      j=$((j+1))
+      if [ "$1" = "-headless" ] ; then
+        SPLASH="false"
+      fi
+      ;;
+  esac
+  shift
+done
+
+k=0
+COMMAND[k]="${JAVA}"
+k=$((k+1))
+if [ "$SPLASH" = "true" ] ; then
+COMMAND[k]="-splash:${SPLASH_LOCATION}"
+k=$((k+1))
+fi;
+COMMAND[k]="${LAUNCHER_BOOTCLASSPATH}"
+k=$((k+1))
+COMMAND[k]="${LAUNCHER_FLAGS}"
+k=$((k+1))
+i=0
+while [ "$i" -lt "${#JAVA_ARGS[@]}" ]; do
+  COMMAND[k]="${JAVA_ARGS[$i]}"
+  i=$((i+1))
+  k=$((k+1))
+done
+COMMAND[k]="-classpath"
+k=$((k+1))
+COMMAND[k]="${CP}"
+k=$((k+1))
+COMMAND[k]="-Dicedtea-web.bin.name=${PROGRAM_NAME}"
+k=$((k+1))
+COMMAND[k]="-Dicedtea-web.bin.location=${BINARY_LOCATION}"
+k=$((k+1))
+COMMAND[k]="${CLASSNAME}"
+k=$((k+1))
+j=0
+while [ "$j" -lt "${#ARGS[@]}" ]; do
+  COMMAND[k]="${ARGS[$j]}"
+  j=$((j+1))
+  k=$((k+1))
+done
+
+exec -a "$PROGRAM_NAME" "${COMMAND[@]}"
+
+exit $?
