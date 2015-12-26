@@ -1,0 +1,5 @@
+Signature	FileName	MinVersion	MaxVersion	MinSize	MaxSize	MinDate	MaxDate	Languages
+s72	s255	S20	S20	I4	I4	I4	I4	S255
+Signature	Signature
+MSVCR100	MSVCR100.DLL	10.0.0.0						
+MSVCR10064	MSVCR100.DLL	10.0.0.0						

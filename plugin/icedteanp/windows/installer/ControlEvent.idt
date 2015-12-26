@@ -1,0 +1,22 @@
+Dialog_	Control_	Event	Argument	Condition	Ordering
+s72	s50	s50	s255	S255	I2
+ControlEvent	Dialog_	Control_	Event	Argument	Condition
+Error	ErrorAbort	EndDialog	ErrorAbort		
+Error	ErrorCancel	EndDialog	ErrorCancel		
+Error	ErrorIgnore	EndDialog	ErrorIgnore		
+Error	ErrorNo	EndDialog	ErrorNo		
+Error	ErrorOk	EndDialog	ErrorOk		
+Error	ErrorRetry	EndDialog	ErrorRetry		
+Error	ErrorYes	EndDialog	ErrorYes		
+Exit	Finish	EndDialog	Exit		
+FatalError	Exit	EndDialog	Exit		
+Install	Cancel	EndDialog	Exit		
+LicenseAgreement	Back	NewDialog	Welcome		
+LicenseAgreement	Cancel	EndDialog	Exit		
+LicenseAgreement	Next	NewDialog	Selection		
+Selection	Back	NewDialog	LicenseAgreement		
+Selection	Cancel	EndDialog	Exit		
+Selection	Next	NewDialog	Install		
+UserExit	Exit	EndDialog	Exit		
+Welcome	Cancel	EndDialog	Exit		
+Welcome	Next	NewDialog	LicenseAgreement		

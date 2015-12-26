@@ -1,0 +1,13 @@
+Action	Condition	Sequence
+s72	S255	I2
+AdvtExecuteSequence	Action
+CostFinalize		300
+CostInitialize		100
+CreateShortcuts		1200
+FileCost		200
+InstallFinalize		1800
+InstallInitialize		500
+InstallValidate		400
+PublishComponents		1300
+PublishFeatures		1400
+PublishProduct		1500

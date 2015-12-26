@@ -1,0 +1,11 @@
+Dialog	HCentering	VCentering	Width	Height	Attributes	Title	Control_First	Control_Default	Control_Cancel
+s72	i2	i2	i2	i2	I4	L128	s50	S50	S50
+Dialog	Dialog
+Error	50	50	300	100	65539	[Error]	ErrorText		
+Exit	50	50	400	300	7	[ProductName] Setup	Finish	Finish	
+FatalError	50	50	400	300	7	[ProductName] Setup	Exit	Exit	
+Install	50	50	400	205	7	[ProductName] Setup	Cancel		Cancel
+LicenseAgreement	50	50	400	300	7	[ProductName] Setup	License	Next	Cancel
+Selection	50	50	400	300	39	[ProductName] Setup	Features	Next	Cancel
+UserExit	50	50	400	300	7	[ProductName] Setup	Exit	Exit	
+Welcome	50	50	400	300	7	[ProductName] Setup	Next	Next	Cancel

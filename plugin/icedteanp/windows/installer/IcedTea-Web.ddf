@@ -1,0 +1,38 @@
+.Set GenerateInf=on
+.Set UniqueFiles=on
+.Set InfFileName=nul:
+.Set RptFileName=nul:
+.Set DiskLabel1=IcedTea-Web for x86
+; The cabinet file name must conform to the MSI identifier data type!
+.Set CabinetName1=IcedTea_Web.cab
+.Set CabinetNameTemplate=
+.Set DiskDirectoryTemplate=
+.Set InfAttr=
+.Set InfDate=2015-01-01
+.Set InfTime=00:00:00
+.Set CompressionType=LZX
+.Set CompressionLevel=7
+.Set CompressionMemory=21
+.Set CabinetFileCountThreshold=0
+.Set FolderFileCountThreshold=0
+.Set FolderSizeThreshold=0
+.Set MaxDiskSize=0
+.Set MaxDiskFileCount=0
+
+; IMPORTANT: All file names in cabinet file must conform to the MSI identifier
+; data type because they are foreign keys into the File table's File column.
+; They also must be ordered according to the sequence in the File table's
+; Sequence column. DO NOT change it, unless you know what you are doing!
+; Compress all binary files
+.Set Compress=on
+x86\NPIcedTea-Web.dll NPIcedTea_Web.dll
+
+; Do not compress the JAR file because it has already compressed class files
+.Set Compress=off
+IcedTea-Web.jar IcedTea_Web.jar
+
+; Compress the license and documentation 
+.Set Compress=on
+COPYING.TXT
+README.TXT /lang=1033
+NEWS.TXT

@@ -1,0 +1,22 @@
+Key	Text
+s72	L255
+UIText	Key
+AbsentPath	
+GB	 GB
+KB	 KB
+MB	 MB
+MenuAbsent	Entire feature will be unavailable
+MenuAdvertise	Feature will be installed when required
+MenuAllCD	Entire feature will be installed to run from CD
+MenuAllLocal	Entire feature will be installed on local hard drive
+MenuAllNetwork	Entire feature will be installed to run from network
+MenuCD	Will be installed to run from CD
+MenuLocal	Will be installed on local hard drive
+MenuNetwork	Will be installed to run from network
+SelChildCostNeg	Releases: [1]
+SelChildCostPos	Requires: [1]
+SelParentCostNegNeg	Releases: [1] + [4] from subfeatures
+SelParentCostNegPos	Releases: [1] - [4] for subfeatures
+SelParentCostPosNeg	Requires: [1] - [4] from subfeatures
+SelParentCostPosPos	Requires: [1] + [4] for subfeatures
+bytes	 bytes

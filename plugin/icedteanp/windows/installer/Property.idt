@@ -1,0 +1,33 @@
+Property	Value
+s72	l0
+1252	Property	Property
+ALLUSERS	1
+ARPCOMMENTS	IcedTea-Web Java™ Network Launch Protocol plug-in for browsers.
+ARPCONTACT	distro-pkg-dev@openjdk.java.net
+ARPHELPLINK	http://icedtea.classpath.org/wiki/IcedTea-Web
+ARPNOMODIFY	1
+ARPPRODUCTICON	IcedTea_Web.ico
+ARPURLINFOABOUT	http://icedtea.classpath.org/wiki/IcedTea-Web
+ARPURLUPDATEINFO	http://icedtea.classpath.org/wiki/IcedTea-Web
+Abort	&Abort
+Back	< &Back
+Browse	B&rowse...
+Cancel	&Cancel
+DefaultUIFont	DialogTextStyle
+Error	Error
+ErrorDialog	Error
+Exit	E&xit
+Finish	&Finish
+INSTALLLEVEL	1
+Ignore	&Ignore
+Manufacturer	IcedTea
+Next	&Next >
+No	&No
+Ok	&OK
+ProductCode	{CAFEBABE-0001-0006-0000-0000EBABEFAC}
+ProductLanguage	1033
+ProductName	IcedTea-Web
+ProductVersion	1.6.0
+Retry	&Retry
+UpgradeCode	{CAFEBABE-0001-0006-0000-0000EBABEFAC}
+Yes	&Yes

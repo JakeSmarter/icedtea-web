@@ -1,0 +1,7 @@
+TextStyle	FaceName	Size	Color	StyleBits
+s72	s32	i2	I4	I2
+TextStyle	TextStyle
+BigTextStyle	MS Shell Dlg 2	10		0
+DialogTextStyle	MS Shell Dlg 2	8		0
+SmallTextStyle	MS Shell Dlg 2	6		0
+TitleTextStyle	MS Shell Dlg 2	12		1

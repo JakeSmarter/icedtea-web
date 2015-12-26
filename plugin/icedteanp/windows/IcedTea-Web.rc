@@ -1,0 +1,958 @@
+/******************************************************************************
+ * WARNING: Keep this file UTF-8 encoded! DO NOT change its encoding unless   *
+ * you know what you are doing!                                               *
+ ******************************************************************************/
+#ifndef _ICEDTEA_WEB_RC_
+#define _ICEDTEA_WEB_RC_
+/******************************************************************************
+ * Resource ID definitions                                                    *
+ ******************************************************************************/
+/* CONTROL ********************************************************************/
+#define IDC_SYNTAX_EDIT      0
+#define IDC_SYNTAX_OK_BUTTON 1
+
+/* DIALOGEX *******************************************************************/
+#define IDD_SYNTAX           0
+
+/* ICON ***********************************************************************/
+#define ID_ICON              0
+
+/* STRINGTABLE ****************************************************************/
+#define IDS_FRIENDLYTYPENAME 0
+#define IDS_OPEN             1
+#define IDS_ERROR            2
+#define IDS_WARNING          3
+
+#ifdef RC_INVOKED
+#ifdef _WIN32
+#include <winresrc.h>
+#include <commctrl.h>
+
+#ifndef RT_MESSAGETABLE
+#define RT_MESSAGETABLE 11
+#endif
+
+#include "config.h"
+#include "IcedTea-Web.h"
+
+IDD_SYNTAX DIALOGEX
+0x8000, 0x8000, /* x, y */
+200, 300,       /* width, height */
+0               /* helpID */
+CAPTION PACKAGE_NAME_STRING " DllInstall Syntax"
+FONT 8, "MS Shell Dlg"
+LANGUAGE LANG_ENGLISH, SUBLANG_DEFAULT
+STYLE WS_SYSMENU | WS_VISIBLE | DS_MODALFRAME {
+    CONTROL "\
+Syntax:\r\n\
+\r\n\
+/I:? | /:H\r\n\
+\tDisplays this help message.\r\n\
+or a combination of one or more of the following switches separated by comma:\r\n\
+/I:USER\r\n\
+\tRegisters or unregisters the plug-in for the current user only.\r\n\
+/I:SYSTEM\r\n\
+\tRegisters or unregisters the plug-in system-wide. This is the default.\r\n\
+\tThe plug-in will be available to all users. This switch requires the\r\n\
+\tinstalling user account to be in the Administrators security group or\r\n\
+\tUAC (Windows Vista and later).\r\n\
+\tIf used together with the /I:USER switch, the plug-in is registered or\r\n\
+\tunregistered both system-wide as well as for the current user.\r\n\
+/I:MOZILLAONLY | /I:NOIE\r\n\
+\tRegisters or unregisters the plug-in with Mozilla compatible browsers only.\r\n\
+\tThese switches are exclusive to /I:IEONLY and /I:NOMOZILLA.\r\n\
+/I:IEONLY | /I:NOMOZILLA\r\n\
+\tRegisters or unregisters the plug-in with Internet Explorer browser only.\r\n\
+\tThese switches are exclusive to /I:MOZILLAONLY and /I:NOIE.\r\n\
+\r\n\
+Examples:\r\n\
+\tregsvr32.exe /N /I:USER,MOZILLAONLY\r\n\
+Registers the plug-in with a Mozilla compatible browser for the current user\r\n\
+only.\r\n\
+\r\n\
+\tregsvr32.exe /N /U /I:IEONLY\r\n\
+Unregisters the plug-in with the Internet Explorer system-wide but keeps any\r\n\
+existing user registrations.",
+    IDC_SYNTAX_EDIT,
+    WC_EDIT,
+    WS_BORDER | WS_HSCROLL | WS_TABSTOP | WS_VSCROLL |
+      ES_AUTOHSCROLL | ES_AUTOVSCROLL | ES_LEFT | ES_MULTILINE | ES_READONLY,
+    5, 5,
+    190, 265
+    CONTROL "&OK",
+    IDC_SYNTAX_OK_BUTTON,
+    WC_BUTTON,
+    WS_TABSTOP | BS_DEFPUSHBUTTON | BS_CENTER | BS_TEXT | BS_VCENTER,
+    75, 275,
+    50, 20
+}
+
+IDD_SYNTAX DIALOGEX
+0x8000, 0x8000, /* x, y */
+200, 300,       /* width, height */
+0               /* helpID */
+CAPTION PACKAGE_NAME_STRING " DllInstall-Syntax"
+FONT 8, "MS Shell Dlg"
+LANGUAGE LANG_GERMAN, SUBLANG_DEFAULT
+STYLE WS_SYSMENU | WS_VISIBLE | DS_MODALFRAME {
+    CONTROL "\
+Syntax:\r\n\
+\r\n\
+/I:? | /:H\r\n\
+\tZeigt diese Hilfemeldung an.\r\n\
+Oder, eine Kombination aus einem oder mehreren der folgenden Schalter,\r\n\
+getrennt durch Kommata:\r\n\
+/I:USER\r\n\
+\tLegt an oder hebt die Registrierung des Plugins nur für den aktuellen\r\n\
+\tBenutzer auf.\r\n\
+/I:SYSTEM\r\n\
+\tLegt an oder hebt die Registrierung des Plugins auf dem System auf. Dies ist\r\n\
+\tdie Standardeinstellung. Das Plugin wird für alle Benutzer verfügbar gemacht.\r\n\
+\tDieser Schalter setzt die Mitgliedschaft des installierenden Benutzerkontos\r\n\
+\tin der Sicherheitsgruppe der Administratoren oder UAC (ab Windows Vista)\r\n\
+\tvoraus.\r\n\
+\tBei Verwendung dieses Schalters zusammen mit dem Schalter „/I:USER“ wird die\r\n\
+\tRegistrierung des Plugins sowohl auf dem System als auch für den aktuellen\r\n\
+\tBenutzer angelegt oder aufgehoben.\r\n\
+/I:MOZILLAONLY | /I:NOIE\r\n\
+\tLegt an oder hebt die Registrierung des Plugins ausschließlich für\r\n\
+\tMozilla-kompatible Browser auf.\r\n\
+\tDiese Schalter schließen die gleichzeitige Verwendung der Schalter\r\n\
+\t„/I:IEONLY“ und „/I:NOMOZILLA“ aus.\r\n\
+/I:IEONLY | /I:NOMOZILLA\r\n\
+\tLegt an oder hebt die Registrierung des Plugins ausschließlich für den\r\n\
+\tInternet Explorer auf.\r\n\
+\tDiese Schalter schließen die gleichzeitige Verwendung der Schalter\r\n\
+\t„/I:MOZILLAONLY“ und „/I:NOIE“ aus.\r\n\
+\r\n\
+Beispiele:\r\n\
+\tregsvr32.exe /N /I:USER,MOZILLAONLY\r\n\
+Legt die Registrierung des Plugins ausschließlich für Mozilla-kompatible\r\n\
+Browser und nur für den aktuellen Benutzer an.\r\n\
+\r\n\
+\tregsvr32.exe /N /U /I:IEONLY\r\n\
+Hebt auf dem System ausschließlich die Registrierung des Plugins für den\r\n\
+Internet Explorer auf, belässt aber die Registrierungen für Benutzer.",
+    IDC_SYNTAX_EDIT,
+    WC_EDIT,
+    WS_BORDER | WS_HSCROLL | WS_TABSTOP | WS_VSCROLL |
+      ES_AUTOHSCROLL | ES_AUTOVSCROLL | ES_LEFT | ES_MULTILINE | ES_READONLY,
+    5, 5,
+    190, 265
+    CONTROL "&OK",
+    IDC_SYNTAX_OK_BUTTON,
+    WC_BUTTON,
+    WS_TABSTOP | BS_DEFPUSHBUTTON | BS_CENTER | BS_TEXT | BS_VCENTER,
+    75, 275,
+    50, 20
+}
+
+IDD_SYNTAX DIALOGEX
+    0x8000, 0x8000, /* x, y */
+    200, 300,       /* width, height */
+    0               /* helpID */
+    CAPTION "Syntaks instalacji DllInstall " PACKAGE_NAME_STRING
+    FONT 8, "MS Shell Dlg"
+    LANGUAGE LANG_POLISH, SUBLANG_DEFAULT
+    STYLE WS_SYSMENU | WS_VISIBLE | DS_MODALFRAME {
+    CONTROL "\
+Syntaks:\r\n\
+\r\n\
+/I:? | /:H\r\n\
+\tWyświetla ten komunikat pomocny.\r\n\
+lub kombinacja z jednego, lub kilku, następujących przełączników, odgrodzonych\r\n\
+przecinkiem:\r\n\
+/I:USER\r\n\
+\tRejestruje lub wyrejestrowuje wtyczkę wyłącznie dla bieżącego użytkownika.\r\n\
+/I:SYSTEM\r\n\
+\tRejestruje lub wyrejestrowuje wtyczkę w systemie (przełącznik domyślny).\r\n\
+\tWtyczka będzie dostępna wszystkim użytkownikom. Ten przełącznik wymaga od\r\n\
+\tinstalującego konta użytkownika przynależność do grupy bezpieczeńswa\r\n\
+\t„Administratorzy” lub UAC (Windows Vista i późniejsze).\r\n\
+\tStosowanie tego przełącznika razem z /I:USER rejestruje lub wyrejestrowuje\r\n\
+\twtyczkę w systemie, jak i dla bieżącego użytkownika.\r\n\
+/I:MOZILLAONLY | /I:NOIE\r\n\
+\tRejestruje lub wyrejestrowuje wtyczkę wyłącznie dla przeglądarek\r\n\
+\tkompatybilnych z Mozilla.\r\n\
+\tThese switches are exclusive to /I:IEONLY and /I:NOMOZILLA\r\n\
+\tTe przełączniki wykluczają /I:IEONLY i /I:NOMOZILLA.\r\n\
+/I:IEONLY | /I:NOMOZILLA\r\n\
+\tRejestruje lub wyrejestrowuje wtyczkę wyłącznie dla przeglądarki Internet\r\n\
+\tExplorer.\r\n\
+\tTe przełączniki wykluczają /I:MOZILLAONLY i /I:NOIE.\r\n\
+\r\n\
+Przykłady:\r\n\
+\tregsvr32.exe /N /I:USER,MOZILLAONLY\r\n\
+Rejestruje wtyczkę wyłącznie dla bieżącego użytkownika i przeglądarek\r\n\
+kompatybilnych z Mozilla.\r\n\
+\r\n\
+\tregsvr32.exe /N /U /I:IEONLY\r\n\
+Wyrejestrowuje wtyczkę z systemu wyłącznie dla przeglądarki Internet Explorer,\r\n\
+zachowując rejestrację dla użytkowników.",
+    IDC_SYNTAX_EDIT,
+    WC_EDIT,
+    WS_BORDER | WS_HSCROLL | WS_TABSTOP | WS_VSCROLL |
+      ES_AUTOHSCROLL | ES_AUTOVSCROLL | ES_LEFT | ES_MULTILINE | ES_READONLY,
+    5, 5,
+    190, 265
+    CONTROL "&OK",
+    IDC_SYNTAX_OK_BUTTON,
+    WC_BUTTON,
+    WS_TABSTOP | BS_DEFPUSHBUTTON | BS_CENTER | BS_TEXT | BS_VCENTER,
+    75, 275,
+    50, 20
+}
+
+#ifndef ICEDTEA_WEB_MIME_TYPES
+#define ICEDTEA_WEB_MIME_TYPES \
+  "application/x-java-applet|" \
+  "application/x-java-applet|" \
+  "application/x-java-applet;version=1.1|" \
+  "application/x-java-applet;version=1.1|" \
+  "application/x-java-applet;version=1.1.1|" \
+  "application/x-java-applet;version=1.1.1|" \
+  "application/x-java-applet;version=1.1.2|" \
+  "application/x-java-applet;version=1.1.2|" \
+  "application/x-java-applet;version=1.1.3|" \
+  "application/x-java-applet;version=1.1.3|" \
+  "application/x-java-applet;version=1.2|" \
+  "application/x-java-applet;version=1.2|" \
+  "application/x-java-applet;version=1.2.1|" \
+  "application/x-java-applet;version=1.2.1|" \
+  "application/x-java-applet;version=1.2.2|" \
+  "application/x-java-applet;version=1.2.2|" \
+  "application/x-java-applet;version=1.3|" \
+  "application/x-java-applet;version=1.3|" \
+  "application/x-java-applet;version=1.3.1|" \
+  "application/x-java-applet;version=1.3.1|" \
+  "application/x-java-applet;version=1.4|" \
+  "application/x-java-applet;version=1.4|" \
+  "application/x-java-applet;version=1.4.1|" \
+  "application/x-java-applet;version=1.4.1|" \
+  "application/x-java-applet;version=1.4.2|" \
+  "application/x-java-applet;version=1.4.2|" \
+  "application/x-java-applet;version=1.5|" \
+  "application/x-java-applet;version=1.5|" \
+  "application/x-java-applet;version=1.6|" \
+  "application/x-java-applet;version=1.6|" \
+  "application/x-java-applet;version=1.7|" \
+  "application/x-java-applet;version=1.7|" \
+  "application/x-java-applet;version=1.8|" \
+  "application/x-java-applet;version=1.8|" \
+  "application/java-archive|" \
+  "application/x-java-bean|" \
+  "application/x-java-bean|" \
+  "application/x-java-bean;version=1.1|" \
+  "application/x-java-bean;version=1.1|" \
+  "application/x-java-bean;version=1.1.1|" \
+  "application/x-java-bean;version=1.1.1|" \
+  "application/x-java-bean;version=1.1.2|" \
+  "application/x-java-bean;version=1.1.2|" \
+  "application/x-java-bean;version=1.1.3|" \
+  "application/x-java-bean;version=1.1.3|" \
+  "application/x-java-bean;version=1.2|" \
+  "application/x-java-bean;version=1.2|" \
+  "application/x-java-bean;version=1.2.1|" \
+  "application/x-java-bean;version=1.2.1|" \
+  "application/x-java-bean;version=1.2.2|" \
+  "application/x-java-bean;version=1.2.2|" \
+  "application/x-java-bean;version=1.3|" \
+  "application/x-java-bean;version=1.3|" \
+  "application/x-java-bean;version=1.3.1|" \
+  "application/x-java-bean;version=1.3.1|" \
+  "application/x-java-bean;version=1.4|" \
+  "application/x-java-bean;version=1.4|" \
+  "application/x-java-bean;version=1.4.1|" \
+  "application/x-java-bean;version=1.4.1|" \
+  "application/x-java-bean;version=1.4.2|" \
+  "application/x-java-bean;version=1.4.2|" \
+  "application/x-java-bean;version=1.5|" \
+  "application/x-java-bean;version=1.5|" \
+  "application/x-java-bean;version=1.6|" \
+  "application/x-java-bean;version=1.6|" \
+  "application/x-java-bean;version=1.7|" \
+  "application/x-java-bean;version=1.7|" \
+  "application/x-java-bean;version=1.8|" \
+  "application/x-java-bean;version=1.8|" \
+  "application/x-java-jnlp-file|" \
+  "application/x-java-vm|" \
+  "application/x-java-vm|" \
+  "application/x-java-vm-npruntime"
+#endif /* ICEDTEA_WEB_MIME_TYPES */
+
+LANGUAGE LANG_GERMAN, SUBLANG_DEFAULT
+1 VERSIONINFO
+FILEVERSION PACKAGE_MAJOR_VERSION, PACKAGE_MINOR_VERSION,
+            PACKAGE_PATCH_VERSION, PACKAGE_BUILD_VERSION
+PRODUCTVERSION PACKAGE_MAJOR_VERSION, PACKAGE_MINOR_VERSION,
+               PACKAGE_PATCH_VERSION, PACKAGE_BUILD_VERSION
+#if defined DEBUG || defined _DEBUG
+FILEFLAGSMASK VS_FF_DEBUG | VS_FF_PRERELEASE
+#endif /* DEBUG || _DEBUG */
+FILEOS VOS_NT_WINDOWS32
+FILETYPE VFT_DLL {
+    BLOCK "StringFileInfo" {
+// #ifdef UNICODE
+        // BLOCK "040704B0" {
+// #else
+        BLOCK "040704E4" {
+// #endif /* UNICODE */
+            /* VALUE "Comments", "" */
+            VALUE "CompanyName", PACKAGE_VENDOR_STRING
+            VALUE "FileDescription", PACKAGE_NAME_STRING " Java™ Network "
+                                     "Launch Protocol Plugin für Browser"
+            VALUE "FileVersion", PACKAGE_VERSION_STRING
+            VALUE "InternalName", PLUGIN_MODULE_NAME_STRING
+            VALUE "LegalCopyright", "GPLv2, siehe die Datei COPYING für Details"
+            VALUE "LegalTrademarks", "Java™ ist ein eingetragenes Warenzeichen "
+                                     "der Oracle Corporation, Redwood Shores, C"
+                                     "A, Vereinigte Staaten von Amerika"
+            VALUE "OriginalFilename", PLUGIN_DLL_STRING
+#if defined DEBUG || defined _DEBUG
+            VALUE "PrivateBuild", "Gebaut auf " __HOSTNAME__ " durch " __USER__
+                                  " am " __DATE__ " um " __TIME__
+#endif /* DEBUG || _DEBUG */
+            VALUE "ProductName", PACKAGE_NAME_STRING
+            VALUE "ProductVersion", PACKAGE_VERSION_STRING
+            VALUE "OLESelfReg", ""
+            /* SpecialBuild", "" */
+        }
+
+/*
+ * The NPAPI supported type values must always be in a en-US ANSI encoded block
+ */
+        BLOCK "040904E4" {
+            VALUE "FileDescription", PACKAGE_NAME_STRING " Java™ Network "
+                                     "Launch Protocol Plugin für Browser"
+            VALUE "ProductName", PACKAGE_NAME_STRING
+            VALUE "MIMEType", ICEDTEA_WEB_MIME_TYPES
+            VALUE "FileExtents", "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "class|jar|"
+                              "jnlp|"
+                              "class|jar"
+            VALUE "FileOpenName", "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+                               "JNLP-Anwendung (*.jnlp)|"
+                               "Java-Klassendatei (*.class)|"
+                               "Java-Archiv (*.jar)|"
+            VALUE "Language", "de"
+        }
+   }
+
+    BLOCK "VarFileInfo" {
+// #ifdef UNICODE
+        // VALUE "Translation", LANG_GERMAN | SUBLANG_DEFAULT * 0x400, 1200
+// #else
+        VALUE "Translation", LANG_GERMAN | SUBLANG_DEFAULT * 0x400, 1252
+// #endif /* UNICODE */
+    }
+
+    BLOCK "VarFileInfo" {
+        VALUE "Translation", LANG_ENGLISH | SUBLANG_DEFAULT * 0x400, 1252
+    }
+}
+
+LANGUAGE LANG_ENGLISH, SUBLANG_DEFAULT
+1 VERSIONINFO
+FILEVERSION PACKAGE_MAJOR_VERSION, PACKAGE_MINOR_VERSION,
+            PACKAGE_PATCH_VERSION, PACKAGE_BUILD_VERSION
+PRODUCTVERSION PACKAGE_MAJOR_VERSION, PACKAGE_MINOR_VERSION,
+               PACKAGE_PATCH_VERSION, PACKAGE_BUILD_VERSION
+#if defined DEBUG || defined _DEBUG
+FILEFLAGSMASK VS_FF_DEBUG | VS_FF_PRERELEASE
+#endif /* DEBUG || _DEBUG */
+FILEOS VOS_NT_WINDOWS32
+FILETYPE VFT_DLL {
+    BLOCK "StringFileInfo" {
+// #ifdef UNICODE
+        // BLOCK "040904B0" {
+// #else
+        BLOCK "040904E4" {
+// #endif /* UNICODE */
+          /* VALUE "Comments", "" */
+            VALUE "CompanyName", PACKAGE_VENDOR_STRING
+            VALUE "FileDescription", PACKAGE_DESCRIPTION_STRING
+            VALUE "FileVersion", PACKAGE_VERSION_STRING
+            VALUE "InternalName", PLUGIN_MODULE_NAME_STRING
+            VALUE "LegalCopyright", "GPLv2, see the file COPYING for details"
+            VALUE "LegalTrademarks", "Java™ is a registered trademark of Oracle"
+                                     " Corporation, Redwood Shores, CA, United "
+                                     "States of America"
+            VALUE "OriginalFilename", PLUGIN_DLL_STRING
+#if defined DEBUG || defined _DEBUG
+            VALUE "PrivateBuild", "Built on " __HOSTNAME__ " by " __USER__
+                                  " on " __DATE__ " at " __TIME__
+#endif /* DEBUG || _DEBUG */
+            VALUE "ProductName", PACKAGE_NAME_STRING
+            VALUE "ProductVersion", PACKAGE_VERSION_STRING
+            VALUE "OLESelfReg", ""
+      /* SpecialBuild", "" */
+// #ifdef UNICODE
+        // }
+
+/*
+ * The NPAPI supported type values must always be in a en-US ANSI encoded block
+ */
+        // BLOCK "040904E4" {
+            // VALUE "FileDescription", PACKAGE_DESCRIPTION_STRING
+            // VALUE "ProductName", PACKAGE_NAME_STRING
+// #endif
+            VALUE "MIMEType", ICEDTEA_WEB_MIME_TYPES
+            VALUE "FileExtents", "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "jnlp|"
+                                 "class|jar"
+            VALUE "FileOpenName", "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)|"
+                                  "JNLP Application (*.jnlp)|"
+                                  "Java Class File (*.class)|"
+                                  "Java Archive (*.jar)"
+            VALUE "Language", "en"
+        }
+    }
+
+    BLOCK "VarFileInfo" {
+// #ifdef UNICODE
+        // VALUE "Translation", LANG_ENGLISH | SUBLANG_DEFAULT * 0x400, 1200
+    // }
+    // BLOCK "VarFileInfo" {
+        // VALUE "Translation", LANG_ENGLISH | SUBLANG_DEFAULT * 0x400, 1252
+// #else
+        VALUE "Translation", LANG_ENGLISH | SUBLANG_DEFAULT * 0x400, 1252
+// #endif /* UNICODE */
+    }
+}
+
+LANGUAGE LANG_POLISH, SUBLANG_DEFAULT
+1 VERSIONINFO
+FILEVERSION PACKAGE_MAJOR_VERSION, PACKAGE_MINOR_VERSION,
+            PACKAGE_PATCH_VERSION, PACKAGE_BUILD_VERSION
+PRODUCTVERSION PACKAGE_MAJOR_VERSION, PACKAGE_MINOR_VERSION,
+               PACKAGE_PATCH_VERSION, PACKAGE_BUILD_VERSION
+#if defined DEBUG || defined _DEBUG
+FILEFLAGSMASK VS_FF_DEBUG | VS_FF_PRERELEASE
+#endif /* DEBUG || _DEBUG */
+FILEOS VOS_NT_WINDOWS32
+FILETYPE VFT_DLL {
+    BLOCK "StringFileInfo" {
+// #ifdef UNICODE
+        // BLOCK "041504B0" {
+// #else
+        BLOCK "041504E2" {
+// #endif /* UNICODE */
+            /* VALUE "Comments", "" */
+            VALUE "CompanyName", PACKAGE_VENDOR_STRING
+            VALUE "FileDescription", "Wtyczka " PACKAGE_NAME_STRING " do "
+                                      "przeglądarek obsługująca Java™ Network "
+                                      "Launch Protocol"
+            VALUE "FileVersion", PACKAGE_VERSION_STRING
+            VALUE "InternalName", PLUGIN_MODULE_NAME_STRING
+            VALUE "LegalCopyright", "GPLv2, dla szczegółów patrz w plik COPYING"
+            VALUE "LegalTrademarks", "Java™ jest zastrzeżonym znakiem handlowym"
+                                     " Oracle Corporation, Redwood Shores, CA, "
+                                     "Stany Zjednoczone Ameryki"
+            VALUE "OriginalFilename", PLUGIN_DLL_STRING
+#if defined DEBUG || defined _DEBUG
+            VALUE "PrivateBuild", "Zbudowano na " __HOSTNAME__ " przez "
+                                  __USER__ ", " __DATE__ " o " __TIME__
+#endif /* DEBUG || _DEBUG */
+            VALUE "ProductName", PACKAGE_NAME_STRING
+            VALUE "ProductVersion", PACKAGE_VERSION_STRING
+            VALUE "OLESelfReg", ""
+            /* SpecialBuild", "" */
+        }
+
+/*
+ * The NPAPI supported type values must always be in a en-US ANSI encoded block
+ */
+        BLOCK "040904E4" {
+            VALUE "FileDescription", "Wtyczka " PACKAGE_NAME_STRING " do "
+                                      "przeglądarek obsługująca Java™ Network "
+                                      "Launch Protocol"
+            VALUE "ProductName", PACKAGE_NAME_STRING
+            VALUE "MIMEType", ICEDTEA_WEB_MIME_TYPES
+            VALUE "FileExtents", "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "class|jar|"
+                                 "jnlp|"
+                                 "class|jar"
+            VALUE "FileOpenName", "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)|"
+                                  "Aplikacja JNLP (*.jnlp)|"
+                                  "Plik Klassy Java (*.class)|"
+                                  "Archiwum Java (*.jar)"
+            VALUE "Language", "pl"
+        }
+    }
+
+    BLOCK "VarFileInfo" {
+// #ifdef UNICODE
+        // VALUE "Translation", LANG_POLISH | SUBLANG_DEFAULT * 0x400, 1200
+// #else
+        VALUE "Translation", LANG_POLISH | SUBLANG_DEFAULT * 0x400, 1250
+// #endif /* UNICODE */
+    }
+
+    BLOCK "VarFileInfo" {
+        VALUE "Translation", LANG_ENGLISH | SUBLANG_DEFAULT * 0x400, 1252
+    }
+}
+
+#ifndef PROCESSOR_ARCHITECTURE
+#ifdef _M_IX86
+#define PROCESSOR_ARCHITECTURE x86
+#elif _M_AMD64 || _M_X64
+#define PROCESSOR_ARCHITECTURE amd64
+#elif _M_IA64
+#define PROCESSOR_ARCHITECTURE ia64
+#elif _M_ARM
+#define PROCESSOR_ARCHITECTURE arm
+#else
+// If no matching architecture can be found always fall back to x86 because it
+// is the default assembly architecture in WinSxS.
+#define PROCESSOR_ARCHITECTURE x86
+#endif
+#define PROCESSOR_ARCHITECTURE_STRING STR(PROCESSOR_ARCHITECTURE)
+#endif /* PROCESSOR_ARCHITECTURE */
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+// IcedTea-Web provides an embedded manifest. If you want to override the
+// embedded manifest with an external mnifest file on Windows Server 2003 and
+// later, set the DWORD value "PreferExternalManifest" to 0x00000001 in the
+// HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\SideBySide
+// regsitry key.
+ISOLATIONAWARE_MANIFEST_RESOURCE_ID RT_MANIFEST {
+    "\
+<?xml version=""1"" encoding=""UTF-8"" standalone=""yes""?>\r\n\
+<assembly xmlns=""urn:schemas-microsoft-com:asm.v1"" manifestVersion=""1.0"">\r\n\
+	<assemblyIdentity\r\n\
+		name=""" PACKAGE_VENDOR_STRING "." PACKAGE_NAME_STRING """\r\n\
+		processorArchitecture=""" PROCESSOR_ARCHITECTURE_STRING """\r\n\
+		publicKeyToken=""0000000000000000""\r\n\
+		type=""win32""\r\n\
+		version=""" PACKAGE_VERSION_STRING """/>\r\n\
+	<description>" PACKAGE_DESCRIPTION_STRING "</description>\r\n\
+	<trustInfo xmlns=""urn:schemas-microsoft-com:asm.v3"">\r\n\
+		<security>\r\n\
+			<requestedPrivileges>\r\n\
+				<requestedExecutionLevel level=""asInvoker""/>\r\n\
+			</requestedPrivileges>\r\n\
+		</security>\r\n\
+	</trustInfo>\r\n\
+	<compatibility xmlns=""urn:schemas-microsoft-com:compatibility.v1"">\r\n\
+		<application>\r\n\
+			<!-- Windows Vista -->\r\n\
+			<supportedOS Id=""{e2011457-1546-43c5-a5fe-008deee3d3f0}""/>\r\n\
+			<!-- Windows 7 -->\r\n\
+			<supportedOS Id=""{35138b9a-5d96-4fbd-8e2d-a2440225f93a}""/>\r\n\
+			<!-- Windows 8 -->\r\n\
+			<supportedOS Id=""{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}""/>\r\n\
+			<!-- Windows 8.1 -->\r\n\
+			<supportedOS Id=""{1f676c76-80e1-4239-95bb-83d0f6d0da78}""/>\r\n\
+			<!-- Windows 10 -->\r\n\
+			<supportedOS Id=""{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}""/>\r\n\
+		</application>\r\n\
+	</compatibility>\r\n\
+</assembly>"
+}
+
+ID_ICON ICON "javaws.ico"
+
+STRINGTABLE LANGUAGE LANG_CZECH, SUBLANG_DEFAULT {
+    IDS_FRIENDLYTYPENAME "Aplikace JNLP"
+}
+
+STRINGTABLE LANGUAGE LANG_GERMAN, SUBLANG_DEFAULT {
+    IDS_FRIENDLYTYPENAME "JNLP-Anwendung"
+    IDS_OPEN "Ö&ffnen"
+    IDS_ERROR "FEHLER"
+    IDS_WARNING "WARNUNG"
+}
+
+STRINGTABLE LANGUAGE LANG_ENGLISH, SUBLANG_DEFAULT {
+    IDS_FRIENDLYTYPENAME "JNLP Application"
+    IDS_OPEN "&Open"
+    IDS_ERROR "ERROR"
+    IDS_WARNING "WARNING"
+}
+
+STRINGTABLE LANGUAGE LANG_POLISH, SUBLANG_DEFAULT {
+    IDS_FRIENDLYTYPENAME "Aplikacja JNLP"
+    IDS_OPEN "O&twórz"
+    IDS_ERROR "BŁĄD"
+    IDS_WARNING "UWAGA"
+}
+
+// Message tables
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+1 RT_MESSAGETABLE {
+    0x00000004L, // MESSAGE_RESOURCE_DATA.NumberOfBlocks
+    0x20000000L, // MESSAGE_RESOURCE_BLOCK.LowId (Custom success)
+    0x20000000L, // MESSAGE_RESOURCE_BLOCK.HighId (Custom success)
+    0x00000034L, // MESSAGE_RESOURCE_BLOCK.OffsetToEntries
+    0x60000000L, // MESSAGE_RESOURCE_BLOCK.LowId (Custom info)
+    0x60000000L, // MESSAGE_RESOURCE_BLOCK.HighId (Custom info)
+    0x00000034L, // MESSAGE_RESOURCE_BLOCK.OffsetToEntries
+    0xA0000000L, // MESSAGE_RESOURCE_BLOCK.LowId (Custom warning)
+    0xA0000000L, // MESSAGE_RESOURCE_BLOCK.HighId (Custom warning)
+    0x00000034L, // MESSAGE_RESOURCE_BLOCK.OffsetToEntries
+    0xE0000000L, // MESSAGE_RESOURCE_BLOCK.LowId (Custom error)
+    0xE0000000L, // MESSAGE_RESOURCE_BLOCK.HighId (Custom error)
+    0x00000034L, // MESSAGE_RESOURCE_BLOCK.OffsetToEntries
+#ifdef UNICODE
+    0x0008, // MESSAGE_RESOURCE_ENTRY.Length
+    0x0001, // MESSAGE_RESOURCE_ENTRY.Flags (UNICODE)
+#else
+    0x0006, // MESSAGE_RESOURCE_ENTRY.Length
+    0x0000, // MESSAGE_RESOURCE_ENTRY.Flags (ANSI)
+#endif
+    TEXT("%1"), // MESSAGE_RESOURCE_ENTRY.Text
+}
+#endif /* _WIN32 */
+#ifdef OS2
+#include <npapi.h>
+
+#include "IcedTea-Web.h"
+
+NP_INFO_ProductVersion RC_DATA {
+    PACKAGE_MAJOR_VERSION,
+    PACKAGE_MINOR_VERSION,
+    PACKAGE_PATCH_VERSION,
+    PACKAGE_BUILD_VERSION
+}
+NP_INFO_MIMEType RC_DATA {
+    ICEDTEA_WEB_MIME_TYPES "\0"
+}
+NP_INFO_FileOpenName RC_DATA {
+    "Java Class File (*.class)|"
+    "Java Archive (*.jar)|"
+    "JNLP Application (*.jnlp)|\0"
+}
+NP_INFO_FileExtents RC_DATA {
+    "class|jar|jnlp\0"
+}
+NP_INFO_FileDescription RC_DATA {
+    PACKAGE_DESCRIPTION "\0"
+}
+NP_INFO_ProductName RC_DATA {
+    PACKAGE_NAME "\0"
+}
+NP_INFO_CompanyName RC_DATA {
+    PACKAGE_VENDOR "\0"
+}
+NP_INFO_FileVersion RC_DATA {
+    PACKAGE_MAJOR_VERSION,
+    PACKAGE_MINOR_VERSION,
+    PACKAGE_PATCH_VERSION,
+    PACKAGE_BUILD_VERSION
+}
+NP_INFO_InternalName RC_DATA {
+    PLUGIN_MODULE_NAME "\0"
+}
+NP_INFO_LegalCopyright RC_DATA {
+    "GPLv2, see the file COPYING for details\0"
+}
+NP_INFO_OriginalFilename RC_DATA {
+    PLUGIN_DLL "\0"
+}
+#endif /* OS2 */
+#endif /* RC_INVOKED */
+#endif /* _ICEDTEA_WEB_RC_ */

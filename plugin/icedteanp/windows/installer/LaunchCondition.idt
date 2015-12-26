@@ -1,0 +1,5 @@
+Condition	Description
+s255	l255
+LaunchCondition	Condition
+IsMSVCR100Installed64	[ProductName] requires Microsoft Visual C++ 2010 x64 SP1 Redistributable Package.
+VersionNT64	[ProductName] requires Windows XP Professional x64 Edition, Windows Server 2003 Standard x64 Edition, or later.
