@@ -1,0 +1,16 @@
+;LIBRARY "NPIcedTea-Web.DLL"
+EXPORTS
+    CLSID_IcedTea_Web DATA
+    IID_IIcedTea_Web  DATA
+    IID_IIcedTea_WebShellExtension DATA
+    DllCanUnloadNow     = DllCanUnloadNow@0     @1 PRIVATE
+    DllGetClassObject   = DllGetClassObject@12  @2 PRIVATE
+    DllGetVersion       = DllGetVersion@4       @3 PRIVATE
+    DllInstall          = DllInstall@8          @4 PRIVATE
+    DllMain             = DllMain@12            @5 PRIVATE
+    DllRegisterServer   = DllRegisterServer@0   @6 PRIVATE
+    DllUnregisterServer = DllUnregisterServer@0 @7 PRIVATE
+
+    NP_Initialize = NP_Initialize@4         @8 PRIVATE
+    NP_GetEntryPoints = NP_GetEntryPoints@4 @9 PRIVATE
+    NP_Shutdown = NP_Shutdown@0             @10 PRIVATE

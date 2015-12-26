@@ -1,0 +1,13 @@
+Feature_	Component_
+s38	s72
+FeatureComponents	Feature_	Component_
+Documentation	NEWS.TXT
+Documentation	README.TXT
+IcedTea_Web	EventMessageFile
+IcedTea_Web	NPIcedTea_Web.dll
+IcedTea_Web	TypesSupported
+IcedTea_Web64	COPYING.TXT
+IcedTea_Web64	EventMessageFile64
+IcedTea_Web64	IcedTea_Web.jar
+IcedTea_Web64	NPIcedTea_Web.dll64
+IcedTea_Web64	TypesSupported64

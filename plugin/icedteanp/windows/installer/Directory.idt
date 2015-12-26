@@ -1,0 +1,13 @@
+Directory	Directory_Parent	DefaultDir
+s72	S72	l255
+Directory	Directory
+CommonFiles64Folder	TARGETDIR	.
+CommonFilesFolder	TARGETDIR	.
+DOCDIR	CommonFiles64Folder	IcedTea-Web:.
+ICEDTEAWEBDIR	CommonFilesFolder	IcedTea-Web:.
+ICEDTEAWEBDIR64	CommonFiles64Folder	IcedTea-Web:.
+IcedTea_WebDir	ICEDTEAWEBDIR	.:x86
+IcedTea_WebDir64	ICEDTEAWEBDIR64	.:AMD64
+IcedTea_WebProgramMenuDir	ProgramMenuFolder	IcedTea-Web:.
+ProgramMenuFolder	TARGETDIR	.
+TARGETDIR		SourceDir

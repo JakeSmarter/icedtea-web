@@ -1,0 +1,339 @@
+# Set the variables below according to your build host's environment before
+# invoking make, or invoke make with the appropriate variables set on the
+# command line.
+#
+# By default the UNICODE version of the plug-in is built. If you want the ANSI
+# version (although there is no need for on the Windows NT line of operating
+# systems) set ANSI=1. Please note that Java applications and the JVM will
+# _always_ use UNICODE internally and the user's locale ANSI or OEM codepage by
+# default externally. The ANSI variable is only important to native Windows
+# application code.
+# Also by default, the release version, stripped of debugging symbols, is built.
+# If you want the debug version set DEBUG=1.
+#
+# The install and uninstall targets work on Windows only.
+
+# Set the PACKAGE_*_VERSION variables to numeric values according to their
+# names. The values MUST NOT exceed 65535. Separate variables are required
+# because resource files (*.rc) take numeric as well as string version data.
+PACKAGE_MAJOR_VERSION?=1
+PACKAGE_MINOR_VERSION?=6
+PACKAGE_PATCH_VERSION?=0
+PACKAGE_BUILD_VERSION?=0
+# WARNING: Keep this variable's value on a single line!
+PACKAGE_VERSION?=$(PACKAGE_MAJOR_VERSION).$(PACKAGE_MINOR_VERSION).$(PACKAGE_PATCH_VERSION).$(PACKAGE_BUILD_VERSION)
+
+# Set the PACKAGE_NAME variable to the product's name. This data is used
+# throughout the package, mainly in the resource file, module version
+# information and code. It's best to refrain from using Windows restricted file
+# name characters in the package name.
+PACKAGE_NAME?=IcedTea-Web
+
+# Set the PACKAGE_DESCRIPTION to a one-line description of the product. This
+# variable's data is used in the module version information. 
+PACKAGE_DESCRIPTION?=$(PACKAGE_NAME) Java™ Network Launch Protocol plug-in for \
+browsers
+
+# Set the PACKAGE_VENDOR variable to your vendor organization's name, e.g. like
+# a company or distribution name, etc. This data is used in the module version
+# information and COM class name. DO NOT use white space or Windows restricted
+# file name characters.
+PACKAGE_VENDOR?=IcedTea
+
+# Set this variable to point to your XulRunner SDK.
+# It's best to use absolute paths.
+#XULRUNNER_PATH?=/usr/include/xulrunner-32.0
+XULRUNNER_PATH?=C:\Program Files\XULRunner\mozilla-release\dom\plugins\base
+
+# Set this variable to point to your JDK.
+# NOTE: You may need to download and install Windows specific JVM header files
+# when building on a non-Windows host, see JDK_WINDOWS_INCLUDE_PATH variable.
+# It's best to use absolute paths.
+#JDK_PATH?=/usr/lib/jvm/java-openjdk
+JDK_PATH?=C:\Program Files\jdk1.8.0_60
+#JDK_INCLUDE_PATH?=$(JDK_PATH)/include
+JDK_INCLUDE_PATH?=$(JDK_PATH)\include
+#JDK_WINDOWS_INCLUDE_PATH?=$(JDK_INCLUDE_PATH)/windows
+JDK_WINDOWS_INCLUDE_PATH?=$(JDK_INCLUDE_PATH)\win32
+JDK_UPDATE_VERSION?=60
+
+# Set this variable to where you have MinGW installed
+# It's best to use absolute paths.
+#MINGW_PATH?=/usr/x86_64-w64-mingw32/sys-root/mingw
+#MINGW_PATH?=/usr/i686-w64-mingw32/sys-root/mingw
+#MINGW_PATH?=C:\Program Files\mingw64
+MINGW_PATH?=C:\Program Files (x86)\mingw32
+
+# Set this variable to point to GCC's library folder.
+# It's best to use absolute paths.
+#MINGW_GCC_PATH?=/usr/lib64/gcc/x86_64-w64-mingw32/4.8.3
+#MINGW_GCC_PATH?=/usr/lib64/gcc/i686-w64-mingw32/4.8.3
+MINGW_GCC_PATH?=$(MINGW_PATH)\lib\gcc\x86_64-w64-mingw32\5.2.0
+#MINGW_GCC_PATH?=$(MINGW_PATH)\lib\gcc\i686-w64-mingw32\5.2.0
+
+# Set this variable to the plug-in DLL's internal module name.
+PLUGIN_MODULE_NAME?=NP$(PACKAGE_NAME)
+
+# Set these variables to the plug-in's final DLL file name. The name should
+# start with "NP" for Mozilla and other NPAPI compatible browsers to be able to
+# detect the plug-in in their plug-in folder.
+PLUGIN_DLL?=$(PLUGIN_MODULE_NAME).dll
+PLUGIN_LIB?=$(PLUGIN_MODULE_NAME).lib
+#===============================================================================
+.SUFFIXES: .rc .res .def
+.PHONY: all clean install package uninstall
+
+ifeq "$(OS)" "Windows_NT"
+CC=gcc.exe
+LD=ld.exe
+RC?=windres.exe
+RM=DEL /F /Q
+CONVERT=C:\Program Files\ImageMagick\convert.exe
+endif
+
+SRC=IcedTea-Web.h\
+    Dll.h\
+    Dll.c\
+    IcedTeaIEPlugin.h\
+    IcedTeaIEPlugin.c\
+    IcedTeaNPPlugin.h\
+    IcedTeaNPPlugin.c\
+    IcedTeaSax.h\
+    IcedTeaSax.c\
+    IcedTeaShellExt.h\
+    IcedTeaShellExt.c\
+    LogMessage.h\
+    LogMessage.c\
+    GUIDs.c\
+    IcedTea-Web.rc\
+    $(DEF)
+
+# The module definition file name does not change, regardless of what the
+# package name is (do not confuse with library name or internal module name).
+DEF=NPIcedTea-Web.dll.def
+
+OBJ=Dll.o\
+    IcedTeaIEPlugin.o\
+    IcedTeaNPPlugin.o\
+    IcedTeaSax.o\
+    IcedTeaShellExt.o\
+    LogMessage.o\
+    GUIDs.o\
+    IcedTea-Web.o
+
+DEFFLAGS=-D WIN32_LEAN_AND_MEAN -D _CRT_SECURE_NO_DEPRECATE -D NO_OLDNAMES\
+         -D _WIN32_IE=0x0600 -D COBJMACROS\
+         -D PACKAGE_VERSION="$(PACKAGE_VERSION)"\
+         -D PACKAGE_NAME="$(PACKAGE_NAME)"\
+         -D PACKAGE_VENDOR="$(PACKAGE_VENDOR)"\
+         -D PACKAGE_DESCRIPTION="$(PACKAGE_DESCRIPTION)"\
+         -D PLUGIN_MODULE_NAME="$(PLUGIN_MODULE_NAME)"
+ifeq "$(PROCESSOR_ARCHITECTURE)" "x86"
+DEFFLAGS+=-D _WIN32_WINNT=0x0500 -D WINVER=0x0500 -D _M_IX86
+else ifeq "$(PROCESSOR_ARCHITECTURE)" "AMD64"
+DEFFLAGS+=-D _WIN32_WINNT=0x0502 -D WINVER=0x0502 -D _M_AMD64 -D _M_X64
+else ifeq "$(PROCESSOR_ARCHITECTURE)" "IA64"
+DEFFLAGS+=-D _WIN32_WINNT=0x0502 -D WINVER=0x0502 -D _M_IA64
+else ifeq "$(PROCESSOR_ARCHITECTURE)" "ARM"
+DEFFLAGS+=-D _WIN32_WINNT=0x0602 -D WINVER=0x0602 -D _M_ARM
+else
+$(error Processor architecture $(PROCESSOR_ARCHITECTURE) not supported!)
+endif # PROCESSOR_ARCHITECTURE
+ifndef ANSI
+DEFFLAGS+=-D UNICODE -D _UNICODE
+endif # ANSI
+ifdef DEBUG
+DEFFLAGS+=-D DEBUG -D _DEBUG
+HOSTNAME?=$(COMPUTERNAME)
+DEFFLAGS+=-D __HOSTNAME__="$(HOSTNAME)"
+USER?=$(USERNAME)
+DEFFLAGS+=-D __USER__="$(USER)"
+else
+DEFFLAGS+=-D NDEBUG
+endif # DEBUG
+
+CFLAGS=-c -std=c99 -Ofast -mwindows -mdll -mwin32 -mms-bitfields\
+       -finput-charset=UTF-8\
+       -fstack-check=no\
+       $(DEFFLAGS)\
+       -I "$(MINGW_PATH)\include"\
+       -I "$(XULRUNNER_PATH)"\
+       -I "$(JDK_INCLUDE_PATH)"\
+       -I "$(JDK_WINDOWS_INCLUDE_PATH)"
+ifeq "$(PROCESSOR_ARCHITECTURE)" "x86"
+CFLAGS+=-m32 -march=i686
+else ifeq "$(PROCESSOR_ARCHITECTURE)" "AMD64"
+CFLAGS+=-m64
+endif # PROCESSOR_ARCHITECTURE
+ifndef ANSI
+CFLAGS+=-municode
+endif # ANSI
+ifdef DEBUG
+CFLAGS+=-g
+endif # DEBUG
+
+# DO NOT link standard libs!
+# We want to link against msvcr110.dll (Microsoft Visual C++ 2012).
+# Otherwise MinGW (GCC) grabs the insecure outdated msvcrt.dll (Microsoft
+# Visual C++ 6.0) first or mixes linking to both libraries.
+LDFLAGS=--dll\
+        --no-undefined\
+        --no-seh\
+        --no-bind\
+        --insert-timestamp\
+        --nxcompat\
+        --enable-auto-image-base\
+        --exclude-all-symbols\
+        --major-image-version $(PACKAGE_MAJOR_VERSION)\
+        --minor-image-version $(PACKAGE_MINOR_VERSION)\
+        --stack 0x10000,0x1000\
+        --heap 0x1000000,0x100000
+ifeq "$(PROCESSOR_ARCHITECTURE)" "x86"
+LDFLAGS+=--subsystem windows:5.00\
+         --major-os-version 5\
+         --minor-os-version 0\
+         --large-address-aware\
+         --compat-implib\
+         -m i386pe
+else ifeq "$(PROCESSOR_ARCHITECTURE)" "AMD64"
+LDFLAGS+=--subsystem windows:5.02\
+         --major-os-version 5\
+         --minor-os-version 2\
+         -m i386pep
+else ifeq "$(PROCESSOR_ARCHITECTURE)" "IA64"
+LDFLAGS+=--subsystem windows:5.02\
+         --major-os-version 5\
+         --minor-os-version 2
+else ifeq "$(PROCESSOR_ARCHITECTURE)" "ARM"
+LDFLAGS+=--subsystem windows:6.02\
+         --major-os-version 6\
+         --minor-os-version 2\
+         --large-address-aware
+endif # PROCESSOR_ARCHITECTURE
+ifndef DEBUG
+LDFLAGS+=-s
+endif # DEBUG
+
+# dllcrt1.o is used for linking with the dynamic single-threaded crtdll.dll (do not use)
+# dllcrt2.o is used for linking with the dynamic multi-threaded msvcr(t/70/71/80/90/100/110/120).dll
+LIBS=-L "$(MINGW_PATH)\lib"\
+     -L "$(MINGW_GCC_PATH)"\
+     "$(MINGW_PATH)\lib\dllcrt2.o"\
+     -l mingw32\
+     -l mingwex\
+     -l gcc\
+     -l msvcr110\
+     -l kernel32\
+     -l advapi32\
+     -l user32\
+     -l gdi32\
+     -l ole32\
+     -l uuid\
+     -l shell32
+
+Dll.o: IcedTea-Web.h IcedTea-Web.rc config.h IcedTeaIEPlugin.h LogMessage.h Dll.h Dll.c
+IcedTeaNPPlugin.o: IcedTeaNPPlugin.c
+IcedTeaIEPlugin.o: IcedTeaIEPlugin.c
+IcedTeaSax.o: IcedTeaSax.h IcedTeaSax.c
+IcedTeaShellExt.o: IcedTea-Web.h IcedTeaShellExt.h IcedTeaShellExt.c
+GUIDs.o: GUIDs.c
+# For icon design and requirements see https://msdn.microsoft.com/en-us/library/dn742485.aspx
+javaws.ico: ..\..\..\javaws.png
+# 10x10 required for overlays on 16x16 icons
+	"$(CONVERT)" "$<" -filter box -resize 10x10 -background none -gravity center -extent 10x10 "$(notdir $(basename $<)) 10x10.bmp"
+	"$(CONVERT)" "$<" -filter box -resize 16x16 -background none -gravity center -extent 16x16 "$(notdir $(basename $<)) 16x16.bmp"
+	"$(CONVERT)" "$<" -filter box -resize 24x24 -background none -gravity center -extent 24x24 "$(notdir $(basename $<)) 24x24.bmp"
+	"$(CONVERT)" "$<" -filter box -resize 32x32 -background none -gravity center -extent 32x32 "$(notdir $(basename $<)) 32x32.bmp"
+# 40x40 required for /big/ Quick Launch area icons on the taskbar and Balloon icons
+	"$(CONVERT)" "$<" -filter box -resize 40x40 -background none -gravity center -extent 40x40 "$(notdir $(basename $<)) 40x40.bmp"
+	"$(CONVERT)" "$<" -filter box -resize 48x48 -background none -gravity center -extent 48x48 "$(notdir $(basename $<)) 48x48.bmp"
+	"$(CONVERT)" "$<" -filter box -resize 64x64 -background none -gravity center -extent 64x64 "$(notdir $(basename $<)) 64x64.bmp"
+	"$(CONVERT)" "$<" -resize 128x128 -background none -gravity center -extent 128x128 "$(notdir $(basename $<)) 128x128.bmp"
+	"$(CONVERT)" "$<" -resize 256x256 -background none -gravity center -extent 256x256 "$(notdir $(basename $<)) 256x256.bmp"
+	"$(CONVERT)" "$(notdir $(basename $<)) 10x10.bmp" \
+	"$(notdir $(basename $<)) 16x16.bmp" \
+	"$(notdir $(basename $<)) 24x24.bmp" \
+	"$(notdir $(basename $<)) 32x32.bmp" \
+	"$(notdir $(basename $<)) 40x40.bmp" \
+	"$(notdir $(basename $<)) 48x48.bmp" \
+	"$(notdir $(basename $<)) 64x64.bmp" \
+	"$(notdir $(basename $<)) 128x128.bmp" \
+	"$(notdir $(basename $<)) 256x256.bmp" \
+	"$@" && \
+	$(RM) "$(notdir $(basename $<)) *x*.bmp"
+IcedTea-Web.o: IcedTea-Web.rc javaws.ico
+ifeq "$(PROCESSOR_ARCHITECTURE)" "x86"
+TARGET=pe-i386
+else ifeq "$(PROCESSOR_ARCHITECTURE)" "AMD64"
+TARGET=pe-x86-64
+else ifeq "$(PROCESSOR_ARCHITECTURE)" "IA64"
+TARGET=pe-ia64
+else ifeq "$(PROCESSOR_ARCHITECTURE)" "ARM"
+TARGET=pe-arm
+endif
+RC?=x86_64-w64-mingw32-windres
+#RC=i686-w64-mingw32-windres
+# Use codepage 65001 (UTF-8)
+RCFLAGS=-v\
+        -F $(TARGET)\
+        --use-temp-file\
+        -c 65001
+
+all: $(PLUGIN_DLL)
+
+$(PLUGIN_DLL): $(OBJ) $(DEF)
+	$(LD) $(LDFLAGS) -Map "$@.map" --out-implib "$(PLUGIN_LIB)" -o "$@" $(OBJ) $(DEF) $(LIBS)
+
+.c.o:
+	$(CC) $(CFLAGS) -o "$@" "$<"
+
+.rc.o:
+# Two step processing required because windres is demangling parameters to the
+# preprocessor incorrectly
+	$(CPP) -x c -std=c99 -mwin32 -D RC_INVOKED -finput-charset=UTF-8 \
+	$(DEFFLAGS) \
+	-D JDK_UPDATE_VERSION="$(JDK_UPDATE_VERSION)" \
+	-D PLUGIN_DLL="$(PLUGIN_DLL)" \
+	-I "$(MINGW_PATH)\include" \
+	-I "$(XULRUNNER_PATH)" \
+	"$<" | \
+	"$(RC)" $(RCFLAGS) -o "$@"
+
+# GNU make gets confused when there are multiple dots in file names
+#.res.o:
+#	$(RC) -v "$<" "$@"
+
+clean:
+	$(RM) $(OBJ) "javaws.ico" "$(PLUGIN_LIB)" "$(PLUGIN_DLL)"
+
+# Works on Windows only
+ifeq "$(OS)" "Windows_NT"
+install: $(PLUGIN_DLL)
+	COPY /F "$<" "$(WINDIR)" && \
+	regsvr32 "$(WINDIR)\$<"
+#	msiexec /I "$<" /L* "$<.log" /QB INSTALLLEVEL=3
+
+uninstall:
+	regsvr32 /U "$(WINDIR)\$(PLUGIN_DLL)" && \
+	$(RM) "$(WINDIR)\$(PLUGIN_DLL)"
+#	msiexec /X {CAFEBABE-000$(PACKAGE_MAJOR_VERSION)-000$(PACKAGE_MINOR_VERSION)-000$(PACKAGE_PATCH_VERSION)-0000EBABEFAC} /L* "installer\$(PACKAGE_NAME).msi.log" /QB
+
+package:
+	$(MAKE) -C installer \
+	PACKAGE_NAME="$(PACKAGE_NAME)" \
+	PACKAGE_DESCRIPTION="$(PACKAGE_DESCRIPTION)" \
+	PACKAGE_MAJOR_VERSION="$(PACKAGE_MAJOR_VERSION)" \
+	PACKAGE_MINOR_VERSION="$(PACKAGE_MINOR_VERSION)" \
+	PACKAGE_PATCH_VERSION="$(PACKAGE_PATCH_VERSION)" \
+	PACKAGE_BUILD_VERSION="$(PACKAGE_BUILD_VERSION)" \
+	PACKAGE_VERSION="$(PACKAGE_VERSION)" \
+	PACKAGE_VENDOR="$(PACKAGE_VENDOR)" \
+	PROCESSOR_ARCHITECTURE="$(PROCESSOR_ARCHITECTURE)"
+else
+install:
+	@echo "The \"$@\" target is only available on Windows. Run \"mingw-make -f$(MAKEFILE_LIST) all $@\" on Windows." &\
+	exit 1
+uninstall:
+	@echo "The \"$@\" target is only available on Windows. Run \"mingw-make -f$(MAKEFILE_LIST) $@\" on Windows." &\
+	exit 1
+endif

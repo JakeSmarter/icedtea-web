@@ -1,0 +1,6 @@
+Action	Condition	Sequence
+s72	S255	I2
+AdvtUISequence	Action
+Exit		-1
+FatalError		-3
+UserExit		-2
