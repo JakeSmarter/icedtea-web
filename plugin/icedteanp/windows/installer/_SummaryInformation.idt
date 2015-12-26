@@ -1,0 +1,19 @@
+PropertyId	Value
+i2	l255
+_SummaryInformation	PropertyId
+1	1252
+2	IcedTea-Web Installation Database
+3	Java™ Network Launch Protocol plug-in for browsers
+4	IcedTea
+5	Install,MSI,IcedTea,IcedTea-Web,Plug-in,Java,Browser,JNLP
+6	This installer database contains the logic and data required to install IcedTea-Web.
+7	AMD64;1033
+8	Administrator
+9	{CAFEBABE-0001-0006-0000-0000EBABEFAC}
+11	2015/10/04 05:30:08
+12	2015/10/04 05:30:08
+13	2015/10/16 19:11:34
+14	301
+15	2
+18	Windows Installer
+19	2

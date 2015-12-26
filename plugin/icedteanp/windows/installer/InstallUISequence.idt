@@ -1,0 +1,16 @@
+Action	Condition	Sequence
+s72	S255	I2
+InstallUISequence	Action
+AppSearch		1
+CostFinalize		300
+CostInitialize		100
+ExecuteAction	0	600
+Exit		-1
+FatalError		-3
+FileCost		200
+FindRelatedProducts		3
+Install	0	499
+LaunchConditions		2
+MigrateFeatureStates		4
+UserExit		-2
+Welcome	NOT Installed	350

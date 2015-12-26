@@ -1,0 +1,76 @@
+#ifndef _ICEDTEA_WEB_CONFIG_H_
+#define _ICEDTEA_WEB_CONFIG_H_
+#define _STR(x) #x
+#define STR(x) _STR(x)
+#define _CATSTR(x,y) x##y
+#define CATSTR(x,y) _CATSTR(x,y)
+
+#ifndef PACKAGE_NAME
+#define PACKAGE_NAME IcedTea-Web
+#endif
+#define PACKAGE_NAME_STRING STR(PACKAGE_NAME)
+
+#ifndef PACKAGE_DESCRIPTION
+#define PACKAGE_DESCRIPTION PACKAGE_NAME Java™ Network Launch Protocol plug-in\
+ for browsers
+#endif
+#define PACKAGE_DESCRIPTION_STRING STR(PACKAGE_DESCRIPTION)
+
+#ifndef PACKAGE_MAJOR_VERSION
+#define PACKAGE_MAJOR_VERSION 1
+#endif
+#ifndef PACKAGE_MINOR_VERSION
+#define PACKAGE_MINOR_VERSION 6
+#endif
+#ifndef PACKAGE_PATCH_VERSION
+#define PACKAGE_PATCH_VERSION 0
+#endif
+#ifndef PACKAGE_BUILD_VERSION
+#define PACKAGE_BUILD_VERSION 0
+#endif
+#ifndef PACKAGE_VERSION
+#define PACKAGE_VERSION PACKAGE_MAJOR_VERSION,PACKAGE_MINOR_VERSION,\
+PACKAGE_PATCH_VERSION,PACKAGE_BUILD_VERSION
+#endif
+#define PACKAGE_VERSION_STRING STR(PACKAGE_VERSION)
+
+#ifndef PACKAGE_VENDOR
+#define PACKAGE_VENDOR IcedTea
+#endif
+#define PACKAGE_VENDOR_STRING STR(PACKAGE_VENDOR)
+
+#ifndef PLUGIN_MODULE_NAME
+#define PLUGIN_MODULE_NAME CATSTR(NP,PACKAGE_NAME)
+#endif
+#define PLUGIN_MODULE_NAME_STRING STR(PLUGIN_MODULE_NAME)
+
+#ifndef PLUGIN_DLL
+#define PLUGIN_DLL CATSTR(PLUGIN_MODULE_NAME,.DLL)
+#endif
+#define PLUGIN_DLL_STRING STR(PLUGIN_DLL)
+
+#ifndef JDK_UPDATE_VERSION
+#define JDK_UPDATE_VERSION 60
+#endif
+#define JDK_UPDATE_VERSION_STRING STR(JDK_UPDATE_VERSION)
+
+#if defined DEBUG || _DEBUG
+#ifdef __HOSTNAME__
+#define _TMP_ __HOSTNAME__
+#undef __HOSTNAME__
+#define __HOSTNAME__ STR(__HOSTNAME__)
+#undef _TMP_
+#else
+#error Define __HOSTNAME__ macro in debug mode.
+#endif /* __HOSTNAME__ */
+#ifdef __USER__
+#define _TMP_ __USER__
+#undef __USER__
+#define __USER__ STR(__USER__)
+#undef _TMP_
+#else
+#error Define __USER__ macro in debug mode.
+#endif /* __USER__ */
+#endif /* DEBUG || _DEBUG */
+
+#endif /* _ICEDTEA_WEB_CONFIG_H_ */

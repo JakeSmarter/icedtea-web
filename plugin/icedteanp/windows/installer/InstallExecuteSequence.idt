@@ -1,0 +1,27 @@
+Action	Condition	Sequence
+s72	S255	I2
+InstallExecuteSequence	Action
+AppSearch		1
+CostFinalize		300
+CostInitialize		100
+CreateShortcuts		1300
+FileCost		200
+InstallFiles		1100
+InstallFinalize		1900
+InstallInitialize		500
+InstallValidate		400
+LaunchConditions	NOT Installed	2
+ProcessComponents		600
+PublishComponents		1400
+PublishFeatures		1500
+PublishProduct		1600
+RegisterProduct		1800
+RegisterUser		1700
+RemoveFiles		900
+RemoveRegistryValues		950
+RemoveShortcuts		1000
+SetARPINSTALLLOCATION	NOT Installed	1201
+SetARPREADME		1202
+UnpublishComponents		700
+UnpublishFeatures		800
+WriteRegistryValues		1200

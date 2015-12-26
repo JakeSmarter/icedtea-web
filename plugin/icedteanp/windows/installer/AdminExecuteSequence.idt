@@ -1,0 +1,13 @@
+Action	Condition	Sequence
+s72	S255	I2
+AdminExecuteSequence	Action
+AppSearch		1
+CostFinalize		300
+CostInitialize		100
+FileCost		200
+InstallAdminPackage		600
+InstallFiles		700
+InstallFinalize		800
+InstallInitialize		500
+InstallValidate		400
+LaunchConditions	NOT Installed	2

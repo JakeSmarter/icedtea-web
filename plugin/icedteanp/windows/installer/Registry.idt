@@ -1,0 +1,7 @@
+Registry	Root	Key	Name	Value	Component_
+s72	i2	l255	L255	L0	s72
+Registry	Registry
+EventMessageFile	2	SYSTEM\CurrentControlSet\Services\EventLog\Application\[ProductName]	EventMessageFile	[#NPIcedTea_Web.dll]	NPIcedTea_Web.dll
+EventMessageFile64	2	SYSTEM\CurrentControlSet\Services\EventLog\Application\[ProductName]	EventMessageFile	[#NPIcedTea_Web.dll64]	NPIcedTea_Web.dll64
+TypesSupported	2	SYSTEM\CurrentControlSet\Services\EventLog\Application\[ProductName]	TypesSupported	#7	NPIcedTea_Web.dll
+TypesSupported64	2	SYSTEM\CurrentControlSet\Services\EventLog\Application\[ProductName]	TypesSupported	#7	NPIcedTea_Web.dll64

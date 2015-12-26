@@ -1,0 +1,63 @@
+Dialog_	Control	Type	X	Y	Width	Height	Attributes	Property	Text	Control_Next	Help
+s72	s50	s20	i2	i2	i2	i2	I4	S72	L0	S50	L50
+1252	Control	Dialog_	Control
+Error	ErrorAbort	PushButton	0	70	60	20	3		[Abort]		
+Error	ErrorCancel	PushButton	0	70	60	20	3		[Cancel]		
+Error	ErrorIcon	Icon	10	10	32	32	5242881				
+Error	ErrorIgnore	PushButton	0	70	60	20	3		[Ignore]		
+Error	ErrorNo	PushButton	0	70	60	20	3		[No]		
+Error	ErrorOk	PushButton	0	70	60	20	3		[Ok]		
+Error	ErrorRetry	PushButton	0	70	60	20	3		[Retry]		
+Error	ErrorText	Text	42	10	248	50	3				
+Error	ErrorYes	PushButton	0	70	60	20	3		[Yes]		
+Exit	Finish	PushButton	330	270	60	20	3		[Finish]		
+Exit	FinishText	Text	93	40	297	215	3		[ProductName] has been successfully installed.		
+Exit	Line	Line	10	260	381	0	1				
+Exit	Logo	Bitmap	10	10	83	100	1048579		Logo		
+Exit	ProductVersionText	Text	10	265	240	15	1		[ProductName] [ProductVersion]		
+Exit	Title	Text	93	10	297	20	262147		{\TitleTextStyle}[ProductName] Setup Complete		
+FatalError	Exit	PushButton	330	270	60	20	3		[Exit]		
+FatalError	ExitText	Text	93	40	297	215	3		[ProductName] could not be installed successfuly. Please, contact your administrator and/or consult the documentation, and try running [ProductName] setup later.		
+FatalError	Line	Line	10	260	381	0	1				
+FatalError	Logo	Bitmap	10	10	83	100	1048579		Logo		
+FatalError	ProductVersionText	Text	10	265	240	15	1		[ProductName] [ProductVersion]		
+FatalError	Title	Text	93	10	297	20	262147		{\TitleTextStyle}[ProductName] Setup Error		
+Install	ActionText	Text	10	145	380	15	262147				
+Install	Cancel	PushButton	330	175	60	20	3		[Cancel]		
+Install	InstallText	Text	10	110	380	15	3		Installing [ProductName]...		
+Install	Line	Line	10	165	381	0	1				
+Install	Logo	Bitmap	307	10	83	100	1048579		Logo		
+Install	ProductVersionText	Text	10	170	180	15	1		[ProductName] [ProductVersion]		
+Install	Progress	ProgressBar	10	125	380	20	3				
+LicenseAgreement	Accept	CheckBox	10	245	380	10	19	ACCEPTLICENSE	I &accept the license myself or on behalf of my organization.	Back	
+LicenseAgreement	Back	PushButton	200	270	60	20	3		[Back]	Next	
+LicenseAgreement	Cancel	PushButton	330	270	60	20	3		[Cancel]	License	
+LicenseAgreement	License	ScrollableText	10	25	380	215	7		License	Accept	
+LicenseAgreement	Line	Line	10	260	381	0	1				
+LicenseAgreement	Next	PushButton	260	270	60	20	1		[Next]	Cancel	
+LicenseAgreement	ProductVersionText	Text	10	265	180	15	1		[ProductName] [ProductVersion]		
+LicenseAgreement	ReadPrompt	Text	10	10	380	10	3		Before using [ProductName], please read the license carefully:		
+Selection	Back	PushButton	200	270	60	20	3		[Back]	Next	
+Selection	Browse	PushButton	330	235	60	20	3		[Browse]	Back	
+Selection	Cancel	PushButton	330	270	60	20	3		[Cancel]	Features	
+Selection	Description	Text	205	25	185	185	3				
+Selection	Features	SelectionTree	10	25	190	205	7	_BrowseDir		Path	
+Selection	Line	Line	10	260	381	0	1				
+Selection	Next	PushButton	260	270	60	20	3		[Next]	Cancel	
+Selection	Path	PathEdit	10	235	315	20	11	_BrowseDir		Browse	
+Selection	ProductVersionText	Text	10	265	180	15	1		[ProductName] [ProductVersion]		
+Selection	SelectFeaturesPrompt	Text	10	10	380	15	3		Please select the &features to install:		
+Selection	Size	Text	205	215	185	15	3				
+UserExit	Exit	PushButton	330	270	60	20	3		[Exit]		
+UserExit	ExitText	Text	93	40	297	215	3		[ProductName] has not been installed. You can resume [ProductName] setup any time later.		
+UserExit	Line	Line	10	260	381	0	1				
+UserExit	Logo	Bitmap	10	10	83	100	1048579		Logo		
+UserExit	ProductVersionText	Text	10	265	240	15	1		[ProductName] [ProductVersion]		
+UserExit	Title	Text	93	10	297	20	262147		{\TitleTextStyle}[ProductName] Setup Canceled		
+Welcome	Cancel	PushButton	330	270	60	20	3		[Cancel]	Next	
+Welcome	Line	Line	10	260	381	0	1				
+Welcome	Logo	Bitmap	10	10	83	100	1048579		Logo		
+Welcome	Next	PushButton	260	270	60	20	3		[Next]	Cancel	
+Welcome	ProductVersionText	Text	10	265	240	15	1		[ProductName] [ProductVersion]		
+Welcome	Title	Text	93	10	297	20	262147		{\TitleTextStyle}Welcome to [ProductName] Setup		
+Welcome	WelcomeText	Text	93	40	297	215	3		This setup will guide you through the installation of [ProductName]. [ProductName] is an open-source and free software implementation of the Java™ Network Launch Protocol.Make sure to read about what is new in the NEWS.TXT file and the latest release information in the README.TXT file.		

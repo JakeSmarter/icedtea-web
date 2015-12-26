@@ -1,0 +1,5 @@
+Action	Type	Source	Target	ExtendedType
+s72	i2	S72	S255	I4
+CustomAction	Action
+SetARPINSTALLLOCATION	51	ARPINSTALLLOCATION	[$NPIcedTea_Web.dll64]	
+SetARPREADME	51	ARPREADME	[#README.TXT]	

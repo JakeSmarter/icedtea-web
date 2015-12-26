@@ -1,0 +1,6 @@
+Shortcut	Directory_	Name	Component_	Target	Arguments	Description	Hotkey	Icon_	IconIndex	ShowCmd	WkDir	DisplayResourceDLL	DisplayResourceId	DescriptionResourceDLL	DescriptionResourceId
+s72	s72	l128	s72	s72	S255	L255	I2	S72	I2	I2	S72	S100	I4	S100	I4
+Shortcut	Shortcut
+COPYING.TXT	IcedTea_WebProgramMenuDir	License	COPYING.TXT	[#COPYING.TXT]		IcedTea-Web's licence. Read it to know your rights and duties using IcedTea-Web.					IcedTea_WebProgramMenuDir				
+NEWS.TXT	IcedTea_WebProgramMenuDir	News	NEWS.TXT	[#NEWS.TXT]		Read what is new in IcedTea-Web.					IcedTea_WebProgramMenuDir				
+README.TXT	IcedTea_WebProgramMenuDir	Read Me	README.TXT	[#README.TXT]		Read the latest release information.					IcedTea_WebProgramMenuDir				
