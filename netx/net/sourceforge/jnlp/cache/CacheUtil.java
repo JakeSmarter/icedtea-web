@@ -29,6 +29,9 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.Permission;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -485,7 +488,23 @@ public class CacheUtil {
             path.append(".").append(location.getQuery());
         }
 
-        return new File(FileUtils.sanitizePath(path.toString()));
+	File f = new File(FileUtils.sanitizePath(path.toString()));
+
+	if (f.getName().length() > 255) {
+		// name too long
+		try {
+			String filename = f.getName();
+			MessageDigest digest = MessageDigest.getInstance("MD5");
+			digest.update(filename.getBytes(), 0, filename.length());
+			filename = (new BigInteger(1, digest.digest())).toString();
+
+			f = new File(f.getParent(), filename);
+		} catch(NoSuchAlgorithmException x) {
+			// shouldn't happen
+		}
+	}
+
+	return f;
     }
 
     /**
