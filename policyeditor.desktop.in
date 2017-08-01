@@ -1,6 +1,8 @@
 [Desktop Entry]
 Name=IcedTea-Web Policy Editor
+Name[da]=IcedTea-Web politikredigering
 Comment=Edit Java Applet policy and permission settings
+Comment[da]=Rediger Java-applet politik- og tilladelsesindstillinger
 Exec=PATH_TO_POLICYEDITOR
 Icon=javaws
 Terminal=false
