@@ -1,6 +1,8 @@
 [Desktop Entry]
 Name=IcedTea Web Start
+Name[da]=IcedTea-Web start
 Comment=IcedTea Application Launcher
+Comment[da]=IcedTea-programstarter
 Exec=PATH_TO_JAVAWS %f
 Icon=javaws
 Terminal=false
