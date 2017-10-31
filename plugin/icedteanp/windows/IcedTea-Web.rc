@@ -815,7 +815,7 @@ FILETYPE VFT_DLL {
 #endif /* PROCESSOR_ARCHITECTURE */
 LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
 // IcedTea-Web provides an embedded manifest. If you want to override the
-// embedded manifest with an external mnifest file on Windows Server 2003 and
+// embedded manifest with an external manifest file on Windows Server 2003 and
 // later, set the DWORD value "PreferExternalManifest" to 0x00000001 in the
 // HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\SideBySide
 // regsitry key.
